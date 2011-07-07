@@ -1,0 +1,36 @@
+body{background:#a7a7a7;}
+a{color:#007E9D;}
+a:hover{color:#ff6600;}
+.zhead{color:#007E9D;}
+
+.zti1 td,.zti2 td{color:#007E9D;}
+
+.z0 a img,.z1 a img,.z2 a img,.z3 a img,.z4 a img{border:#c1cfe6 1px solid;}
+.z0 a:hover img,.z1 a:hover img,.z2 a:hover img,.z3 a:hover img,.z4 a:hover img{border:#328AB2 1px solid;}
+
+.nav{padding:0 19px;width:920px;background:url(../images/cuxiaolan/nav.jpg);}
+  .nav,.nav a{font:bold 14px/33px simsun;color:#fff;}
+  .nav a{width:108px;text-align:center;display:inline-block;background:url(../images/cuxiaolan/nav1.jpg) top right no-repeat;}
+  .nav a:hover{color:#295D9F;background:url(../images/cuxiaolan/navh.jpg);text-decoration:none}
+
+.z1 dl.z_con,.z2 dl.z_con,.z4 dl.z_con,.z3a1,.z3a2,.z3a3{background:url(../images/cuxiaolan/a1.jpg) 1px 1px repeat-x}
+  .z1 dl.z_con{width:100%}
+.z1 dt.z_con,.z2 dt.z_con,.z4 dt.z_con,.z3a1 dt,.z3a2 dt,.z3a3 dt{background:url(../images/cuxiaolan/a2.jpg) right no-repeat;line-height:31px;color:#295D9F;border:1px solid #b4d1c7;border-bottom:none}
+  .z1 dt.z_con{width:938px;}
+  .z2 dt.z_con{width:453px;}
+  .z4 dt.z_con{width:292px;}
+.z0 dd.z_con,.z1 dd.z_con,.z2 dd.z_con,.z4 dd.z_con,.z3a1 dd,.z3a2 dd,.z3a3 dd{border:#b4d1c7 1px solid;background:#f8fafe;}
+
+.z1n3 .l{border:#BBDBE4 1px solid;background:#D6E9EE;}
+.z1n6 .b{border:#BBDBE4 1px solid;background:#D6E9EE;}
+.z1n7 .con{border:#BBDBE4 1px solid;background:#D6E9EE;}
+.z1n19 .l{border:#BBDBE4 1px solid;background:#D6E9EE;}
+.z1n20{background:url(../images/cuxiaolan/bg.jpg)}
+  .z1n20 .t,.z1n20 .r{background:none;}
+  .z1n20 .t img{border:1px solid #b4d1c7}
+
+.z2n5 .dl{background:#fff;border:#BBDBE4 1px solid;}
+.z2n5 .img{border:none;}
+.z2n5 .dt{background:#fff;}
+
+.z3a1 .more,.z3a3 .more{line-height:31px;color:#369;padding:0 60px 0 0}

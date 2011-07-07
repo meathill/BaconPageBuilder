@@ -1,0 +1,208 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<title>专题模版搭建系统</title>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<link href="css/css.css" rel="stylesheet" type="text/css" />
+<link href="css/empty.css" rel="stylesheet" type="text/css" id="css_tag" />
+<link href="css/admin.css" rel="stylesheet" type="text/css" />
+<link href="css/colorbox.css" rel="stylesheet" type="text/css" />
+<script src="http://icon.zol.com.cn/js/jquery_1.4.2.js"></script>
+<script src="http://icon.zol.com.cn/js/jquery.colorbox-min.js"></script>
+</head>
+<body onload="displayInit();">
+<!--浮动提示层begin-->
+<div id='preloader'>
+  <p align="center"><img src="images/loading.gif" width="32" height="32" /></p> 
+  <p align="center"><strong>专题模板自建系统</strong> 加载中，请稍候……</p>
+</div>
+<!--浮动提示层end-->
+<!--右侧控制板 begin-->
+<div id="mk">
+	<!--弄个iframe盖住flash-->
+	<iframe id="cover" scrolling="no" frameborder="0"></iframe>
+  <!--模块&样式 begin-->
+  <div id="mkclose">
+    <div id="tools" class="prow">
+      <a href="javascript:_is_refill = true; SWFAddress.back();">撤销</a>
+      <a href="javascript:_is_refill = true; SWFAddress.forward();">重做</a>
+      <!--<a href="#" id="controls_btn" title="处理保存/加载等功能">功能</a>-->
+      <a href="http://icon.zol.com.cn/article/templateDIY/images/help1.jpg" title="使用帮助" rel="help_group">帮助</a>
+    </div>
+    <ul id="element_type" class="prow">
+      <li class="cur">单列</li>
+      <li>双列</li>
+      <li>三列</li>
+      <li>代码</li>
+    </ul>
+    <div id="elist">
+      <dl class="show">
+        <dt>
+          <input type="button" value="单列无标题" class="addRowBtn" name="0" />
+          <input type="button" value="单列有标题" class="addRowBtn" name="1" />
+        </dt>
+        <dd>
+          <ul>
+            <li><img src="images/z0n1.gif" n="z1" /></li>
+            <li><img src="images/z0n2.gif" n="z1" /></li>
+						<li><img src="images/z0n3.jpg" n="z1" /></li>
+            <li><img src="images/z1n1.gif" n="z1" /></li>
+            <li><img src="images/z1n2.gif" n="z1" /></li>
+            <li><img src="images/z1n3.gif" n="z1" /></li>
+            <li><img src="images/z1n4.gif" n="z1" /></li>
+            <li><img src="images/z1n5.gif" n="z1" /></li>
+            <li><img src="images/z1n6.gif" n="z1" /></li>
+            <li><img src="images/z1n7.gif" n="z1" /></li>
+            <li><img src="images/z1n8.gif" n="z1" /></li>
+						<li><img src="images/z1n9.gif" n="z1" /></li>
+            <li><img src="images/z1n10.gif" n="z1" /></li>
+            <li><img src="images/z1n11.gif" n="z1" /></li>
+            <li><img src="images/z1n12.gif" n="z1" /></li>
+            <li><img src="images/z1n13.gif" n="z1" /></li>
+            <li><img src="images/z1n14.gif" n="z1" /></li>
+            <li><img src="images/z1n15.gif" n="z1" /></li>
+            <li><img src="images/z1n16.gif" n="z1" /></li>
+            <li><img src="images/z1n17.gif" n="z1" /></li>
+            <li><img src="images/z1n18.gif" n="z1" /></li>
+            <li><img src="images/z1n19.gif" n="z1" /></li>
+            <li><img src="images/z1n20.jpg" n="z1" /></li>
+            <li><img src="images/z1n21.gif" n="z1" /></li>
+            <li><img src="images/z1n22.gif" n="z1" /></li>
+            <li><img src="images/z1n23.gif" n="z1" /></li>
+            <li><img src="images/z1n24.gif" n="z1" /></li>
+            <li><img src="images/z1n25.gif" n="z1" /></li>
+            <li><img src="images/z1n26.gif" n="z1" /></li>
+            <li><img src="images/z1n27.gif" n="z1" /></li>
+            <li><img src="images/zsti1.gif" n="z1" /></li>
+          </ul>
+        </dd>
+      </dl>
+      <dl>
+        <dt>
+          <input type="button" value="1:1双列含标题" class="addRowBtn" name="2" />
+					<input type="button" value="7:3双列无标题" class="addRowBtn" name="3" />
+        </dt>
+        <dd>
+          <ul>
+            <li>1:1双列适用</li>
+            <li><img src="images/z2n1.gif" n="z2" /></li>
+            <li><img src="images/z2n2.gif" n="z2" /></li>
+            <li><img src="images/z2n3.gif" n="z2" /></li>
+            <li><img src="images/z2n4.gif" n="z2" /></li>
+            <li><img src="images/z2n5.gif" n="z2" /></li>
+            <li><img src="images/z2n6.gif" n="z2" /></li>
+            <li><img src="images/z2n7.gif" n="z2" /></li>
+            <li><img src="images/z2n8.gif" n="z2" /></li>
+            <li><img src="images/z2n9.gif" n="z2" /></li>
+            <li><img src="images/z2n10.gif" n="z2" /></li>
+						<li><img src="images/z2n11.gif" n="z2" /></li>
+            <li><img src="images/zsti2.gif" n="z2" /></li>
+            <li>7:3双列适用</li>
+						<li><img src="images/z3n1.jpg" n="z3" /></li>
+						<li><img src="images/z3n2.jpg" n="z3" /></li>
+						<li><img src="images/z3n3.jpg" n="z3" /></li>
+						<li><img src="images/z3n4.jpg" n="z3" /></li>
+						<li><img src="images/z3n5.jpg" n="z3" /></li>
+						<li><img src="images/z3n6.jpg" n="z3" /></li>
+						<li><img src="images/z3n7.jpg" n="z3" /></li>
+          </ul>
+        </dd>
+      </dl>
+      <dl>
+        <dt>
+          <input type="button" value="1:1:1三列含标题" class="addRowBtn" name="4" />
+        </dt>
+        <dd>
+          <ul>
+            <li><img src="images/z4n1.jpg" n="z4" /></li>
+          </ul>
+        </dd>
+      </dl>
+      <dl>
+        <dt>当前版本：V 1.3</dt>
+        <dd>
+					<form id="code_form" action="http://article.zol.com.cn/zt/template_list.php" method="post" target="_self">
+					  <input type="hidden" name="submit_type" value="3" />
+						<input type="hidden" name="template_name" id="template_name" value="" />
+            <textarea id="texts" name="tpl_content"></textarea>
+          </form>
+        </dd>
+      </dl>
+    </div>
+		<div id="cpanel">
+			<div id="output">升级到1.3版，<a href="version.html" class="hong12" id="version_btn" title="版本记录">想知道哪里改变了么？</a> <a href="http://article.zol.com.cn/admin/survey/survey_preview.php?surveyid=1813" class="hong12" id="survey_btn" title="使用调查">发表您的反馈</a><br />建议使用1024*768以上分辨率，大屏幕会让你用的更爽。</div>
+      <input type="button" id="submit_btn" value="上传模板" title="如果模板已经搭好了，就点此上传吧~~" />
+			<label for="fg">样式选择：</label>
+		  <select id="fg">
+		    <option style="background:#ffffff;" value="css">普通</option>
+				<option style="background:#05bef4;color:#fff" value="zdc">ZDC通用</option>
+				<option style="background:#125a8b;color:#fff" value="slan">全球深蓝</option>
+				<option style="background:#dd5858;color:#fff" value="red">喜庆大红色</option>
+		    <option style="background:#8A9E3C;" value="lusimg">足球场绿色</option>
+				<option style="background:#cf0;" value="qlv">高速绿色</option>
+        <option style="background:#ca3f23;color:#fff" value="lovered">义卖大红色</option>
+		    <option style="background:#A0CCD9;" value="cuxiaolan">促销蓝</option>
+		    <option value="techhui">科技灰</option>
+        <option style="background:#61a0bf;color:#fff" value="zdc2">调研蓝</option>
+        <option style="background:#ff6b31;color:#fff" value="hzcheng">会展橙</option>
+        <option style="background:#222;color:#ccc" value="dchei">摄影黑</option>
+		    <option style="background:#000000;color:#ccc" value="hlimg">黑色</option>
+		    <option style="background:#EE95B7;" value="fhimg">粉红</option>
+		    <option style="background:#7D172E;color:#fff" value="zsimg">紫红</option>
+		    <option style="background:#EDE3E4;" value="fsimg">浅粉</option>
+		    <option style="background:#5B0000;color:#fff" value="rwimg">深红</option>
+		    <option style="background:#D1C6B1;" value="ynimg">浅棕</option>
+		    <option style="background:#4C4030;color:#fff" value="yimg">黑底银心</option>
+		    <option style="background:#1F0000;color:#fff" value="rbimg">棕红</option>
+				<option value="xiyouji">西游记</option>
+		  </select>
+			<label for="tpl_name">模板名称：</label>
+			<input type="text" id="tpl_name" title="模板名称" size="15" />
+		</div>
+  </div>
+  <!--模块&样式 end-->
+  <a href="javascript:switshow();" id="mkshow" class="btns">关闭</a>
+  <div id="timg"></div>
+</div>
+<!--右侧控制板 end-->
+<!--模板生成区 begin-->
+<div class="div_mainbody">
+	<div id="bannerMaker" style="display:none;">
+		<h1>正在加载大头生成器，请耐心等候</h1>（如果你只能看到这个，就说明需要安装最新版的flash player了，点下面的链接吧。翟路留）
+	  <p><a href="http://get.adobe.com/cn/flashplayer/?promoid=DJDZP"><img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="下载最新版本的Flash Player" /></a></p>
+	</div>
+</div>
+<div id="mains">
+  <img src="images/zhead.gif" style="display:none;margin:0 auto;float:none;" />
+  <div id="token"></div>
+	<input type="button" id="removeBtn" value="删" class="tbtn cls" />
+  <input type="button" id="upmoveBtn" name="up" value="↑" class="tbtn up"  />
+  <input type="button" id="downmoveBtn" name="down" value="↓" class="tbtn down" />
+  <input type="text" id="rowTitle" />
+</div>
+<!--模板生成区 end-->
+<!--loading，帮助等等 begin-->
+<div id='for_color_box'>
+  <div id='help_tips'>
+    <a href="http://icon.zol.com.cn/article/templateDIY/images/help2.jpg" title="使用说明 - 增加通栏" rel="help_group">使用说明</a>
+    <a href="http://icon.zol.com.cn/article/templateDIY/images/help3.jpg" title="使用说明 - 增加通栏" rel="help_group">使用说明</a>
+    <a href="http://icon.zol.com.cn/article/templateDIY/images/help4.jpg" title="使用说明 - 选择模块" rel="help_group">使用说明</a>
+    <a href="http://icon.zol.com.cn/article/templateDIY/images/help5.jpg" title="使用说明 - 拖放模块到指定位置" rel="help_group">使用说明</a>
+    <a href="http://icon.zol.com.cn/article/templateDIY/images/help6.jpg" title="使用说明 - 模板完成" rel="help_group">使用说明</a>
+    <a href="http://icon.zol.com.cn/article/templateDIY/images/help7.jpg" title="使用说明 - 选择样式" rel="help_group">使用说明</a>
+    <a href="http://icon.zol.com.cn/article/templateDIY/images/help8.jpg" title="使用说明 - 大头生成器" rel="help_group">使用说明</a>
+  </div>
+  <div id='control_panel'>
+    保存等功能
+  </div>
+</div>
+<!--loading，帮助等等 end-->
+  <!-- 感谢原作者，保留原作者信息为注释：技术支持MSN:cocoxye@hotmail.com -->
+  <!-- 翟路佳针对zol后台进行修改 -->
+<!-- 把操作类代码放到页面最后再加载 -->
+<script src="http://icon.zol.com.cn/js/SWFAddress.js"></script>
+<script type="text/javascript" src="http://article.zol.com.cn/zt/templateDIY/file_to_jsobj.php?var=divs&dir=element"></script>
+<script src="js/swfobject.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<data>
+	<template id="1" name="ZDC通用" src="template/banner.swf" thumb="template/banner.jpg"></template>
+	<template id="2" name="全球深蓝" src="template/banner2.swf" thumb="template/banner2.jpg"></template>
+	<template id="3" name="科技感深蓝" src="template/banner3.swf" thumb="template/banner3.jpg"></template>
+	<template id="4" name="喜气大红色" src="template/banner4.swf" thumb="template/banner4.jpg"></template>
+	<template id="5" name="足球场绿色" src="template/banner5.swf" thumb="template/banner5.jpg"></template>
+	<template id="6" name="高速绿色" src="template/banner6.swf" thumb="template/banner6.jpg"></template>
+	<template id="7" name="义卖大红色" src="template/banner7.swf" thumb="template/banner7.jpg"></template>
+	<template id="8" name="促销蓝" src="template/banner8.swf" thumb="template/banner8.jpg"></template>
+	<template id="9" name="科技灰" src="template/banner9.swf" thumb="template/banner9.jpg"></template>
+	<template id="10" name="调研蓝" src="template/banner10.swf" thumb="template/banner10.jpg"></template>
+	<template id="11" name="会展橙" src="template/banner11.swf" thumb="template/banner11.jpg"></template>
+	<template id="12" name="摄影黑" src="template/banner12.swf" thumb="template/banner12.jpg"></template>
+</data>

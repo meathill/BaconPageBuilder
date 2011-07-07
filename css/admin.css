@@ -1,0 +1,133 @@
+#mk {
+	position:fixed;
+	right:0px;
+	top:0px;
+	width:360px;
+	z-index:100;
+  display:none;
+	_position:absolute;
+  _top:expression(documentElement.scrollTop);
+}
+
+#cover{width:360px;position:absolute;z-index:5;background:#fff}
+#mk.sm {
+	width:40px;
+	height:22px;
+}
+#mkclose {
+	position:absolute;
+	z-index:10;
+	top:0px;
+	right:0px;
+	width:360px;
+}
+#mkshow{width:40px;position:absolute;z-index:15;right:0px;top:0px;}
+.prow{width:359px;border-left:1px solid #7293AA;}
+#element_type{width:359px;border-left:1px solid #7293AA;cursor:pointer; overflow:hidden;}
+#element_type li {
+	width:80px;
+	height:24px;
+	background:#fff;
+	text-align:center;
+	line-height:24px;
+	border:1px solid #7293AA;
+	border-left:none;
+	float:left;
+}
+#element_type li.cur{
+	border-bottom:none;
+	height:25px;
+	line-height:25px;
+	background:#f8f8f8;
+}
+#tools{width:353px;padding:3px;background:#7293AA;margin:0 0 5px}
+#tools a,.btns{display:inline-block;width:50px;height:20px;line-height:20px;border:1px solid #369;background:#def;color:#036;text-align:center;}
+  #tools a:hover,.btns:hover{background:#eff;border-color:#9cf;text-decoration:none;}
+#elist {
+	border-left:#7293AA 1px solid;
+	border-right:#7293aa 1px solid;
+	background: #f8f8f8;
+}
+#elist dl {
+	display:none;
+}
+#elist dl.show {
+	display:block;
+}
+#elist dt {
+	padding:5px;
+	width:100%;
+	background:#f8f8f8;
+	border-bottom:#9BB4C5 1px solid;
+}
+#elist dd {
+	width:100%;
+	height:400px;
+	overflow:auto;
+	background:#fafafa;
+}
+#elist ul{width:100%;
+	height:400px;
+	overflow:auto;
+	background:#fafafa;}
+
+#elist li {
+	border-bottom:#BACFDB 1px dotted;
+	margin-top:6px;
+	text-align:center;
+  color:#c00;
+  font:16px/25px microsoft yahei,simhei;
+}
+#elist img {
+	width:330px;
+}
+#cpanel{width:348px;border:#7293aa 1px solid;background: #f0f0f0;padding:5px}
+#output{width:346px;border:1px solid #ccc;background:#fff;margin:0 0 5px}
+#texts {
+	width:348px;
+	height:394px;
+	font:12px/15px simsun;
+	border:none;
+	border-bottom:#9bb4c5 1px solid;
+	float:right;
+	color:#333;
+}
+#mains{width:1020px;margin:0 auto;float:none;display:none;}
+  #mains img{float:left;}
+.oimg {
+	position:absolute;
+	opacity:0.4;
+	filter:alpha(opacity=40);
+	z-index:1000;
+}
+.temp {
+	position:relative;
+	opacity:0.6;
+	filter:alpha(opacity=60);
+}
+#timg{display:none;}
+#fg,#tpl_name{width:170px;margin:5px 0 0}
+#token{width:950px;height:22px;margin:5px;border:4px dashed #c00;background:#fff0f0;float:left;}
+.hui12{color:#666}
+
+/******** 增加一些功能按钮 ，再把样式修改下*********/
+.z0,.z1,.z2,.z3,.z4{position:relative;line-height:30px;padding:0 30px}
+  .z3 .lf{background:#def}
+	.z3 .rt{background:#fed}
+.tbtn{width:30px;position:absolute;left:0px;z-index:10}
+  .cls{top:0px}
+  .up{top:24px}
+  .down{top:48px}
+.light_on{background:#f90}
+#submit_btn{width:100px;height:48px;border:2px solid #f30;background:#f5f5d0;color:#f30;font:bolder 20px/48px microsoft yahei,simhei;float:right;cursor:pointer;margin:4px 0}
+	#submit_btn:hover{background:#ff0}
+#rowTitle{border:2px #c00 solid;width:200px}
+.hong12{color:#f30}
+/******** 大头生成器 *******/
+.div_mainbody{width:960px;margin:0 auto;float:none;display:none;}
+  #bannerMaker h1{font:bold 20px/30px microsoft yahei}
+  
+/******** 弹出层 *********/
+#preloader{width:280px;margin:20px auto 0;float:none;padding:10px;border:3px dashed #69c;}
+  #preloader strong{font-size:14px}
+#for_color_box{display:none;}

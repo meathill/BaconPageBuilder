@@ -1,0 +1,40 @@
+/* public part */
+a{color:#333;text-decoration:none}
+a.u{text-decoration:underline;}
+a:hover{color:#f60;text-decoration:underline;}
+img{border:0}
+.clear{font:0/0 Arial;clear:both;visibility:hidden;}
+body{background:#FDF6F0;font:12px/20px simsun;color:#333;}
+/* editor part */
+
+.nav,.nav a{font:bold 16px/48px simsun;color:#fff;}
+.nav{background:url(../images/xiyouji/nav.jpg);padding:1px 0}
+.nav a{width:116px;text-align:center;display:block;float:left}
+	.nav a:hover{color:#ff0;text-decoration:none;background:url(../images/xiyouji/navact.jpg) repeat-x}
+	.nav a.w{width:131px}
+.z0 dd.z_con{width:960px;border:none}
+.z3 .lf,.z3 .rt{background:none}
+
+.z1 dt.z_con,.z2 dt.z_con{padding:0 14px;border:1px solid #e2dfd9;background:url(../images/xiyouji/z1bg.jpg);color:#fff;font:bold 14px/28px simsun}
+  .z1 dt.z_con{width:930px}
+  .z2 dt.z_con{width:445px}
+	
+/*font*/
+h2{padding:0 0 10px}
+	h2 a{color:#900;font:bold 18px/30px microsoft yahei,simhei}
+
+.hong12,a.hong12{color:#900}
+.hui12,a.hui12{color:#999!important;font-size:12px!important;}
+.hui12a,a.hui12a{color:#666!important;font-size:12px!important;}
+
+.tdtxt1,.tdtxt1 a{font:14px/180% simsun;color:#990000} 
+.tdtxt2,.tdtxt2 a{font:12px/160% simsun;color:#990000} 
+.tdimg1,.tdimg1 a{font:12px/28px simsun;color:#990000} 
+.tdimg1 img{border:1px solid #ccc;padding:2px;background-color:#fff;}
+/*font*/
+.fs12b,.fs12b a{color:#333333!important;font:bold 12px/22px "tahoma"!important}
+.fs12b{padding-left:12px;background:no-repeat url(http://2.zol-img.com.cn/zt/tm_4bb/aae1ac643c/z46s_arrow.jpg) 0 2px}
+
+
+.line1{background: no-repeat url(../images/xiyouji/line1.jpg) 50% 50%;}
+.line2{background: no-repeat url(http://2.zol-img.com.cn/zt/tm_4bb/aae1ac643c/z46s_dis2.jpg) 50% 50%;}
