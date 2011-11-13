@@ -1,0 +1,21 @@
+<? xml version="1.0" encode="GBK" ?>
+<project name="topicDIY" default="D.html" basedir=".">
+  <target name="D.html">
+    
+  </target>
+  <target name="R.html">
+    
+  </target>
+  <target name="D.flash">
+    
+  </target>
+  <target name="R.html">
+    
+  </target>
+  <target name="Debug">
+    
+  </target>
+  <target name="Release">
+    
+  </target>
+</project>
