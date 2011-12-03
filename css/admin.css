@@ -1,27 +1,84 @@
-#mk {
+/***************************************
+ *  全局样式
+ **************************************/
+.hidden, .always-hidden {
+  display:none
+}
+/***************************************
+ *  功能侧边栏
+ **************************************/
+#sidebar {
 	position:fixed;
 	right:0px;
 	top:0px;
 	width:360px;
-	z-index:100;
-  display:none;
+	z-index:1;
 	_position:absolute;
   _top:expression(documentElement.scrollTop);
 }
+#cover {
+  width:360px;
+  position:absolute;
+  z-index:-1;
+  background:#fff
+}
+#moduleThumbs {
+  border-left:#7293AA 1px solid;
+  border-right:#7293aa 1px solid;
+  background: #f8f8f8;
+}
+#moduleThumbs dl {
+  display:none;
+}
+#moduleThumbs dl.show {
+  display:block;
+}
+#moduleThumbs dt {
+  padding:5px;
+  width:100%;
+  background:#f8f8f8;
+  border-bottom:#9BB4C5 1px solid;
+}
+#moduleThumbs dd {
+  width:100%;
+  height:400px;
+  overflow:auto;
+  background:#fafafa;
+}
+#moduleThumbs ul{width:100%;
+  height:400px;
+  overflow:auto;
+  background:#fafafa;}
 
-#cover{width:360px;position:absolute;z-index:5;background:#fff}
-#mk.sm {
-	width:40px;
-	height:22px;
+#moduleThumbs li {
+  border-bottom:#BACFDB 1px dotted;
+  margin-top:6px;
+  text-align:center;
+  color:#c00;
+  font:16px/25px microsoft yahei,simhei;
 }
-#mkclose {
-	position:absolute;
-	z-index:10;
-	top:0px;
-	right:0px;
-	width:360px;
+#moduleThumbs img {
+  width:330px;
 }
-#mkshow{width:40px;position:absolute;z-index:15;right:0px;top:0px;}
+/***************************************
+ *  按钮
+ **************************************/
+.ui-button {
+  cursor:pointer;
+}
+#togglePanelButton {
+  position:absolute;
+  z-index:15;
+  right:2px;
+  top:2px;
+}
+#submitButton {
+  width:100px;
+  height:48px;
+  font:bolder 20px/48px microsoft yahei,simhei;
+  float:right;
+  margin:4px 0
+}
 .prow{width:359px;border-left:1px solid #7293AA;}
 #element_type{width:359px;border-left:1px solid #7293AA;cursor:pointer; overflow:hidden;}
 #element_type li {
@@ -43,44 +100,6 @@
 #tools{width:353px;padding:3px;background:#7293AA;margin:0 0 5px}
 #tools a,.btns{display:inline-block;width:50px;height:20px;line-height:20px;border:1px solid #369;background:#def;color:#036;text-align:center;}
   #tools a:hover,.btns:hover{background:#eff;border-color:#9cf;text-decoration:none;}
-#elist {
-	border-left:#7293AA 1px solid;
-	border-right:#7293aa 1px solid;
-	background: #f8f8f8;
-}
-#elist dl {
-	display:none;
-}
-#elist dl.show {
-	display:block;
-}
-#elist dt {
-	padding:5px;
-	width:100%;
-	background:#f8f8f8;
-	border-bottom:#9BB4C5 1px solid;
-}
-#elist dd {
-	width:100%;
-	height:400px;
-	overflow:auto;
-	background:#fafafa;
-}
-#elist ul{width:100%;
-	height:400px;
-	overflow:auto;
-	background:#fafafa;}
-
-#elist li {
-	border-bottom:#BACFDB 1px dotted;
-	margin-top:6px;
-	text-align:center;
-  color:#c00;
-  font:16px/25px microsoft yahei,simhei;
-}
-#elist img {
-	width:330px;
-}
 #cpanel{width:348px;border:#7293aa 1px solid;background: #f0f0f0;padding:5px}
 #output{width:346px;border:1px solid #ccc;background:#fff;margin:0 0 5px}
 #texts {
@@ -92,7 +111,7 @@
 	float:right;
 	color:#333;
 }
-#mains{width:1020px;margin:0 auto;float:none;display:none;}
+#mains{width:1020px;margin:0 auto;float:none;}
   #mains img{float:left;}
 .oimg {
 	position:absolute;
@@ -119,7 +138,6 @@
   .up{top:24px}
   .down{top:48px}
 .light_on{background:#f90}
-#submit_btn{width:100px;height:48px;border:2px solid #f30;background:#f5f5d0;color:#f30;font:bolder 20px/48px microsoft yahei,simhei;float:right;cursor:pointer;margin:4px 0}
 	#submit_btn:hover{background:#ff0}
 #rowTitle{border:2px #c00 solid;width:200px}
 .hong12{color:#f30}
@@ -130,4 +148,3 @@
 /******** 弹出层 *********/
 #preloader{width:280px;margin:20px auto 0;float:none;padding:10px;border:3px dashed #69c;}
   #preloader strong{font-size:14px}
-#for_color_box{display:none;}
