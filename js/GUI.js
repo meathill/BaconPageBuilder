@@ -85,80 +85,8 @@ function end(evt) {
   // 改变地址栏
   setAddressContent(false);
 }
-// 使用地址栏里的地址来生成模板
-function addressChangeHandler(evt) {
-  var _param_num = SWFAddress.getPathNames().length;
-  if (_is_refill && _param_num > 0) {
-    if (SWFAddress.getPathNames()[0] != $('#fg').val()) {
-      $('#fg').val(SWFAddress.getPathNames()[0]);
-      changeCss(null, false);
-    }
-    if (_param_num > 1) {
-      var _arr = decodeURIComponent(SWFAddress.getPathNames()[1]).split('|');
-      clearHandler();
-      for (var i = 0, len = _arr.length; i < len; i++) {
-        var _type = Number(_arr[i].substr(0, 1));
-        var _img_arr = _arr[i].substr(2).split(',');
-        var _row = addRow(null, _type);
-        _row.find('dd').html('');
-        _row.appendTo($('#mains'));
-        for (var j = 0, jlen = _img_arr.length; j < jlen; j++) {
-          var _img = $('<img></img>', {'class':'dimg'});
-          var _at = 0;
-          if (_img_arr[j].indexOf('@') != -1) {
-            _at = Number(_img_arr[j].substr(_img_arr[j].indexOf('@') + 1));
-            _img_arr[j] = _img_arr[j].substring(0, _img_arr[j].indexOf('@'));
-          }
-          _img.attr('src', './images/' + _img_arr[j]);
-          _img.bind('click', start);
-          _img.appendTo(_row.find('dd').eq(_at));
-        }
-      }
-    }
-  }
-}
-/**
- * 设置地址栏
- * 只保留有内容的通栏
- */
-function setAddressContent(bl){
-  var _result = '/' + $('#fg').val() + '/';
-  var _is_cols = false;
-  bl = bl == undefined ? true : bl;
-  $("#mains div").each(function(i) {
-    if ($(this).find('img').length > 0) {
-      _result += $(this).attr('type') + '-';
-      if ($(this).children('dl').length > 1) {
-        _is_cols = true;
-      }
-      $(this).find('img').each(function(j){
-        var _src = $(this).attr('src');
-        var _at = '';
-        if (_is_cols) {
-          // 取左边还是右边
-          _at = '@' + $('#mains div:eq(' + i + ') dd').index($(this).parent());
-        }
-        _result += _src.substr(_src.lastIndexOf('/') + 1) + _at + ',';
-      });
-      _result = _result.slice(0, -1);
-      _result += '|';
-      _is_cols = false;
-    }
-  });
-  _result = _result.slice(0, -1);
-  _result +=  '/';
-  _is_refill = bl;
-  SWFAddress.setValue(_result);
-}
-// 阻止事件冒泡
-function stopEvent(evt){
-  evt.stopPropagation();
-}
 
-var _cur_type=0, _sh = 500;  // 当前模块类型/浏览器高
-var _panel_visible = true, _is_refill = true;  // 面板是否显示; // 拖动容器等
-
-// 插入大头生成器
+var _is_refill = false;
 
 var GUI = {
   token : null,
@@ -167,62 +95,55 @@ var GUI = {
     $('#preloader').remove();
     $('.hidden').fadeIn();
     this.token = $('#token').remove();
+    
     // 按钮事件绑定
     $('#togglePanelButton')
-      .button()
+      .hover(function(event) {
+        $(this).addClass('ui-state-hover');
+      }, function(event) {
+        $(this).removeClass('ui-state-hover');
+      })
       .click(function(event) {
         $('#sidebar').slideToggle('normal');
       });
     $("#submitButton")
       .button()
       .click(this.uploadTemplate);
-    // 调整功能面板大小
-    this.onResize();
-    $(window).resize(this.onResize);
+    $(".addRowBtn").click(this.addRow);
+    
     // 拖动
-    $("#moduleThumbs img").draggable({
-      opacity: 0.7,
-      helper: 'clone'
+    $('#refreshHTML dt').sortable({
+      connectWith: "#refreshHTML dt"
+    }).disableSelection();
+    $("#modules")
+      .tabs()
+      .find('img')
+        .draggable({
+          opacity: 0.7,
+          helper: 'clone',
+          connectToSortable: '#refreshHTML dt'
+        });
+        
+    // 样式切换
+    $('#cssSelector').change(this.changeCss);
+    // 模版名称
+    $('#templateName').change(function() {
+      Model.setTemplateName($(this).val())
     });
-    return;
-    
-    
-    
-    
-    $("#element_type li").bind("click", change_type);
-    $('#fg').bind('change', changeCss);
-    $('#tpl_name').bind('change', function() {
-      $('#template_name').val($(this).val())
-    });
-    $(".addRowBtn").bind('click', addRow);
-    
-    // 调用方法构建模板
-    addressChangeHandler();
-    SWFAddress.addEventListener(SWFAddressEvent.CHANGE, addressChangeHandler);
     
     // 适用探出层的“功能”按钮绑定
-    $('#controls_btn').colorbox({width:'600px', inline:true, href:'#control_panel', opacity:'0.5',
-                                 onOpen:function () { $('#bannerMaker').css('visibility', 'hidden'); },
-                                 onClosed:function () { $('#bannerMaker').css('visibility', 'visible');}
-                               });
     $('a[rel="help_group"]').colorbox({rel:'help_group', opacity:'0.5', current:'{current} / {total}',
                              onOpen:function () { $('#bannerMaker').css('visibility', 'hidden'); },
                              onClosed:function () { $('#bannerMaker').css('visibility', 'visible');}
                            });
-    $('#survey_btn').colorbox({width:'60%', height:'400px', iframe:true,
-                             onOpen:function () { $('#bannerMaker').css('visibility', 'hidden'); },
-                             onClosed:function () { $('#bannerMaker').css('visibility', 'visible');}
-                             });
-    $('#version_btn').colorbox({width:'60%', height:'400px',
-                             onOpen:function () { $('#bannerMaker').css('visibility', 'hidden'); },
-                             onClosed:function () { $('#bannerMaker').css('visibility', 'visible');}
-                             });
     
-    
+    // 调整功能面板大小
+    this.onResize();
+    $(window).resize(this.onResize);
   },
   clearAll : function (bl) {
-    $('#mains div img').unbind('click', start);
-    $('#mains div').remove();
+    $('#templateContainer  img').unbind('click', start);
+    $('#templateContainer div').remove();
     if (bl) {
       setAddressContent();
     }
@@ -230,69 +151,109 @@ var GUI = {
   //更新输入框 
   uploadTemplate : function (){
     $('#submitButton').prop('disabled', true);
-    GUI.reText();
     if (BannerMaker.isChanged) {
       if (window.confirm('您在大头生成器里进行的操作还未保存，现在提交模板的话那些操作不会生效，确定么？')) {
-        $("#code_form").submit();
+        Model.submit();
       } else{
         alert('请点击大头生成器中的“保存”按钮，保存大头，然后再点“上传模板”');
       }
     } else {
-      $("#code_form").submit();
+      Model.submit();
     }
   },
-  showInfo : function (str, is_reset){
-    if (is_reset) {
+  showInfo : function (str, isReset){
+    if (isReset) {
       $('#output').append(str); 
     } else {
       $('#output').html(str);
     }
   },
-  /**
- * 切换布局选项卡
- * @param {Object} e
- */
-  change_type : function (evt) {
-    $("#elist dl").eq(_cur_type).removeClass("show");
-    $("#element_type li").eq(_cur_type).removeClass('cur');
-  
-    var _index = $(this).index();
-    if('代码' == $(this).html()) {
-      reText();
+  changeCss : function (evt, isSetURL){
+    isSetURL = isSetURL == undefined ? true : isSetURL;
+    var css = "css/" + $('#cssSelector').val() + ".css";
+    if ($('#customStyle').length > 0) {
+      $('#customStyle').attr('href', css);
+    } else {
+      var init = {
+        href : css,
+        id : 'customStyle',
+        rel : 'stylesheet'
+      }
+      $('<link>', init).appendTo($('head'));
     }
-    $("#elist dl").eq(_index).addClass("show");
-    $(this).addClass("cur");
-    _cur_type = _index;
-  },
-  changeCss : function (evt, bl){
-    bl = bl == undefined ? true : bl;
-    var _css = "css/" + $('#fg').val() + ".css";
-    $("#css_tag").attr('href', _css);
-    if (bl) setAddressContent(false);
-  },
-  refreshHTML : function () {
-    if (_title_txt.parent().length > 0 && _title_txt.parent().attr('id') != 'timg') {
-      _title_txt.parent().click();
+    if (isSetURL) {
+      GUI.setAddressContent(false);
     }
-    var str =$("#mains").html().toLowerCase();
-    // 移除input标签和空白div，还有多余的编辑标题
-    str = str.replace(/<input[^>]*>/gim,"");
-    str = str.replace(/<div[^>]*><\/div>/gim,'');
-    str = str.replace(/\stitle=([^\s|^>]+)/gim, '');
-    var mts = str.match(/<img.*?>/gim);
-    for(var i=0;i<mts.length;i++){str=str.replace(mts[i],divs[mts[i].match(/.*\/(.*?).[gif|jpg]/)[1]]);}
-    str = str.replace('<!-- link css -->','<link href="http://icon.zol.com.cn/article/templateDIY/css/' + $('#fg').val() + '.css" type="text/css" rel="stylesheet" />');;
-    str += '</div><!--页尾 end--><norunscript>topicDIY.init();</norunscript></body></html>';
-    // 是否使用模板大头
-    if (BannerMaker.headPic != '') {
-      str = str.replace('http://icon.zol.com.cn/article/templateDIY/images/head.jpg', BannerMaker.headPic);
-    }
-    $("#texts").val(str);
   },
   onResize : function (evt) {
     var screenHeight = $(window).height();
-    $('#moduleThumbs dd, #moduleThumbs ul').height(screenHeight - 203);
+    $('.moduleThumbs').height(screenHeight - 403);
     $('#cover').height(screenHeight);
+  },
+  /**
+   * 设置地址栏
+   * 只保留有内容的通栏
+   */
+  setAddressContent : function (bl) {
+    var _result = '/' + $('#cssSelector').val() + '/';
+    var _is_cols = false;
+    bl = bl == undefined ? true : bl;
+    $("#refreshHTML div").each(function(i) {
+      if ($(this).find('img').length > 0) {
+        _result += $(this).attr('type') + '-';
+        if ($(this).children('dl').length > 1) {
+          _is_cols = true;
+        }
+        $(this).find('img').each(function(j){
+          var _src = $(this).attr('src');
+          var _at = '';
+          if (_is_cols) {
+            // 取左边还是右边
+            _at = '@' + $('#refreshHTML div:eq(' + i + ') dd').index($(this).parent());
+          }
+          _result += _src.substr(_src.lastIndexOf('/') + 1) + _at + ',';
+        });
+        _result = _result.slice(0, -1);
+        _result += '|';
+        _is_cols = false;
+      }
+    });
+    _result = _result.slice(0, -1);
+    _result +=  '/';
+    _is_refill = bl;
+    SWFAddress.setValue(_result);
+  },
+  // 使用地址栏里的地址来生成模板
+  addressChangeHandler : function (evt) {
+    var _param_num = SWFAddress.getPathNames().length;
+    if (_is_refill && _param_num > 0) {
+      if (SWFAddress.getPathNames()[0] != $('#cssSelector').val()) {
+        $('#cssSelector').val(SWFAddress.getPathNames()[0]);
+        changeCss(null, false);
+      }
+      if (_param_num > 1) {
+        var _arr = decodeURIComponent(SWFAddress.getPathNames()[1]).split('|');
+        clearHandler();
+        for (var i = 0, len = _arr.length; i < len; i++) {
+          var _type = Number(_arr[i].substr(0, 1));
+          var _img_arr = _arr[i].substr(2).split(',');
+          var _row = addRow(null, _type);
+          _row.find('dd').html('');
+          _row.appendTo($('#refreshHTML'));
+          for (var j = 0, jlen = _img_arr.length; j < jlen; j++) {
+            var _img = $('<img></img>', {'class':'dimg'});
+            var _at = 0;
+            if (_img_arr[j].indexOf('@') != -1) {
+              _at = Number(_img_arr[j].substr(_img_arr[j].indexOf('@') + 1));
+              _img_arr[j] = _img_arr[j].substring(0, _img_arr[j].indexOf('@'));
+            }
+            _img.attr('src', './images/' + _img_arr[j]);
+            _img.bind('click', start);
+            _img.appendTo(_row.find('dd').eq(_at));
+          }
+        }
+      }
+    }
   },
   // 框架代码
   frameCodeArr : ["<dl><dt class='z_con' style='display:none'>栏目标题</dt><dd class='z_con'>&nbsp;</dd></dl>",

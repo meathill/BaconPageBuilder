@@ -7,7 +7,6 @@ ui,li{font-style:normal;list-style:none;}
 .input,.select,.textarea{font-size:12px;}
 a{text-decoration:none;color:#333;}
 a:hover{text-decoration:underline;color:#f60;border:none;}
-img{background:url(../images/loading.gif) center center no-repeat}
 
 /*¿ò¼Ü*/
 .zhead,#zhead{width:960px}
@@ -36,6 +35,11 @@ img{background:url(../images/loading.gif) center center no-repeat}
 
 .z0 a img,.z1 a img,.z2 a img,.z3 a img,.z4 a img{border:#C1C1C1 1px solid;background:#fff;}
 .z0 a:hover img.z1 a:hover img,.z2 a:hover img,.z3 a:hover img,.z4 a:hover img{border:#777 1px solid;}
+
+/********************************
+ * Í¨ÓÃ
+ *******************************/
+.loading{background:url(../images/loading.gif) center center no-repeat}
 
 /*×ÖÌå*/
 .hei14by{font:bold 14px/20px microsoft yahei,simhei;}
