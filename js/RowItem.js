@@ -63,3 +63,18 @@ function submitTitle(evt, bl) {
     _dt.bind('click', editRowTitle);
   }
 }
+
+function RowItem() {
+  this.appendTo = function (parent) {
+    
+  }
+  
+  /**
+   * 构造函数部分
+   */
+  var self = this;
+  var index = 0;
+  var init = {};
+  this.body = $('<dl>', init);
+  
+}
