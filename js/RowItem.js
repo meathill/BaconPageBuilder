@@ -64,17 +64,41 @@ function submitTitle(evt, bl) {
   }
 }
 
-function RowItem() {
+function RowItem(colsNum) {
   this.appendTo = function (parent) {
     
   }
-  
+  function createBody(colsNum){
+    var result;
+    if (colsNum > 1) {
+      result = $('<div>', {
+        class : 'column-' + colsNum
+      })
+      for (var i = 0; i < colsNum ; i++) {
+        result.append(createDL());
+      }
+      result.find('dl').last().addClass('last-column')
+    } else {
+      result = createDL();
+    }
+    return result;
+  }
+  function createDL() {
+    var result = $('<dl>', {
+      class : 'row-item'
+    }).append($('<dt>', {
+      text: '标题'
+    })).append($('<dd>', {
+      text: '&nbsp;'
+    }));
+    return result;
+  }
   /**
    * 构造函数部分
    */
   var self = this;
   var index = 0;
   var init = {};
-  this.body = $('<dl>', init);
+  this.body = createBody(colsNum);
   
 }
