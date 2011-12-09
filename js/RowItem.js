@@ -66,18 +66,18 @@ function submitTitle(evt, bl) {
 
 function RowItem(colsNum) {
   this.appendTo = function (parent) {
-    
+    $(parent).append(this.body);
   }
   function createBody(colsNum){
     var result;
     if (colsNum > 1) {
       result = $('<div>', {
-        class : 'column-' + colsNum
-      })
+        'class' : 'column-' + colsNum
+      });
       for (var i = 0; i < colsNum ; i++) {
         result.append(createDL());
       }
-      result.find('dl').last().addClass('last-column')
+      result.find('dl').last().addClass('last-column');
     } else {
       result = createDL();
     }
@@ -85,7 +85,7 @@ function RowItem(colsNum) {
   }
   function createDL() {
     var result = $('<dl>', {
-      class : 'row-item'
+      'class' : 'row-item'
     }).append($('<dt>', {
       text: 'БъЬт'
     })).append($('<dd>', {
@@ -100,5 +100,4 @@ function RowItem(colsNum) {
   var index = 0;
   var init = {};
   this.body = createBody(colsNum);
-  
 }
