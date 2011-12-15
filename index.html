@@ -4,7 +4,7 @@
     <title>专题模版搭建系统</title>
     <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
     <link href="css/eggplant/jquery-ui-1.8.16.custom.css" rel="stylesheet" />
-    <link href="css/css.css" rel="stylesheet" />
+    <link href="css/new.css" rel="stylesheet" />
     <link href="css/admin.css" rel="stylesheet" />
     <link href="css/colorbox.css" rel="stylesheet" />
     <script src="js/lib/jquery-1.7.1.min.js"></script>
@@ -15,6 +15,7 @@
     <script src="js/BannerMaker.js"></script>
     <script src="js/Model.js"></script>
     <script src="js/RowItem.js"></script>
+    <script src="js/Page.js"></script>
     <script src="js/GUI.js"></script>
     <script src="js/Main.js"></script>
   </head>
@@ -44,11 +45,11 @@
         <a href="http://icon.zol.com.cn/article/templateDIY/images/help1.jpg" title="使用帮助" rel="help_group">帮助</a>
       </div>
       <div id="insertButtons">
-        <input type="button" value="单列无标题" class="addRowBtn" name="0" />
-        <input type="button" value="单列有标题" class="addRowBtn" name="1" />
-        <input type="button" value="1:1双列含标题" class="addRowBtn" name="2" />
-        <input type="button" value="7:3双列无标题" class="addRowBtn" name="3" />
-        <input type="button" value="1:1:1三列含标题" class="addRowBtn" name="4" />
+        <input type="button" value="单列无标题" class="addRowBtn one no-title" />
+        <input type="button" value="单列有标题" class="addRowBtn one" />
+        <input type="button" value="1:1双列含标题" class="addRowBtn two" />
+        <input type="button" value="7:3双列无标题" class="addRowBtn two" />
+        <input type="button" value="1:1:1三列含标题" class="addRowBtn three"" />
       </div>
       <div id="modules">
         <ul>
@@ -171,7 +172,7 @@
         </p>
       </div>
     </div>
-    <div id="templateContainer hidden">
+    <div id="pageContainer" class="hidden">
       <div id="token"></div>
       <!--<input type="button" id="removeBtn" value="删" class="tbtn cls" />
       <input type="button" id="upmoveBtn" name="up" value="↑" class="tbtn up"  />

@@ -99,5 +99,6 @@ function RowItem(colsNum) {
   var self = this;
   var index = 0;
   var init = {};
+  colsNum = colsNum == undefined ? 1 : colsNum;
   this.body = createBody(colsNum);
 }

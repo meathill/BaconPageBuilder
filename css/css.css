@@ -19,19 +19,19 @@ a:hover{text-decoration:underline;color:#f60;border:none;}
 
 /* 通栏容器 */  
 .z0,.z1,.z2,.z3,.z4{width:960px;margin:10px 0 0; overflow:hidden;}
-  .z2 dl.z_con{width:475px;float:left;}
-  .z4 dl.z_con{width:314px;float:left;}
+  .z2 dl.z_con{width:475px;}
+  .z4 dl.z_con{width:314px;}
 	.z0 dt.z_con,.z3 dt.z_con{display:none}
-	.z1 dt.z_con,.z2 dt.z_con,.z4 dt.z_con{padding:0 10px;font:bold 14px/30px microsoft yahei;background:#ddd;float:left;}
+	.z1 dt.z_con,.z2 dt.z_con,.z4 dt.z_con{padding:0 10px;font:bold 14px/30px microsoft yahei;background:#ddd;}
     .z1 dt.z_con{width:940px;}
     .z2 dt.z_con{width:455px;}
     .z4 dt.z_con{width:294px;}
-	.z0 dd.z_con,.z1 dd.z_con,.z2 dd.z_con,.z4 dd.z_con{border:#ddd 1px solid;overflow-x:hidden;background:#fefefe;float:left;}
+	.z0 dd.z_con,.z1 dd.z_con,.z2 dd.z_con,.z4 dd.z_con{border:#ddd 1px solid;overflow-x:hidden;background:#fefefe;}
     .z1 dd.z_con{width:958px;}
     .z2 dd.z_con{width:463px;padding:5px;}
     .z4 dd.z_con{width:302px;padding:5px;}
-    .z3 .lf{width:740px;float:left;position:relative;}
-    .z3 .rt{width:220px;float:left;position:relative;}
+    .z3 .lf{width:740px;position:relative;}
+    .z3 .rt{width:220px;position:relative;}
 
 .z0 a img,.z1 a img,.z2 a img,.z3 a img,.z4 a img{border:#C1C1C1 1px solid;background:#fff;}
 .z0 a:hover img.z1 a:hover img,.z2 a:hover img,.z3 a:hover img,.z4 a:hover img{border:#777 1px solid;}
@@ -48,20 +48,20 @@ a:hover{text-decoration:underline;color:#f60;border:none;}
 
 /*首屏*/
 .z0n1{width:952px;padding:3px; overflow:hidden;}
-.z0n1 .l{width:400px;padding:2px;border:1px solid #ccc;background:#fff;float:left;}
-.z0n1 .r{width:530px;padding:0 0 0 16px;float:left;}
-  .z0n1 .t{width:530px;float:left;}
-	.z0n1	.m{width:520px;font:14px/24px simsun;padding:8px 5px 0;float:left;}
+.z0n1 .l{width:400px;padding:2px;border:1px solid #ccc;background:#fff;}
+.z0n1 .r{width:530px;padding:0 0 0 16px;}
+  .z0n1 .t{width:530px;}
+	.z0n1	.m{width:520px;font:14px/24px simsun;padding:8px 5px 0;}
 	  .z0n1 .hei14by{line-height:25px}
 	 
 
 .z0n2{width:938px;padding:10px; overflow:hidden;}
-.z0n2 .l{width:280px;padding:3px;border:1px solid #ccc;background:#fff;float:left;}
-.z0n2 .m{width:390px;padding:0 10px;float:left;}
-	.z0n2 .m .t{width:370px;line-height:21px;padding:10px;border-bottom:#C1C1C1 1px dotted;float:left;}
-	.z0n2 .m .b{width:370px;font:14px/27px simsun;float:left;}
-.z0n2 .r{width:240px;float:left;}
-	.z0n2 .r div{padding:0 0 5px;float:left;}
+.z0n2 .l{width:280px;padding:3px;border:1px solid #ccc;background:#fff;}
+.z0n2 .m{width:390px;padding:0 10px;}
+	.z0n2 .m .t{width:370px;line-height:21px;padding:10px;border-bottom:#C1C1C1 1px dotted;}
+	.z0n2 .m .b{width:370px;font:14px/27px simsun;}
+.z0n2 .r{width:240px;}
+	.z0n2 .r div{padding:0 0 5px;}
 	.z0n2 .r td{border-bottom:#d1d1d1 1px dotted;line-height:28px;}
 	
 /*导航  暂时默认加载西游记的导航*/
@@ -78,39 +78,39 @@ a:hover{text-decoration:underline;color:#f60;border:none;}
 	.z1n1 td{line-height:25px}
 	
 .z1n2{width:958px; overflow:hidden;}
-	.z1n2 .l{width:256px;float:left;}
+	.z1n2 .l{width:256px;}
 		.z1n2 .l img{padding:1px;}
 		.z1n2 .l td{line-height:30px;text-align:center}
-	.z1n2 .r{width:690px;float:left;}
-		.z1n2 .r .m{width:100%;height:110px;padding:5px 0;float:left;}
+	.z1n2 .r{width:690px;}
+		.z1n2 .r .m{width:100%;height:110px;padding:5px 0;}
 		  .z1n2 .r .hei14by{line-height:25px}
-		.z1n2 .r .b{width:100%;float:left;}
+		.z1n2 .r .b{width:100%;}
 		.z1n2 .r .b img{padding:1px;}
 		.z1n2 .r .b td{line-height:30px;text-align:center}
 
 .z1n3{width:928px;padding:15px; overflow:hidden;}
-	.z1n3 .l{width:455px;border:#C1C1C1 1px solid;float:left;}
-		.z1n3 .l .pic{width:296px;float:left;}
-		.z1n3 .l .con{width:140px;padding:5px 10px;float:left;}
+	.z1n3 .l{width:455px;border:#C1C1C1 1px solid;}
+		.z1n3 .l .pic{width:296px;}
+		.z1n3 .l .con{width:140px;padding:5px 10px;}
 		.z1n3 .l td{line-height:22px}
 	.z1n3 .r{margin:0 0 0 14px}
 	
 .z1n4{width:958px;padding:15px 0 5px; overflow:hidden;}
 	.z1n4 img{padding:1px}
 	.z1n4 td{line-height:21px}
-	.z1n4 .l{padding:0 15px;width:204px;float:left;}
-	.z1n4 .r{width:716px;padding:0 0 0 4px;float:left;}
+	.z1n4 .l{padding:0 15px;width:204px;}
+	.z1n4 .r{width:716px;padding:0 0 0 4px;}
 
 .z1n5{width:958px;padding:15px 0 5px; overflow:hidden;}
 	.z1n5 img{padding:1px;}
-	.z1n5 .l{width:234px;padding:0 15px;float:left;}
-	.z1n5 .r{width:694px;float:left;}
+	.z1n5 .l{width:234px;padding:0 15px;}
+	.z1n5 .r{width:694px;}
 	.z1n5 .r td{line-height:21px}
 	
 .z1n6{width:946px;padding:15px 0 15px 11px; overflow:hidden;}
-	.z1n6 .l{width:300px;padding:0 7px;float:left;}
-		.z1n6 .t{padding:0 0 6px;float:left;}
-		.z1n6 .b{width:280px;padding:8px 2px 4px 10px;background:#DEDEDE;line-height:21px;float:left;}
+	.z1n6 .l{width:300px;padding:0 7px;}
+		.z1n6 .t{padding:0 0 6px;}
+		.z1n6 .b{width:280px;padding:8px 2px 4px 10px;background:#DEDEDE;line-height:21px;}
 		.z1n6 .con{padding:6px 0 0}
 		
 .z1n7{width:958px;overflow:hidden;}
@@ -150,33 +150,33 @@ a:hover{text-decoration:underline;color:#f60;border:none;}
 		.z1n14 .r .b{width:100%;float:left}
 
 .z1n15{width:100%;padding:15px 0; overflow:hidden;}
-	.z1n15 .l{width:202px;padding:0 15px;float:left;}
-	.z1n15 .r{width:722px;float:left;}
-		.z1n15 .r .t{width:100%;height:90px;float:left;}
+	.z1n15 .l{width:202px;padding:0 15px;}
+	.z1n15 .r{width:722px;}
+		.z1n15 .r .t{width:100%;height:90px;}
 		.z1n15 .r .t td{line-height:22px}
-		.z1n15 .r .b{width:100%;float:left;}
+		.z1n15 .r .b{width:100%;}
 
 .z1n16{width:100%;padding:10px 0 0; overflow:hidden;}
 	.z1n16 img{padding:1px}
 	.z1n16 td{text-align:center;line-height:26px}
 
 .z1n17{width:100%;padding:15px 0; overflow:hidden;}
-	.z1n17 .l{width:244px;padding:0 15px;float:left;}
+	.z1n17 .l{width:244px;padding:0 15px;}
 		.z1n17 .l img{padding:1px}
-	.z1n17 .r{width:680px;float:left;}
-		.z1n17 .r .t{width:100%;padding:5px 0;float:left;}
+	.z1n17 .r{width:680px;}
+		.z1n17 .r .t{width:100%;padding:5px 0;}
 		.z1n17 .r td{padding:5px 0;line-height:20px;}
 
 .z1n18{width:100%;padding:15px 0; overflow:hidden;}
-	.z1n18 .l{width:254px;padding:0 15px;float:left;}
+	.z1n18 .l{width:254px;padding:0 15px;}
 		.z1n18 .l img{padding:1px}
-	.z1n18 .r{width:650px;line-height:20px;float:left;}
-		.z1n18 .r .pic{padding:0 8px 7px 0;float:left;}
-		.z1n18 .r .b{padding:8px 0 0;float:left;}
-		.z1n18 .r .t{width:100%;float:left;}
+	.z1n18 .r{width:650px;line-height:20px;}
+		.z1n18 .r .pic{padding:0 8px 7px 0;}
+		.z1n18 .r .b{padding:8px 0 0;}
+		.z1n18 .r .t{width:100%;}
 
 .z1n19{padding:15px;width:928px; overflow:hidden;}
-	.z1n19 .l{width:437px;padding:10px;border:#c1c1c1 1px solid;float:left;}
+	.z1n19 .l{width:437px;padding:10px;border:#c1c1c1 1px solid;}
 	.z1n19 .r{margin:0 0 0 10px;}
 	.z1n19 td{line-height:20px;}
 	.z1n19 img{padding:1px;}
@@ -185,52 +185,52 @@ a:hover{text-decoration:underline;color:#f60;border:none;}
   .z1n20 .t{width:940px;height:110px;background:#fff;margin:0 0 10px}
   .z1n20 .b{width:100%}
     .z1n20 .b img,.z1n20 .b a:hover img{border:none;padding:0}
-  .z1n20 .l{width:250px;height:350px;overflow:hidden;padding:160px 10px 0 0;float:left;visibility:hidden;}
-  .z1n20 .r{width:680px;height:510px;background:#fff;float:left;overflow:hidden;}
+  .z1n20 .l{width:250px;height:350px;overflow:hidden;padding:160px 10px 0 0;visibility:hidden;}
+  .z1n20 .r{width:680px;height:510px;background:#fff;overflow:hidden;}
 
 .z1n21{width:958px;padding:15px 0 5px; overflow:hidden;}
   .z1n21 img{padding:1px;}
-  .z1n21 .l{width:234px;padding:0 15px;float:left;}
-  .z1n21 .r{width:694px;float:left;}
+  .z1n21 .l{width:234px;padding:0 15px;}
+  .z1n21 .r{width:694px;}
   .z1n21 .r td{line-height:25px}
 
 .z1n22{width:100%;padding:15px; overflow:hidden;}
-	.z1n22 .l{width:147px;line-height:20px;float:left;}
-	.z1n22 .m{width:162px;padding:0 10px;float:left;}
-	.z1n22 .r{width:122px;float:left;}
+	.z1n22 .l{width:147px;line-height:20px;}
+	.z1n22 .m{width:162px;padding:0 10px;}
+	.z1n22 .r{width:122px;}
 	.z1n22 .r .t{height:132px;}
 	.z1n22 .pl30{padding: 0 0 0 26px}
 
 .z1n23{width:100%;padding:0 15px; overflow:hidden;}
-	.z1n23 .l{width:230px;padding:6px 0 0;float:left;}
+	.z1n23 .l{width:230px;padding:6px 0 0;}
 		.z1n23 .l td{line-height:20px}
-	.z1n23 .r{width:698px;padding:10px 0 0 10px;float:left;}
+	.z1n23 .r{width:698px;padding:10px 0 0 10px;}
 		.z1n23 .r td{text-align:center;line-height:25px}
 
 .z1n24{width:100%;padding:0 15px; overflow:hidden;}
-	.z1n24 .l{width:58px;padding:10px 0;float:left;}
-	.z1n24 .r{width:860px;padding:0 0 0 10px;float:left;}
+	.z1n24 .l{width:58px;padding:10px 0;}
+	.z1n24 .r{width:860px;padding:0 0 0 10px;}
 		.z1n24 .r td{line-height:30px;text-align:center;}
 
 .z1n25{width:958px; overflow:hidden;}
-	.z1n25 .l{width:380px;float:left;}
-	.z1n25 .m{width:314px;padding:12px 0;float:left;}
-	.z1n25 .r{padding:10px;margin:12px 0;border-left:#DEDEDE 1px solid;background:#FAFAFA;width:231px;height:496px;float:left;}
+	.z1n25 .l{width:380px;}
+	.z1n25 .m{width:314px;padding:12px 0;}
+	.z1n25 .r{padding:10px;margin:12px 0;border-left:#DEDEDE 1px solid;background:#FAFAFA;width:231px;height:496px;}
 	.z1n25 .r td{line-height:20px;}
 
 .z1n26{width:958px; overflow:hidden;}
-	.z1n26 .l{width:400px;float:left;}
-	.z1n26 .m{width:294px;padding:12px 0;float:left;}
-		.z1n26 .m .t{padding:0 0 12px;float:left;}
-	.z1n26 .r{padding:10px;margin:12px 0;border-left:#DEDEDE 1px solid;background:#FAFAFA;width:231px;height:516px;float:left;}
+	.z1n26 .l{width:400px;}
+	.z1n26 .m{width:294px;padding:12px 0;}
+		.z1n26 .m .t{padding:0 0 12px;}
+	.z1n26 .r{padding:10px;margin:12px 0;border-left:#DEDEDE 1px solid;background:#FAFAFA;width:231px;height:516px;}
 	.z1n26 .r td{line-height:20px;}
 
 .z1n27{width:958px; overflow:hidden;}
-	.z1n27 .l{width:696px;float:left;}
+	.z1n27 .l{width:696px;}
 		.z1n27 .l td{background:#333;text-align:center;line-height:28px;color:#ccc}
 		.z1n27 .l a{color:#ccc}
 		.z1n27 .l a:hover{color:#f60}
-	.z1n27 .r{padding:10px;margin:12px 0;border-left:#DEDEDE 1px solid;background:#FAFAFA;width:229px;height:532px;float:left;}
+	.z1n27 .r{padding:10px;margin:12px 0;border-left:#DEDEDE 1px solid;background:#FAFAFA;width:229px;height:532px;}
 	.z1n27 .r td{line-height:20px;}
 	
 .zsti1{padding:10px;width:938px; overflow:hidden;}
@@ -243,40 +243,40 @@ a:hover{text-decoration:underline;color:#f60;border:none;}
 
 .z2n3{padding:10px 0 10px 10px;width:453px; overflow:hidden;}
 	.z2n3 img{padding:2px;}
-	.z2n3 .l{width:176px;padding:0 15px 0 0;float:left;}
+	.z2n3 .l{width:176px;padding:0 15px 0 0;}
 		.z2n3 .l td{text-align:center;line-height:30px}
-	.z2n3 .r{width:262px;float:left;}
-		.z2n3 .r .t{width:100%;float:left;}
+	.z2n3 .r{width:262px;}
+		.z2n3 .r .t{width:100%;}
 		.z2n3 .r .t td{line-height:23px}
 		.z2n3 .r .b{padding:7px 0 0}
 		.z2n3 .r .b td{text-align:center;;line-height:30px}
 
 .z2n4{width:453px;padding:10px 0 10px 10px; overflow:hidden;}
-	.z2n4 .l{width:197px;float:left;}
-	.z2n4 .r{width:256px;float:left;}
+	.z2n4 .l{width:197px;}
+	.z2n4 .r{width:256px;}
     .z2n4 .ht{height:130px}
-		.z2n4 .r .t{width:100%;float:left;}
+		.z2n4 .r .t{width:100%;}
 		.z2n4 .r .b{padding:10px 0 0}
 		.z2n4 .r .hei14by{line-height:30px}
 
 .z2n5{padding:6px;width:451px; overflow:hidden;}
-	.z2n5 dl{width:142px;padding:1px;margin:2px;border:#bbb 1px solid;background:#fff;float:left;}
-	.z2n5 dt{width:100%;text-align:center;background:#D4D4D4;margin-bottom:2px;line-height:30px;float:left;}
-	.z2n5 dd{float:left;}
+	.z2n5 dl{width:142px;padding:1px;margin:2px;border:#bbb 1px solid;background:#fff;}
+	.z2n5 dt{width:100%;text-align:center;background:#D4D4D4;margin-bottom:2px;line-height:30px;}
+	.z2n5 dd{}
 
 .z2n6{padding:10px;width:443px; overflow:hidden;}
-	.z2n6 .l{width:197px;float:left;}
-	.z2n6 .r{width:246px;float:left;}
+	.z2n6 .l{width:197px;}
+	.z2n6 .r{width:246px;}
     .z2n6 .ht{height:170px}
-		.z2n6 .r .t{width:100%;line-height:24px;float:left;}
+		.z2n6 .r .t{width:100%;line-height:24px;}
 		.z2n6 .r .hei12b{line-height:30px}
 		.z2n6 .r .b{padding:20px 0 0}
 
 .z2n7{padding:10px;width:443px; overflow:hidden;}
-	.z2n7 .l{width:197px;float:left;}
-	.z2n7 .r{width:246px;float:left;}
+	.z2n7 .l{width:197px;}
+	.z2n7 .r{width:246px;}
     .z2n3 .ht{height:150px}
-		.z2n7 .r .t{width:100%;line-height:23px;float:left;}
+		.z2n7 .r .t{width:100%;line-height:23px;}
 		.z2n7 .r .hei12b{line-height:25px}
 		.z2n7 .r .b{padding:8px 0 0}
 		
@@ -285,10 +285,10 @@ a:hover{text-decoration:underline;color:#f60;border:none;}
 	.z2n8 table{float:none}
 
 .z2n9{padding:10px 0 10px 10px;width:453px; overflow:hidden;}
-	.z2n9 .l{width:200px;float:left;}
-	.z2n9 .r{width:253px;float:left;}
+	.z2n9 .l{width:200px;}
+	.z2n9 .r{width:253px;}
 	.z2n9 .r img{margin:0 0 10px}
-	.z2n9 .r .t{width:100%;float:left;}
+	.z2n9 .r .t{width:100%;}
 
 .z2n10{padding:5px;width:453px}
 	.z2n10 img{padding:1px;margin:0 10px 0 0}
@@ -299,7 +299,7 @@ a:hover{text-decoration:underline;color:#f60;border:none;}
 
 .z2n12{padding:10px;width:443px;line-height:20px;}
 	.z2n12 img{padding:1px}
-	.z2n12 .t{float:left;margin-right:10px}
+	.z2n12 .t{margin-right:10px}
 	.z2n12 .b{float:right;margin:10px 0 0 10px}
 	
 .zsti2{padding:5px;width:453px}
@@ -307,16 +307,16 @@ a:hover{text-decoration:underline;color:#f60;border:none;}
 
 .z3a1{width:358px;margin:0 10px 10px 0;border:1px solid #B5AB77;background:#fff;float:left}
   .z3a1 dt,.z3a3 dt{padding:0 14px 0;border:1px solid #e2dfd9;background:repeat-x url(../images/xiyouji/z1bg.jpg);color:#fff;font:bold 14px/28px simsun;}
-  .z3a1 dd,.z3a3 dd{padding:10px 9px;border-top:none;float:left;}
+  .z3a1 dd,.z3a3 dd{padding:10px 9px;border-top:none;}
   .z3a3 dd{width:340px}
 
-.z3a2{width:218px;margin:0 0 10px;border:1px solid #999980;background:#fff;float:left;display:inline}
+.z3a2{width:218px;margin:0 0 10px;border:1px solid #999980;background:#fff;display:inline}
   .z3a2 dt{padding:0 12px 0;border:1px solid #EDEDE3;background:#DBDBC7;color:#4A4132;font:bold 14px/28px simsun;}
   .z3a2 dd{padding:10px;border-top:none;float:left}
   
-.z3a3{width:728px;margin:0 0 10px;border:1px solid #B5AB77;background:#fff;float:left;display:inline}
+.z3a3{width:728px;margin:0 0 10px;border:1px solid #B5AB77;background:#fff;display:inline}
   .z3a1 .more,.z3a3 .more{float:right;color:#fff;font:normal 12px/28px simsun;}
   .z3a3 dd{width:710px}
   
-.z4n1{width:100%;float:left;}
+.z4n1{width:100%;}
   .z4n1 td{line-height:200%}

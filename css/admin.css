@@ -31,9 +31,10 @@
   width:310px;
   padding:5px 0;
 }
-#templateContainer {
-  width:1000px;
+#pageContainer {
+  width:960px;
   margin:0 auto;
+  position: relative;
 }
 #cssSelector, #templateName {
   width:170px;

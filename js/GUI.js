@@ -109,7 +109,7 @@ var GUI = {
     $("#submitButton")
       .button()
       .click(this.uploadTemplate);
-    $(".addRowBtn").click(this.addRow);
+    $(".addRowBtn").click(Page.createNewRow);
     
     // ÍÏ¶¯
     $('#refreshHTML dt').sortable({
