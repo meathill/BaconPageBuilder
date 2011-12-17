@@ -87,9 +87,18 @@ function end(evt) {
 }
 
 var _is_refill = false;
-
+/*****************************************
+ * 这个直接实例化的东西控制所有面板上的操作
+ * 因为和页面耦合度极高，所以就不单独写成类了
+ * 当成开始就有的东西，其它需要全局使用的东西也从这个对象里面取
+ * 
+ * @author Meathill
+ * @version 0.2(2011-12-27)
+ ****************************************/
 var GUI = {
   token : null,
+  banner : null,
+  page : null,
   init : function () {
     // 显示所有内容
     $('#preloader').remove();
@@ -109,7 +118,6 @@ var GUI = {
     $("#submitButton")
       .button()
       .click(this.uploadTemplate);
-    $(".addRowBtn").click(Page.createNewRow);
     
     // 拖动
     $('#refreshHTML dt').sortable({
@@ -141,12 +149,9 @@ var GUI = {
     this.onResize();
     $(window).resize(this.onResize);
   },
-  clearAll : function (bl) {
-    $('#templateContainer  img').unbind('click', start);
-    $('#templateContainer div').remove();
-    if (bl) {
-      setAddressContent();
-    }
+  setPage : function (page) {
+    this.page = page;
+    $(".addRowBtn").click(page.createNewRow);
   },
   //更新输入框 
   uploadTemplate : function (){

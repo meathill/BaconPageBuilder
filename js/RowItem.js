@@ -37,37 +37,25 @@ function moveRow(evt) {
   }
   setAddressContent(false);
 }
-/**
- * 编辑通栏标题
- * @param {Object} evt
- */
-function editRowTitle(evt) {
-  if (_title_txt.parent().length > 0 && _title_txt.parent().attr('id') != 'timg') {
-    submitTitle({type : 'click'});
-  };
-  _title_txt.val($(this).html());
-  $(this).unbind('click', editRowTitle);
-  $(this).bind('click', submitTitle);
-  $(this).html('');
-  $(this).append(_title_txt);
-  $(this).attr('title', '回车或单击空白处确认修改');
-  _title_txt.focus();
-}
-function submitTitle(evt, bl) {
-  if (evt.type == 'click' || (evt.type == 'keydown' && evt.keyCode == 13) || bl){
-    var _dt = _title_txt.parent();
-    $('#timg').append(_title_txt);
-    _dt.html(_title_txt.val());
-    _dt.attr('title', '点击编辑标题');
-    _dt.unbind('click', submitTitle);
-    _dt.bind('click', editRowTitle);
-  }
-}
 
 function RowItem(colsNum) {
+  /**
+   * 构造函数部分
+   */
+  var self = this;
+  var index = 0;
+  var init = {};
+  colsNum = colsNum == undefined ? 1 : colsNum;
+  this.body = createBody(colsNum);
+  /**
+   * Public Methods
+   */
   this.appendTo = function (parent) {
     $(parent).append(this.body);
   }
+  /**
+   * Private Functions
+   */
   function createBody(colsNum){
     var result;
     if (colsNum > 1) {
@@ -88,17 +76,37 @@ function RowItem(colsNum) {
       'class' : 'row-item'
     }).append($('<dt>', {
       text: '标题'
-    })).append($('<dd>', {
+      }).toggle(editTitle, submitTitle)
+    ).append($('<dd>', {
       text: '&nbsp;'
     }));
     return result;
   }
   /**
-   * 构造函数部分
+   * 编辑通栏标题
+   * @param {Object} event
+   * @private
    */
-  var self = this;
-  var index = 0;
-  var init = {};
-  colsNum = colsNum == undefined ? 1 : colsNum;
-  this.body = createBody(colsNum);
+  function editTitle(event) {
+    var title = $('<input>', {
+      val: body.text(),
+      'title': '回车或单击空白处确认修改',
+      change : submitTitle
+    }).focus();
+    body.append(title);
+  }
+  /**
+   * 保存编辑的标题
+   * @param {Object} event
+   * @private
+   */
+  function submitTitle(event) {
+    if (evt.type == 'click' || (evt.type == 'keydown' && evt.keyCode == 13)){
+      var dt = $(this).parent();
+      dt.html($(this).val());
+      _dt.attr('title', '点击编辑标题');
+      _dt.unbind('click', submitTitle);
+      _dt.bind('click', editRowTitle);
+    }
+  }
 }
