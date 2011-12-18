@@ -40,18 +40,45 @@ function moveRow(evt) {
 
 function RowItem(colsNum) {
   /**
-   * 构造函数部分
-   */
-  var self = this;
-  var index = 0;
-  var init = {};
-  colsNum = colsNum == undefined ? 1 : colsNum;
-  this.body = createBody(colsNum);
-  /**
    * Public Methods
    */
   this.appendTo = function (parent) {
     $(parent).append(this.body);
+  }
+  /**
+   * 编辑通栏标题
+   * @param {Object} event
+   * @private
+   */
+  this.editTitle = function (event) {
+    var input = $('<input>', {
+      val: $(this).text(),
+      'title': '回车或单击空白处确认修改',
+      change : self.submitTitle,
+      focusout: self.submitTitle
+    });
+    input.focus();
+    $(this).html('').append(input);
+  }
+  /**
+   * 保存编辑的标题
+   * @param {Object} event
+   * @private
+   */
+  this.submitTitle = function (event) {
+    if (event.type == 'click' || event.type == 'focusout' || (evt.type == 'keydown' && evt.keyCode == 13)){
+      var input, dt;
+      if (event.target.tagName == 'dt') {
+        dt = $(this);
+        input = dt.find('input');
+      } else {
+        dt = $(this).parent();
+        input = $(this);
+      }
+      dt.html(input.val())
+        .attr('title', '点击编辑标题');
+      input.remove();
+    }
   }
   /**
    * Private Functions
@@ -76,37 +103,17 @@ function RowItem(colsNum) {
       'class' : 'row-item'
     }).append($('<dt>', {
       text: '标题'
-      }).toggle(editTitle, submitTitle)
+      }).toggle(self.editTitle, self.submitTitle)
     ).append($('<dd>', {
-      text: '&nbsp;'
+      text: ' '
     }));
     return result;
   }
   /**
-   * 编辑通栏标题
-   * @param {Object} event
-   * @private
+   * 构造函数部分
    */
-  function editTitle(event) {
-    var title = $('<input>', {
-      val: body.text(),
-      'title': '回车或单击空白处确认修改',
-      change : submitTitle
-    }).focus();
-    body.append(title);
-  }
-  /**
-   * 保存编辑的标题
-   * @param {Object} event
-   * @private
-   */
-  function submitTitle(event) {
-    if (evt.type == 'click' || (evt.type == 'keydown' && evt.keyCode == 13)){
-      var dt = $(this).parent();
-      dt.html($(this).val());
-      _dt.attr('title', '点击编辑标题');
-      _dt.unbind('click', submitTitle);
-      _dt.bind('click', editRowTitle);
-    }
-  }
+  var self = this;
+  var index = 0;
+  colsNum = colsNum == undefined ? 1 : colsNum;
+  this.body = createBody(colsNum);
 }
