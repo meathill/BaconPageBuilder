@@ -51,14 +51,20 @@ function RowItem(colsNum) {
    * @private
    */
   this.editTitle = function (event) {
+    var dt = $(this).parent();
     var input = $('<input>', {
       val: $(this).text(),
-      'title': '回车或单击空白处确认修改',
-      change : self.submitTitle,
-      focusout: self.submitTitle
+      'title': self.saveText,
+      'class': self.inputClass,
+      click: function (event) {
+        event.stopPropagation();
+      },
+      focusout: self.submitTitle,
+      keydown: self.submitTitle
     });
+    $(this).remove()
+    dt.append(input);
     input.focus();
-    $(this).html('').append(input);
   }
   /**
    * 保存编辑的标题
@@ -66,18 +72,15 @@ function RowItem(colsNum) {
    * @private
    */
   this.submitTitle = function (event) {
-    if (event.type == 'click' || event.type == 'focusout' || (evt.type == 'keydown' && evt.keyCode == 13)){
-      var input, dt;
-      if (event.target.tagName == 'dt') {
-        dt = $(this);
-        input = dt.find('input');
-      } else {
-        dt = $(this).parent();
-        input = $(this);
-      }
-      dt.html(input.val())
-        .attr('title', '点击编辑标题');
-      input.remove();
+    if (event.type == 'focusout' || (event.type == 'keydown' && event.keyCode == 13)){
+      var dt = $(this).parent();
+      var input = $(this).remove();
+      var h3 = $('<h3>', {
+        text: input.val(),
+        click: self.editTitle
+      })
+      dt.append(h3)
+        .attr('title', self.editText);
     }
   }
   /**
@@ -99,14 +102,19 @@ function RowItem(colsNum) {
     return result;
   }
   function createDL() {
+    var h3 = $('<h3>', {
+      text: self.defaultTitle,
+      click: self.editTitle
+    });
     var result = $('<dl>', {
-      'class' : 'row-item'
-    }).append($('<dt>', {
-      text: '标题'
-      }).toggle(self.editTitle, self.submitTitle)
-    ).append($('<dd>', {
-      text: ' '
-    }));
+      'class': self.itemClass
+    })
+      .append($('<dt>', {
+          'title': self.editText
+        }).append(h3))
+      .append($('<dd>', {
+        text: '&nbsp;'
+      }));
     return result;
   }
   /**
@@ -117,3 +125,8 @@ function RowItem(colsNum) {
   colsNum = colsNum == undefined ? 1 : colsNum;
   this.body = createBody(colsNum);
 }
+RowItem.prototype.editText = '点击编辑标题';
+RowItem.prototype.saveText = '回车或单击空白处确认修改';
+RowItem.prototype.itemClass = 'row-item';
+RowItem.prototype.inputClass = 'row-title';
+RowItem.prototype.defaultTitle = '标题';

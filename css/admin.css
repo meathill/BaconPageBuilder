@@ -63,6 +63,11 @@
 .row-item dt {
   cursor:pointer;
 }
+.row-title {
+  border:1px #C33 solid;
+  width:50%;
+  box-shadow: 0 0 4px #F33;    
+}
 
 .prow{width:359px;border-left:1px solid #7293AA;}
 
@@ -105,7 +110,6 @@
   .down{top:48px}
 .light_on{background:#f90}
 	#submit_btn:hover{background:#ff0}
-#rowTitle{border:2px #c00 solid;width:200px}
 .hong12{color:#f30}
 /******** 大头生成器 *******/
 .div_mainbody{width:960px;margin:0 auto;float:none;display:none;}
