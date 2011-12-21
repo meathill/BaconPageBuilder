@@ -1,44 +1,5 @@
-function addRow(evt ,_type) {
-  if (evt != null) {
-    _type = Number($(this).attr('name'));
-  }
-  var _class = '';
-  if (0 == _type){
-    _class = 'z1';
-  } else {
-    _class = 'z'+_type;
-  }
-  var _row = $('<div></div>', {'class':'banners', 'type': _type}).appendTo("#mains");
-  _row.addClass(_class);
-  _row.html(_frame_arr[_type]);
-  // 通栏的标题可以点击后编辑
-  _row.find('dt').attr('title', '点击编辑标题');
-  _row.find('dt').bind('click', editRowTitle);
-  // 添加删除按钮
-  $('<div></div>').prependTo(_row);
-  _down_btn.clone(true).prependTo(_row);
-  _up_btn.clone(true).prependTo(_row);
-  _remove_btn.clone(true).prependTo(_row);
-  return _row;
-}
-/**
- * 删除通栏
- * @param {Object} e
- */ 
-function removeRow(evt){
-  $(this).parent().remove();
-  setAddressContent(false);
-}
-function moveRow(evt) {
-  if($(this).attr('name') == 'up' && $(this).parent().prev('div').length > 0) {
-    $(this).parent().insertBefore($(this).parent().prev('div'));
-  } else if ($(this).attr('name') == 'down' && $(this).parent().next('div').length > 0) {
-    $(this).parent().insertAfter($(this).parent().next('div'));
-  }
-  setAddressContent(false);
-}
-
-function RowItem(colsNum) {
+jQuery.namespace('com.meathill.bacon');
+com.meathill.bacon.RowItem = function (colsNum) {
   /**
    * Public Methods
    */
@@ -72,7 +33,7 @@ function RowItem(colsNum) {
    * @private
    */
   this.submitTitle = function (event) {
-    if (event.type == 'focusout' || (event.type == 'keydown' && event.keyCode == 13)){
+    if (event.type == 'focusout' || (event.type == 'keydown' && event.which == 13)){
       var dt = $(this).parent();
       var input = $(this).remove();
       var h3 = $('<h3>', {
@@ -83,21 +44,31 @@ function RowItem(colsNum) {
         .attr('title', self.editText);
     }
   }
+  this.moveUp = function (event) {
+    self.body.trigger(self.MOVE_UP);
+  }
+  this.moveDown = function (event) {
+    self.body.trigger(self.MOVE_DOWN);
+  }
+  /**
+ * 删除通栏
+ * @param {Object} event
+ */ 
+  this.remove = function (event) {
+    self.body.remove();
+  }
   /**
    * Private Functions
    */
   function createBody(colsNum){
-    var result;
+    var result = $('<div>', {
+      'class' : 'rows column-' + colsNum
+    });
+    for (var i = 0; i < colsNum ; i++) {
+      result.append(createDL());
+    }
     if (colsNum > 1) {
-      result = $('<div>', {
-        'class' : 'column-' + colsNum
-      });
-      for (var i = 0; i < colsNum ; i++) {
-        result.append(createDL());
-      }
       result.find('dl').last().addClass('last-column');
-    } else {
-      result = createDL();
     }
     return result;
   }
@@ -117,6 +88,45 @@ function RowItem(colsNum) {
       }));
     return result;
   }
+  function createButtons(container) {
+    var upButton = $('<button>', {
+      'class': 'operationButtons v1',
+      'click': self.moveUp,
+      'title': '将整个通栏上移',
+      val: '上移'
+    }).button({
+      icons: {
+        primary: "ui-icon-arrowthick-1-n"
+      },
+      text: false
+    });
+    var downButton = $('<button>', {
+      'class': 'operationButtons v3',
+      'click': self.moveDown,
+      'title': '将整个通栏下移',
+      val: '下移'
+    }).button({
+      icons: {
+        primary: "ui-icon-arrowthick-1-s"
+      },
+      text: false
+    });
+    var removeButton = $('<button>', {
+      'class': 'operationButtons v2',
+      'click': self.remove,
+      'title': '删除通栏',
+      val: '删除'
+    }).button({
+      icons: {
+        primary: "ui-icon-close"
+      },
+      text: false
+    });
+    container
+      .append(upButton)
+      .append(downButton)
+      .append(removeButton);
+  }
   /**
    * 构造函数部分
    */
@@ -124,9 +134,12 @@ function RowItem(colsNum) {
   var index = 0;
   colsNum = colsNum == undefined ? 1 : colsNum;
   this.body = createBody(colsNum);
+  createButtons(this.body);
 }
 RowItem.prototype.editText = '点击编辑标题';
 RowItem.prototype.saveText = '回车或单击空白处确认修改';
 RowItem.prototype.itemClass = 'row-item';
 RowItem.prototype.inputClass = 'row-title';
 RowItem.prototype.defaultTitle = '标题';
+RowItem.prototype.MOVE_UP = 'moveUp';
+RowItem.prototype.MOVE_DOWN = 'moveDown';

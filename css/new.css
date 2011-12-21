@@ -61,6 +61,10 @@ a:hover {
 
 /* = Ò³Ãæ½á¹¹
  * ----------------------------------- */
+.rows {
+  position:relative;
+  margin: 0 0 10px
+}
 .row-item {
   border: 1px solid #CCC;
 }

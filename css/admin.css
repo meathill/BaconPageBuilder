@@ -5,6 +5,19 @@
   display:none
 }
 /***************************************
+ *  弹出层 
+ * ************************************/
+#preloader { 
+  width: 280px;
+  margin: 20px auto 0;
+  float: none;
+  padding: 10px;
+  border: 3px dashed #69c;
+}
+#preloader strong {
+  font-size:14px;
+}
+/***************************************
  *  功能侧边栏
  **************************************/
 #sidebar {
@@ -31,11 +44,6 @@
   width:310px;
   padding:5px 0;
 }
-#pageContainer {
-  width:960px;
-  margin:0 auto;
-  position: relative;
-}
 #cssSelector, #templateName {
   width:170px;
   margin:5px 0 0
@@ -60,6 +68,34 @@
 /***************************************
  *  页面主体部分
  **************************************/
+.div_mainbody {
+  width: 960px;
+  margin:0 auto;
+}
+#pageContainer {
+  width:960px;
+  margin:0 auto;
+  position: relative;
+}
+#bannerMaker h1 {
+  font:bold 20px/30px microsoft yahei
+}
+.rows .operationButtons {
+  position: absolute;
+  left: -25px;
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+}
+.rows .v1 {
+  top:0px;
+}
+.rows .v2 {
+  top:24px;
+}
+.rows .v3 {
+  top:48px;
+}
 .row-item dt {
   cursor:pointer;
 }
@@ -68,6 +104,7 @@
   width:50%;
   box-shadow: 0 0 4px #F33;    
 }
+
 
 .prow{width:359px;border-left:1px solid #7293AA;}
 
@@ -99,6 +136,7 @@
 #timg{display:none;}
 #token{width:950px;height:22px;margin:5px;border:4px dashed #c00;background:#fff0f0;float:left;}
 .hui12{color:#666}
+.hong12{color:#f30}
 
 /******** 增加一些功能按钮 ，再把样式修改下*********/
 .z0,.z1,.z2,.z3,.z4{position:relative;line-height:30px;padding:0 30px}
@@ -109,12 +147,5 @@
   .up{top:24px}
   .down{top:48px}
 .light_on{background:#f90}
-	#submit_btn:hover{background:#ff0}
-.hong12{color:#f30}
 /******** 大头生成器 *******/
-.div_mainbody{width:960px;margin:0 auto;float:none;display:none;}
-  #bannerMaker h1{font:bold 20px/30px microsoft yahei}
   
-/******** 弹出层 *********/
-#preloader{width:280px;margin:20px auto 0;float:none;padding:10px;border:3px dashed #69c;}
-  #preloader strong{font-size:14px}
