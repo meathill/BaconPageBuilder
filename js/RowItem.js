@@ -1,10 +1,15 @@
+/***************************************
+ *  横通类
+ * @author Meathill
+ * @version 0.1(2011-12-22)
+ * ************************************/
 jQuery.namespace('com.meathill.bacon');
 com.meathill.bacon.RowItem = function (colsNum) {
   /**
-   * Public Methods
+   * 添加通栏到页面
    */
   this.appendTo = function (parent) {
-    $(parent).append(this.body);
+    $(parent).append(body);
   }
   /**
    * 编辑通栏标题
@@ -44,21 +49,33 @@ com.meathill.bacon.RowItem = function (colsNum) {
         .attr('title', self.editText);
     }
   }
+  /**
+   * 上移通栏
+   * @param {Object} event
+   * @private
+   */
   this.moveUp = function (event) {
-    self.body.trigger(self.MOVE_UP);
+    body.insertBefore(body.prev());
   }
+  /**
+   * 下移通栏
+   * @param {Object} event
+   * @private
+   */
   this.moveDown = function (event) {
-    self.body.trigger(self.MOVE_DOWN);
+    body.insertAfter(body.next());
   }
   /**
  * 删除通栏
  * @param {Object} event
+ * @private
  */ 
   this.remove = function (event) {
-    self.body.remove();
+    body.remove();
   }
   /**
-   * Private Functions
+   * 创建dom
+   * @private
    */
   function createBody(colsNum){
     var result = $('<div>', {
@@ -72,6 +89,9 @@ com.meathill.bacon.RowItem = function (colsNum) {
     }
     return result;
   }
+  /**
+   * 创建dl，dl是基础结构
+   */
   function createDL() {
     var h3 = $('<h3>', {
       text: self.defaultTitle,
@@ -88,6 +108,9 @@ com.meathill.bacon.RowItem = function (colsNum) {
       }));
     return result;
   }
+  /**
+   * 创建功能按钮
+   */
   function createButtons(container) {
     var upButton = $('<button>', {
       'class': 'operationButtons v1',
@@ -133,13 +156,11 @@ com.meathill.bacon.RowItem = function (colsNum) {
   var self = this;
   var index = 0;
   colsNum = colsNum == undefined ? 1 : colsNum;
-  this.body = createBody(colsNum);
-  createButtons(this.body);
+  var body = createBody(colsNum);
+  createButtons(body);
 }
-RowItem.prototype.editText = '点击编辑标题';
-RowItem.prototype.saveText = '回车或单击空白处确认修改';
-RowItem.prototype.itemClass = 'row-item';
-RowItem.prototype.inputClass = 'row-title';
-RowItem.prototype.defaultTitle = '标题';
-RowItem.prototype.MOVE_UP = 'moveUp';
-RowItem.prototype.MOVE_DOWN = 'moveDown';
+com.meathill.bacon.RowItem.prototype.editText = '点击编辑标题';
+com.meathill.bacon.RowItem.prototype.saveText = '回车或单击空白处确认修改';
+com.meathill.bacon.RowItem.prototype.itemClass = 'row-item';
+com.meathill.bacon.RowItem.prototype.inputClass = 'row-title';
+com.meathill.bacon.RowItem.prototype.defaultTitle = '标题';

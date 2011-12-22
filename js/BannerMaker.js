@@ -4,7 +4,7 @@
  * @version 0.1 (2011-11-18)
  */
 jQuery.namespace('com.meathill.bacon');
-com.meathill.pork.BannerMaker = function () {
+com.meathill.bacon.BannerMaker = function () {
   var headPicUrl = ''; // ´óÍ·Í¼Æ¬url
   var callback = null;
   var isChanged = false;
