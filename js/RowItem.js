@@ -75,6 +75,7 @@ com.meathill.bacon.RowItem = function (colsNum) {
   }
   /**
    * 创建dom
+   * @param {Number} colsNum
    * @private
    */
   function createBody(colsNum){
@@ -91,6 +92,7 @@ com.meathill.bacon.RowItem = function (colsNum) {
   }
   /**
    * 创建dl，dl是基础结构
+   * @private
    */
   function createDL() {
     var h3 = $('<h3>', {
@@ -104,12 +106,14 @@ com.meathill.bacon.RowItem = function (colsNum) {
           'title': self.editText
         }).append(h3))
       .append($('<dd>', {
-        text: '&nbsp;'
+        text: self.dragHere
       }));
     return result;
   }
   /**
    * 创建功能按钮
+   * @param {jQuery Object} container
+   * @private
    */
   function createButtons(container) {
     var upButton = $('<button>', {
@@ -151,6 +155,30 @@ com.meathill.bacon.RowItem = function (colsNum) {
       .append(removeButton);
   }
   /**
+   * 初始化放置图片的功能
+   * @param {jQuery Object} body
+   * @private
+   */
+  function initDroppable(body) {
+    body.find('dd').droppable({
+      scope: "element",
+      hoverClass: "row-drag-hover",
+      drop: function (event, ui) {
+        var item = ui.draggable.clone()
+                    .removeClass('ui-draggable')
+                    .addClass('elementItem');
+        if ($(this).html() == self.dragHere) {
+          $(this).html('');
+        }
+        $(this).append(item);
+        $('#pageContainer dd').sortable({
+          placeholder: "placeholder",
+          connectWith: "#pageContainer dd"
+        }).disableSelection();
+      }
+    })
+  }
+  /**
    * 构造函数部分
    */
   var self = this;
@@ -158,9 +186,11 @@ com.meathill.bacon.RowItem = function (colsNum) {
   colsNum = colsNum == undefined ? 1 : colsNum;
   var body = createBody(colsNum);
   createButtons(body);
+  initDroppable(body);
 }
 com.meathill.bacon.RowItem.prototype.editText = '点击编辑标题';
 com.meathill.bacon.RowItem.prototype.saveText = '回车或单击空白处确认修改';
+com.meathill.bacon.RowItem.prototype.dragHere = '请将右侧的模块拖放至此';
 com.meathill.bacon.RowItem.prototype.itemClass = 'row-item';
 com.meathill.bacon.RowItem.prototype.inputClass = 'row-title';
 com.meathill.bacon.RowItem.prototype.defaultTitle = '标题';

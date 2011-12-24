@@ -1,91 +1,3 @@
-/**
- * 开始拖拽通栏
- * @param {Object} evt
- */
-function start(evt) {
-  if ($(this).hasClass("dimg")) {
-    _drag_item = $(this);
-		_drag_item.removeClass('dimg');
-		_drag_item.unbind('click', start);
-		_token.insertBefore(_drag_item);
-  } else {
-		_drag_item = $(this).clone();
-    $('#timg').append(_token);
-  }
-  $("#mains").parent().append(_drag_item);
-  _drag_item.addClass("oimg");
-  _drag_item.css('left', evt.pageX - 10 + "px");
-  _drag_item.css('top', evt.pageY - 10 + "px");
-  _drag_item.bind("click", end);
-  $(document).bind("mousemove", drag);
-	
-	// 调整token大小
-	_token.css('width', _drag_item.width() - 22 + 'px');
-	
-	// 可供添加内容的区块
-	_con_arr = $('#mains div.'+_drag_item.attr('n')+' dd.z_con');
-	$('#mains div.' + _drag_item.attr('n')).addClass('light_on');
-}
-function drag(evt) {
-  if (!_drag_item) {
-    return
-  }
-  _x = evt.pageX;
-  _y = evt.pageY;
-  _drag_item.css('left', _x - 10 + "px");
-  _drag_item.css('top', _y - 10 + "px");
-	var _count = 0;
-  for (var i = 0; i < _con_arr.length; i++) {
-		var _obj = _con_arr.eq(i).offset();
-    if (_x > _obj.left && _x < _obj.left + _con_arr.eq(i).width() && _y > _obj.top && _y < _obj.top + _con_arr.eq(i).height()) {
-			var _imgs = _con_arr.eq(i).children('img');
-      if (_imgs.length == 0) {
-        _con_arr.eq(i).html('');
-        _con_arr.eq(i).append(_token);
-        return;
-      } else {
-        for (var j = 0; j < _imgs.length; j++) {
-          var _t = _imgs.eq(j).offset().top;
-          var _h = _imgs.eq(j).height();
-          var _s = _t + _h / 2;
-          if (_y > _t && _y < _s) {
-            _token.insertBefore(_imgs.eq(j));
-            return;
-          } else if (_y > _s && _y < _t + _h) {
-            _token.insertAfter(_imgs.eq(j));
-          }
-        }
-      }
-    } else {
-      if (0 == _con_arr.eq(i).children('img').length) {
-        _con_arr.eq(i).html('&nbsp;');
-      }
-			_count++;
-    }
-  }
-  if (_count == _con_arr.length) {
-    $('#timg').append(_token)
-  }
-}
-function end(evt) {
-  _drag_item.unbind("click", end);
-  $(document).unbind("mousemove", drag);
-  if (_token.parent().attr('id') == "timg") {
-    _drag_item.remove();
-  } else {
-    _drag_item.insertAfter(_token);
-		_drag_item.removeClass('oimg');
-		_drag_item.addClass('dimg');
-		_drag_item.bind('click', start);
-		$('#timg').append(_token);
-  }
-	
-	$('#mains div.' + _drag_item.attr('n')).removeClass('light_on');
-  
-  // 改变地址栏
-  setAddressContent(false);
-}
-
 var _is_refill = false;
 /*****************************************
  * 这个直接实例化的东西控制所有面板上的操作
@@ -120,8 +32,8 @@ var GUI = {
       .click(this.uploadTemplate);
     
     // 拖动
-    $('#refreshHTML dt').sortable({
-      connectWith: "#refreshHTML dt"
+    $('#pageContainer dd').sortable({
+      connectWith: "#pageContainer dd"
     }).disableSelection();
     $("#modules")
       .tabs()
@@ -129,7 +41,7 @@ var GUI = {
         .draggable({
           opacity: 0.7,
           helper: 'clone',
-          connectToSortable: '#refreshHTML dt'
+          scope: 'element'
         });
         
     // 样式切换

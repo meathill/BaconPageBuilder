@@ -43,6 +43,7 @@
 .moduleThumbs img {
   width:310px;
   padding:5px 0;
+  cursor: pointer;
 }
 #cssSelector, #templateName {
   width:170px;
@@ -99,10 +100,25 @@
 .row-item dt {
   cursor:pointer;
 }
+.row-item dd {
+  padding: 5px;
+}
+.row-item img {
+  width: 100%;
+}
 .row-title {
   border:1px #C33 solid;
   width:50%;
   box-shadow: 0 0 4px #F33;    
+}
+.row-drag-hover {
+  border:1px solid #F99;
+  background:#FF9;
+}
+.placeholder {
+  height: 22px;
+  line-height: 22px;
+  border:4px dashed #c00;
 }
 
 
@@ -134,7 +150,6 @@
 	filter:alpha(opacity=60);
 }
 #timg{display:none;}
-#token{width:950px;height:22px;margin:5px;border:4px dashed #c00;background:#fff0f0;float:left;}
 .hui12{color:#666}
 .hong12{color:#f30}
 
