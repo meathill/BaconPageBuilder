@@ -21,8 +21,9 @@ com.meathill.bacon.Page = function (target) {
   /**
    * Public Methods
    */
-  this.createNewRow = function (event) {
-    var row = new com.meathill.bacon.RowItem();
+  this.createNewRow = function (colsNum, isTitled) {
+    colsNum = colsNum || 1;
+    var row = new com.meathill.bacon.RowItem(colsNum, isTitled);
     row.appendTo(body);
   }
   this.clearAll = function (bl) {

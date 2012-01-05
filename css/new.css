@@ -63,7 +63,16 @@ a:hover {
  * ----------------------------------- */
 .rows {
   position:relative;
-  margin: 0 0 10px
+  margin: 0 0 10px;
+  zoom: 1;
+}
+.rows:after {
+  clear:both;
+  visibility: hidden;
+  display: block;
+  height: 0;
+  line-height: 0;
+  content: "";
 }
 .row-item {
   border: 1px solid #CCC;
@@ -72,4 +81,20 @@ a:hover {
   padding: 0 10px;
   font: bold 14px/30px Microsoft Yahei;
   background: #DDD;
+}
+.no-title dt {
+  display:none;
+}
+.rows dl.column-2 {
+  width:473px;
+  margin:0 10px 0 0;
+  float:left;
+}
+.rows dl.column-3 {
+  width:310px;
+  margin: 0 12px 0 0;
+  float:left;
+}
+.rows dl.last-column {
+  margin: 0;
 }

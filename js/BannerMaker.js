@@ -30,6 +30,7 @@ com.meathill.bacon.BannerMaker = function () {
     var express = "swf/expressInstall.swf";
     var version = '11';
     so.embedSWF(src, domid, width, height, version, express, flashvars, param);
+    $('#header').height(height);
   }
   /**
    * 将大头图片替换在页面代码内
@@ -48,7 +49,7 @@ com.meathill.bacon.BannerMaker = function () {
    * @private
    */
   var setBannerHeight = function (height){
-    $('#bannerMaker').height(height);
+    $('#bannerMaker, #header').height(height);
   }
   var setBannerChanged = function (bl) {
     this.isChanged = bl;

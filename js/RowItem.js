@@ -4,7 +4,7 @@
  * @version 0.1(2011-12-22)
  * ************************************/
 jQuery.namespace('com.meathill.bacon');
-com.meathill.bacon.RowItem = function (colsNum) {
+com.meathill.bacon.RowItem = function (colsNum, isTitled) {
   /**
    * 添加通栏到页面
    */
@@ -78,12 +78,13 @@ com.meathill.bacon.RowItem = function (colsNum) {
    * @param {Number} colsNum
    * @private
    */
-  function createBody(colsNum){
+  function createBody(colsNum, isTitled){
+    isTitled = isTitled || '';
     var result = $('<div>', {
-      'class' : 'rows column-' + colsNum
+      'class' : 'rows' + isTitled
     });
     for (var i = 0; i < colsNum ; i++) {
-      result.append(createDL());
+      result.append(createDL(colsNum));
     }
     if (colsNum > 1) {
       result.find('dl').last().addClass('last-column');
@@ -94,13 +95,13 @@ com.meathill.bacon.RowItem = function (colsNum) {
    * 创建dl，dl是基础结构
    * @private
    */
-  function createDL() {
+  function createDL(colsNum) {
     var h3 = $('<h3>', {
       text: self.defaultTitle,
       click: self.editTitle
     });
     var result = $('<dl>', {
-      'class': self.itemClass
+      'class': self.itemClass + ' column-' + colsNum
     })
       .append($('<dt>', {
           'title': self.editText
@@ -184,7 +185,7 @@ com.meathill.bacon.RowItem = function (colsNum) {
   var self = this;
   var index = 0;
   colsNum = colsNum == undefined ? 1 : colsNum;
-  var body = createBody(colsNum);
+  var body = createBody(colsNum, isTitled);
   createButtons(body);
   initDroppable(body);
 }

@@ -30,6 +30,7 @@ var GUI = {
     $("#submitButton")
       .button()
       .click(this.uploadTemplate);
+    $(".addRowBtn").click(this.insertRow);
     
     // 拖动
     $('#pageContainer dd').sortable({
@@ -63,7 +64,12 @@ var GUI = {
   },
   setPage : function (page) {
     this.page = page;
-    $(".addRowBtn").click(page.createNewRow);
+  },
+  insertRow : function (event) {
+    var colsNum = $(this).attr('class').match(/column-(\d)/)[1];
+    var isTitled = $(this).hasClass('no-title') ? ' no-title' : '';
+    console.log(isTitled);
+    GUI.page.createNewRow(colsNum, isTitled);
   },
   //更新输入框 
   uploadTemplate : function (){
