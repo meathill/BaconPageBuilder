@@ -19,23 +19,31 @@ var GUI = {
     
     // 按钮事件绑定
     $('#togglePanelButton')
-      .hover(function(event) {
-        $(this).addClass('ui-state-hover');
-      }, function(event) {
-        $(this).removeClass('ui-state-hover');
+      .button({
+        icons: {
+          primary: "ui-icon-circle-triangle-e"
+        },
+        text: false
       })
-      .click(function(event) {
-        $('#sidebar').slideToggle('normal');
-      });
+      .click(this.togglePanel);
     $("#submitButton")
       .button()
       .click(this.uploadTemplate);
     $(".addRowBtn").click(this.insertRow);
+    $('#configButton').button({
+      icons: {
+        primary: 'ui-icon-wrench'
+      },
+      text: false
+    });
+    $('#helpButton').button({
+      icons: {
+        primary: 'ui-icon-help'
+      },
+      text: false
+    })
     
     // 拖动
-    $('#pageContainer dd').sortable({
-      connectWith: "#pageContainer dd"
-    }).disableSelection();
     $("#modules")
       .tabs()
       .find('img')
@@ -52,18 +60,27 @@ var GUI = {
       Model.setTemplateName($(this).val())
     });
     
-    // 适用探出层的“功能”按钮绑定
-    $('a[rel="help_group"]').colorbox({rel:'help_group', opacity:'0.5', current:'{current} / {total}',
-                             onOpen:function () { $('#bannerMaker').css('visibility', 'hidden'); },
-                             onClosed:function () { $('#bannerMaker').css('visibility', 'visible');}
-                           });
-    
     // 调整功能面板大小
     this.onResize();
     $(window).resize(this.onResize);
   },
-  setPage : function (page) {
-    this.page = page;
+  togglePanel : function (event) {
+    var icon = $(this).children().first();
+    if ($('#sidebar').hasClass('outside')) {
+      $('#sidebar').animate({"right": 0}, 600, function () {
+        $(this).removeClass('outside')
+      });
+      icon
+        .removeClass('ui-icon-circle-triangle-w')
+        .addClass('ui-icon-circle-triangle-e');
+    } else {
+      $('#sidebar').animate({"right": -20 - $('#sidebar').width()}, 600, function () {
+        $(this).addClass('outside');
+      });
+      icon
+        .removeClass('ui-icon-circle-triangle-e')
+        .addClass('ui-icon-circle-triangle-w');
+    }
   },
   insertRow : function (event) {
     var colsNum = $(this).attr('class').match(/column-(\d)/)[1];
@@ -84,11 +101,11 @@ var GUI = {
       Model.submit();
     }
   },
-  showInfo : function (str, isReset){
+  log : function (str, isReset){
     if (isReset) {
-      $('#output').append(str); 
-    } else {
       $('#output').html(str);
+    } else {
+      $('#output').append(str); 
     }
   },
   changeCss : function (evt, isSetURL){
@@ -110,8 +127,8 @@ var GUI = {
   },
   onResize : function (evt) {
     var screenHeight = $(window).height();
-    $('.moduleThumbs').height(screenHeight - 403);
-    $('#cover').height(screenHeight);
+    $('.moduleThumbs').height(screenHeight - 286);
+    $('#cover').height(screenHeight - 20);
   },
   /**
    * 设置地址栏
@@ -177,11 +194,5 @@ var GUI = {
         }
       }
     }
-  },
-  // 框架代码
-  frameCodeArr : ["<dl><dt class='z_con' style='display:none'>栏目标题</dt><dd class='z_con'>&nbsp;</dd></dl>",
-  "<dl class='z_con'><dt class='z_con'>栏目标题</dt><dd class='z_con'>&nbsp;</dd></dl>",
-  "<dl class='z_con'><dt class='z_con'>栏目标题1</dt><dd class='z_con'>&nbsp;</dd></dl><dl class='z_con ml10'><dt class='z_con'>栏目标题2</dt><dd class='z_con'>&nbsp;</dd></dl>",
-  "<dl class='lf'><dt class='z_con'>栏目标题1</dt><dd class='z_con'>&nbsp;</dd></dl><dl class='rt'><dt class='z_con'>栏目标题2</dt><dd class='z_con'>&nbsp;</dd></dl>",
-  "<dl class='z_con'><dt class='z_con'>栏目标题1</dt><dd class='z_con'>&nbsp</dd></dl><dl class='z_con ml9'><dt class='z_con'>栏目标题2</dt><dd class='z_con'>&nbsp</dd></dl><dl class='z_con ml9'><dt class='z_con'>栏目标题3</dt><dd class='z_con'>&nbsp</dd></dl>"],
+  }
 }

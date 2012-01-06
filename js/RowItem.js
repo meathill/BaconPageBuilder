@@ -118,7 +118,7 @@ com.meathill.bacon.RowItem = function (colsNum, isTitled) {
    */
   function createButtons(container) {
     var upButton = $('<button>', {
-      'class': 'operationButtons v1',
+      'class': 'operationButtons up',
       'click': self.moveUp,
       'title': '将整个通栏上移',
       val: '上移'
@@ -129,7 +129,7 @@ com.meathill.bacon.RowItem = function (colsNum, isTitled) {
       text: false
     });
     var downButton = $('<button>', {
-      'class': 'operationButtons v3',
+      'class': 'operationButtons down',
       'click': self.moveDown,
       'title': '将整个通栏下移',
       val: '下移'
@@ -140,7 +140,7 @@ com.meathill.bacon.RowItem = function (colsNum, isTitled) {
       text: false
     });
     var removeButton = $('<button>', {
-      'class': 'operationButtons v2',
+      'class': 'operationButtons remove',
       'click': self.remove,
       'title': '删除通栏',
       val: '删除'

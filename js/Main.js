@@ -4,7 +4,7 @@ $(function (evt) {
   var page = new com.meathill.bacon.Page('#pageContainer');
   GUI.init();
   GUI.banner = banner;
-  GUI.setPage(page);
+  GUI.page = page;
   // 调用方法构建模板
   GUI.addressChangeHandler();
   SWFAddress.addEventListener(SWFAddressEvent.CHANGE, GUI.addressChangeHandler);
