@@ -9,7 +9,7 @@ com.meathill.bacon.BannerMaker = function () {
   var callback = null;
   var isChanged = false;
   var saveURL = '';
-  var domID = "bannerMaker";
+  var domID = "banner-maker";
   /**
    * @constructor
    */
@@ -49,7 +49,7 @@ com.meathill.bacon.BannerMaker = function () {
    * @private
    */
   var setBannerHeight = function (height){
-    $('#bannerMaker, #header').height(height);
+    $('#banner-maker, #header').height(height);
   }
   var setBannerChanged = function (bl) {
     this.isChanged = bl;

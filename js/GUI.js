@@ -18,7 +18,7 @@ var GUI = {
     this.token = $('#token').remove();
     
     // 按钮事件绑定
-    $('#togglePanelButton')
+    $('#toggle-panel-button')
       .button({
         icons: {
           primary: "ui-icon-circle-triangle-e"
@@ -26,22 +26,23 @@ var GUI = {
         text: false
       })
       .click(this.togglePanel);
-    $("#submitButton")
+    $("#submit-button")
       .button()
       .click(this.uploadTemplate);
-    $(".addRowBtn").click(this.insertRow);
-    $('#configButton').button({
+    $(".add-row-button").click(this.insertRow);
+    $('#config-button').button({
       icons: {
         primary: 'ui-icon-wrench'
       },
       text: false
     });
-    $('#helpButton').button({
+    $('#help-button').button({
       icons: {
         primary: 'ui-icon-help'
       },
       text: false
     })
+    $('#steps').buttonset();
     
     // 拖动
     $("#modules")
@@ -54,11 +55,7 @@ var GUI = {
         });
         
     // 样式切换
-    $('#cssSelector').change(this.changeCss);
-    // 模版名称
-    $('#templateName').change(function() {
-      Model.setTemplateName($(this).val())
-    });
+    $('#css-selector').change(this.changeCss);
     
     // 调整功能面板大小
     this.onResize();
@@ -90,7 +87,7 @@ var GUI = {
   },
   //更新输入框 
   uploadTemplate : function (){
-    $('#submitButton').prop('disabled', true);
+    $('#submit-button').prop('disabled', true);
     if (BannerMaker.isChanged) {
       if (window.confirm('您在大头生成器里进行的操作还未保存，现在提交模板的话那些操作不会生效，确定么？')) {
         Model.submit();
@@ -111,12 +108,12 @@ var GUI = {
   changeCss : function (evt, isSetURL){
     isSetURL = isSetURL == undefined ? true : isSetURL;
     var css = "css/" + $('#cssSelector').val() + ".css";
-    if ($('#customStyle').length > 0) {
-      $('#customStyle').attr('href', css);
+    if ($('#custom-style').length > 0) {
+      $('#custom-style').attr('href', css);
     } else {
       var init = {
         href : css,
-        id : 'customStyle',
+        id : 'custom-style',
         rel : 'stylesheet'
       }
       $('<link>', init).appendTo($('head'));
@@ -127,7 +124,8 @@ var GUI = {
   },
   onResize : function (evt) {
     var screenHeight = $(window).height();
-    $('.moduleThumbs').height(screenHeight - 286);
+    $('.module-thumbs').height(screenHeight - 295);
+    $('.step-content').height(screenHeight - 265)
     $('#cover').height(screenHeight - 20);
   },
   /**
@@ -135,7 +133,7 @@ var GUI = {
    * 只保留有内容的通栏
    */
   setAddressContent : function (bl) {
-    var _result = '/' + $('#cssSelector').val() + '/';
+    var _result = '/' + $('#css-selector').val() + '/';
     var _is_cols = false;
     bl = bl == undefined ? true : bl;
     $("#refreshHTML div").each(function(i) {
@@ -167,8 +165,8 @@ var GUI = {
   addressChangeHandler : function (evt) {
     var _param_num = SWFAddress.getPathNames().length;
     if (_is_refill && _param_num > 0) {
-      if (SWFAddress.getPathNames()[0] != $('#cssSelector').val()) {
-        $('#cssSelector').val(SWFAddress.getPathNames()[0]);
+      if (SWFAddress.getPathNames()[0] != $('#css-selector').val()) {
+        $('#css-selector').val(SWFAddress.getPathNames()[0]);
         changeCss(null, false);
       }
       if (_param_num > 1) {

@@ -21,7 +21,8 @@
   <body>
     <!--浮动提示层begin-->
     <div id='preloader'>
-      <p align="center"><img src="images/loading.gif" width="32" height="32" alt="Loading" />
+      <p align="center">
+        <img src="images/loading.gif" width="32" height="32" alt="Loading" />
       </p>
       <p align="center">
         <strong>专题模板自建系统</strong>
@@ -31,7 +32,7 @@
     </div>
     <!--浮动提示层end-->
     <!--右侧控制板 begin-->
-    <button id="togglePanelButton" title="开关侧边栏" class="sidebarIconButton">
+    <button id="toggle-panel-button" title="开关侧边栏" class="sidebar-icon-button">
       开关侧边栏
     </button>
     <div id="sidebar" class="hidden">
@@ -39,88 +40,106 @@
       <iframe id="cover" scrolling="no" frameborder="0"></iframe>
       <h3>功能面板</h3>
       <hr />
-      <button id="helpButton" title="帮助" class="sidebarIconButton">帮助</button>
-      <button id="configButton" title="配置" class="sidebarIconButton">配置</button>
-      <!--模块&样式 begin-->
-      <div id="insertButtons">
-        <input type="button" value="单列无标题" class="addRowBtn column-1 no-title" />
-        <input type="button" value="单列有标题" class="addRowBtn column-1" />
-        <input type="button" value="双列含标题" class="addRowBtn column-2" />
-        <input type="button" value="三列含标题" class="addRowBtn column-3" />
+      <button id="help-button" title="帮助" class="sidebar-icon-button">帮助</button>
+      <button id="config-button" title="配置" class="sidebar-icon-button">配置</button>
+      <div id="steps">
+        <input type="radio" id="step1" name="steps" /><label for="step1" class="step-button">选择样式</label>
+        <input type="radio" id="step2" name="steps" checked="checked" /><label for="step2" class="step-button">搭建模版</label>
+        <input type="radio" id="step3" name="steps" /><label for="step3" class="step-button">属性设置</label>
       </div>
-      <div id="modules">
-        <ul>
-          <li>
-            <a href="#one-column">单列</a>
-          </li>
-          <li>
-            <a href="#two-column">双列</a>
-          </li>
-          <li>
-            <a href="#three-column">三列</a>
-          </li>
-        </ul>
-        <ul id="one-column" class="moduleThumbs">
-          <li><img src="images/z0n1.gif" n="z1" /></li>
-          <li><img src="images/z0n2.gif" n="z1" /></li>
-          <li><img src="images/z0n3.jpg" n="z1" /></li>
-          <li><img src="images/z1n1.gif" n="z1" /></li>
-          <li><img src="images/z1n2.gif" n="z1" /></li>
-          <li><img src="images/z1n3.gif" n="z1" /></li>
-          <li><img src="images/z1n4.gif" n="z1" /></li>
-          <li><img src="images/z1n5.gif" n="z1" /></li>
-          <li><img src="images/z1n6.gif" n="z1" /></li>
-          <li><img src="images/z1n7.gif" n="z1" /></li>
-          <li><img src="images/z1n8.gif" n="z1" /></li>
-          <li><img src="images/z1n9.gif" n="z1" /></li>
-          <li><img src="images/z1n10.gif" n="z1" /></li>
-          <li><img src="images/z1n11.gif" n="z1" /></li>
-          <li><img src="images/z1n12.gif" n="z1" /></li>
-          <li><img src="images/z1n13.gif" n="z1" /></li>
-          <li><img src="images/z1n14.gif" n="z1" /></li>
-          <li><img src="images/z1n15.gif" n="z1" /></li>
-          <li><img src="images/z1n16.gif" n="z1" /></li>
-          <li><img src="images/z1n17.gif" n="z1" /></li>
-          <li><img src="images/z1n18.gif" n="z1" /></li>
-          <li><img src="images/z1n19.gif" n="z1" /></li>
-          <li><img src="images/z1n20.jpg" n="z1" /></li>
-          <li><img src="images/z1n21.gif" n="z1" /></li>
-          <li><img src="images/z1n22.gif" n="z1" /></li>
-          <li><img src="images/z1n23.gif" n="z1" /></li>
-          <li><img src="images/z1n24.gif" n="z1" /></li>
-          <li><img src="images/z1n25.gif" n="z1" /></li>
-          <li><img src="images/z1n26.gif" n="z1" /></li>
-          <li><img src="images/z1n27.gif" n="z1" /></li>
-          <li><img src="images/zsti1.gif" n="z1" /></li>
-        </ul>
-        <ul id="two-column" class="moduleThumbs">
-          <li><img src="images/z2n1.gif" n="z2" /></li>
-          <li><img src="images/z2n2.gif" n="z2" /></li>
-          <li><img src="images/z2n3.gif" n="z2" /></li>
-          <li><img src="images/z2n4.gif" n="z2" /></li>
-          <li><img src="images/z2n5.gif" n="z2" /></li>
-          <li><img src="images/z2n6.gif" n="z2" /></li>
-          <li><img src="images/z2n7.gif" n="z2" /></li>
-          <li><img src="images/z2n8.gif" n="z2" /></li>
-          <li><img src="images/z2n9.gif" n="z2" /></li>
-          <li><img src="images/z2n10.gif" n="z2" /></li>
-          <li><img src="images/z2n11.gif" n="z2" /></li>
-          <li><img src="images/zsti2.gif" n="z2" /></li>
-        </ul>
-        <ul id="three-column" class="moduleThumbs">
-          <li><img src="images/z4n1.jpg" n="z4" /></li>
-        </ul>
+      <div id="step-contents">
+        <div id="step-contents-container" class="clr">
+          <div id="step-content-1" class="step-content">
+            
+          </div>
+          <div id="step-content-2" class="step-content">
+            <!--模块&样式 begin-->
+            <div id="insert-buttons">
+              <input type="button" value="单列无标题" class="add-row-button column-1 no-title" />
+              <input type="button" value="单列有标题" class="add-row-button column-1" />
+              <input type="button" value="双列含标题" class="add-row-button column-2" />
+              <input type="button" value="三列含标题" class="add-row-button column-3" />
+            </div>
+            <div id="modules">
+              <ul>
+                <li>
+                  <a href="#one-column">单列</a>
+                </li>
+                <li>
+                  <a href="#two-column">双列</a>
+                </li>
+                <li>
+                  <a href="#three-column">三列</a>
+                </li>
+              </ul>
+              <ul id="one-column" class="module-thumbs ">
+                <li><img src="images/z0n1.gif" class="column-1" /></li>
+                <li><img src="images/z0n2.gif" class="column-1" /></li>
+                <li><img src="images/z0n3.jpg" class="column-1" /></li>
+                <li><img src="images/z1n1.gif" class="column-1" /></li>
+                <li><img src="images/z1n2.gif" class="column-1" /></li>
+                <li><img src="images/z1n3.gif" class="column-1" /></li>
+                <li><img src="images/z1n4.gif" class="column-1" /></li>
+                <li><img src="images/z1n5.gif" class="column-1" /></li>
+                <li><img src="images/z1n6.gif" class="column-1" /></li>
+                <li><img src="images/z1n7.gif" class="column-1" /></li>
+                <li><img src="images/z1n8.gif" class="column-1" /></li>
+                <li><img src="images/z1n9.gif" class="column-1" /></li>
+                <li><img src="images/z1n10.gif" class="column-1" /></li>
+                <li><img src="images/z1n11.gif" class="column-1" /></li>
+                <li><img src="images/z1n12.gif" class="column-1" /></li>
+                <li><img src="images/z1n13.gif" class="column-1" /></li>
+                <li><img src="images/z1n14.gif" class="column-1" /></li>
+                <li><img src="images/z1n15.gif" class="column-1" /></li>
+                <li><img src="images/z1n16.gif" class="column-1" /></li>
+                <li><img src="images/z1n17.gif" class="column-1" /></li>
+                <li><img src="images/z1n18.gif" class="column-1" /></li>
+                <li><img src="images/z1n19.gif" class="column-1" /></li>
+                <li><img src="images/z1n20.jpg" class="column-1" /></li>
+                <li><img src="images/z1n21.gif" class="column-1" /></li>
+                <li><img src="images/z1n22.gif" class="column-1" /></li>
+                <li><img src="images/z1n23.gif" class="column-1" /></li>
+                <li><img src="images/z1n24.gif" class="column-1" /></li>
+                <li><img src="images/z1n25.gif" class="column-1" /></li>
+                <li><img src="images/z1n26.gif" class="column-1" /></li>
+                <li><img src="images/z1n27.gif" class="column-1" /></li>
+                <li><img src="images/zsti1.gif" class="column-1" /></li>
+              </ul>
+              <ul id="two-column" class="module-thumbs ">
+                <li><img src="images/z2n1.gif" class="column-2" /></li>
+                <li><img src="images/z2n2.gif" class="column-2" /></li>
+                <li><img src="images/z2n3.gif" class="column-2" /></li>
+                <li><img src="images/z2n4.gif" class="column-2" /></li>
+                <li><img src="images/z2n5.gif" class="column-2" /></li>
+                <li><img src="images/z2n6.gif" class="column-2" /></li>
+                <li><img src="images/z2n7.gif" class="column-2" /></li>
+                <li><img src="images/z2n8.gif" class="column-2" /></li>
+                <li><img src="images/z2n9.gif" class="column-2" /></li>
+                <li><img src="images/z2n10.gif" class="column-2" /></li>
+                <li><img src="images/z2n11.gif" class="column-2" /></li>
+                <li><img src="images/zsti2.gif" class="column-2" /></li>
+              </ul>
+              <ul id="three-column" class="module-thumbs ">
+                <li><img src="images/z4n1.jpg" class="column-3" /></li>
+              </ul>
+            </div>
+          </div>
+          <div id="step-content-3" class="step-content">
+            
+          </div>
+        </div>
+        
       </div>
       <div id="output">
         2.0重构中
         建议使用宽屏，享受更好的编辑体验
       </div>
       <div id="cpanel">
-        <button id="submitButton" title="点此上传模版">
+        <button id="submit-button" title="点此上传模版">
           上传模板
         </button>
-        <label for="cssSelector">样式选择：</label>
-        <select id="cssSelector">
+        <label for="css-selector">样式选择：</label>
+        <select id="css-selector">
           <option style="background:#ffffff;" value="css">普通</option>
           <option style="background:#05bef4;color:#fff" value="zdc">ZDC通用</option>
           <option style="background:#125a8b;color:#fff" value="slan">全球深蓝</option>
@@ -148,15 +167,15 @@
     </div>
     <!--右侧控制板 end-->
     <!--模板生成区 begin-->
-    <div id="header" class="div_mainbody hidden">
-      <div id="bannerMaker">
-        <h2>正在加载大头生成器，请耐心等候</h2>（如果你只能看到这个，就说明需要安装最新版的flash player了，点下面的链接吧。翟路留）
-        <p>
-          <a href="http://get.adobe.com/cn/flashplayer/"><img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="下载最新版本的Flash Player" /></a>
-        </p>
+    <div id="page-container" class="hidden">
+      <div id="header" class="hidden">
+        <div id="banner-maker">
+          <h2>正在加载大头生成器，请耐心等候</h2>（如果你只能看到这个，就说明需要安装最新版的flash player了，点下面的链接吧。翟路留）
+          <p>
+            <a href="http://get.adobe.com/cn/flashplayer/"><img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="下载最新版本的Flash Player" /></a>
+          </p>
+        </div>
       </div>
-    </div>
-    <div id="pageContainer" class="hidden">
     </div>
     <!--模板生成区 end-->
     <form id="htmlCodeForm" action="" method="post" class="always-hidden">

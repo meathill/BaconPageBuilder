@@ -53,22 +53,37 @@
   border-radius:10px 0 0 10px;
 	box-shadow:-1px 2px 1px #666;
 }
-.moduleThumbs {
+#steps {
+  margin: 0 0 10px;
+}
+.step-button {
+  width: 114px;
+}
+#step-contents {
+  width:100%;
+  overflow:hidden;
+}
+#step-contents-container {
+  width: 1110px;
+}
+.step-content {
+  width:360px;
+  margin:0 10px 0 0;
+  float:left;
+}
+.module-thumbs {
   padding:10px !important;
   overflow-x: hidden;
   overflow-y: scroll;
 }
-.moduleThumbs img {
+.module-thumbs  img {
   width:310px;
   padding:5px 0;
   cursor: pointer;
 }
-#cssSelector {
+#css-selector {
   width:170px;
   margin:5px 0 0
-}
-#cpanel { 
-  
 }
 #output {
   margin:10px 0;
@@ -82,44 +97,43 @@
 /***************************************
  *  按钮
  **************************************/
-#togglePanelButton {
+#toggle-panel-button {
   right:10px;
   top:18px;
 }
-#submitButton {
+#submit-button {
   width:100px;
   height:48px;
   font:bolder 16px/20px microsoft yahei,simhei;
 }
-.sidebarIconButton {
+.sidebar-icon-button {
   width:20px !important;
   height:20px;
   position:absolute;
   z-index: 2;
   top:8px;
 }
-#helpButton {
+#help-button {
   right:36px;
 }
-#configButton {
+#config-button {
   right: 62px;
 }
 /***************************************
  *  页面主体部分
  **************************************/
-.div_mainbody {
-  width: 960px;
-  margin:0 auto 10px;
+#header {
+  margin: 0 0 10px;
 }
-#pageContainer {
+#page-container {
   width:960px;
   margin:0 auto;
   position: relative;
 }
-#bannerMaker h1 {
+#banner-maker h1 {
   font:bold 20px/30px microsoft yahei
 }
-.rows .operationButtons {
+.rows .operation-buttons {
   position: absolute;
   left: -25px;
   width: 20px;

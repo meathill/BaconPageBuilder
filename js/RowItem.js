@@ -81,7 +81,7 @@ com.meathill.bacon.RowItem = function (colsNum, isTitled) {
   function createBody(colsNum, isTitled){
     isTitled = isTitled || '';
     var result = $('<div>', {
-      'class' : 'rows' + isTitled
+      'class' : 'rows clr' + isTitled
     });
     for (var i = 0; i < colsNum ; i++) {
       result.append(createDL(colsNum));
@@ -118,7 +118,7 @@ com.meathill.bacon.RowItem = function (colsNum, isTitled) {
    */
   function createButtons(container) {
     var upButton = $('<button>', {
-      'class': 'operationButtons up',
+      'class': 'operation-buttons up',
       'click': self.moveUp,
       'title': '将整个通栏上移',
       val: '上移'
@@ -129,7 +129,7 @@ com.meathill.bacon.RowItem = function (colsNum, isTitled) {
       text: false
     });
     var downButton = $('<button>', {
-      'class': 'operationButtons down',
+      'class': 'operation-buttons down',
       'click': self.moveDown,
       'title': '将整个通栏下移',
       val: '下移'
@@ -140,7 +140,7 @@ com.meathill.bacon.RowItem = function (colsNum, isTitled) {
       text: false
     });
     var removeButton = $('<button>', {
-      'class': 'operationButtons remove',
+      'class': 'operation-buttons remove',
       'click': self.remove,
       'title': '删除通栏',
       val: '删除'
@@ -167,14 +167,14 @@ com.meathill.bacon.RowItem = function (colsNum, isTitled) {
       drop: function (event, ui) {
         var item = ui.draggable.clone()
                     .removeClass('ui-draggable')
-                    .addClass('elementItem');
+                    .addClass('element-item');
         if ($(this).html() == self.dragHere) {
           $(this).html('');
         }
         $(this).append(item);
-        $('#pageContainer dd').sortable({
+        $('#page-container dd').sortable({
           placeholder: "placeholder",
-          connectWith: "#pageContainer dd"
+          connectWith: "#page-container dd"
         }).disableSelection();
       }
     })

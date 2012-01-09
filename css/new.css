@@ -58,6 +58,17 @@ a {
 a:hover {
   text-decoration:underline;
 }
+.clr {
+  zoom:1;
+}
+.clr:after {
+  clear:both;
+  visibility: hidden;
+  display: block;
+  height: 0;
+  line-height: 0;
+  content: "";
+}
 
 /* = Ò³Ãæ½á¹¹
  * ----------------------------------- */
@@ -65,14 +76,6 @@ a:hover {
   position:relative;
   margin: 0 0 10px;
   zoom: 1;
-}
-.rows:after {
-  clear:both;
-  visibility: hidden;
-  display: block;
-  height: 0;
-  line-height: 0;
-  content: "";
 }
 .row-item {
   border: 1px solid #CCC;

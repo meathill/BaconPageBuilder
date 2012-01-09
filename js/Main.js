@@ -1,7 +1,7 @@
 $(function (evt) {
   var banner = new com.meathill.bacon.BannerMaker();
   banner.install(swfobject);
-  var page = new com.meathill.bacon.Page('#pageContainer');
+  var page = new com.meathill.bacon.Page('#page-container');
   GUI.init();
   GUI.banner = banner;
   GUI.page = page;
