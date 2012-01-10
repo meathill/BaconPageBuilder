@@ -8,14 +8,13 @@ var _is_refill = false;
  * @version 0.2(2011-12-27)
  ****************************************/
 var GUI = {
-  token : null,
   banner : null,
   page : null,
+  isAnimating : false,
   init : function () {
     // 显示所有内容
     $('#preloader').remove();
     $('.hidden').fadeIn();
-    this.token = $('#token').remove();
     
     // 按钮事件绑定
     $('#toggle-panel-button')
@@ -42,7 +41,12 @@ var GUI = {
       },
       text: false
     })
-    $('#steps').buttonset();
+    $('.step-button')
+      .click(this.switchStepContent)
+      .eq(1)
+      .click()
+      .parent()
+      .buttonset();
     
     // 拖动
     $("#modules")
@@ -56,28 +60,33 @@ var GUI = {
         
     // 样式切换
     $('#css-selector').change(this.changeCss);
-    
-    // 调整功能面板大小
-    this.onResize();
-    $(window).resize(this.onResize);
   },
   togglePanel : function (event) {
     var icon = $(this).children().first();
     if ($('#sidebar').hasClass('outside')) {
-      $('#sidebar').animate({"right": 0}, 600, function () {
+      $('#sidebar').animate({"right": 0}, 400, function () {
         $(this).removeClass('outside')
       });
       icon
         .removeClass('ui-icon-circle-triangle-w')
         .addClass('ui-icon-circle-triangle-e');
     } else {
-      $('#sidebar').animate({"right": -20 - $('#sidebar').width()}, 600, function () {
+      $('#sidebar').animate({"right": -20 - $('#sidebar').width()}, 400, function () {
         $(this).addClass('outside');
       });
       icon
         .removeClass('ui-icon-circle-triangle-e')
         .addClass('ui-icon-circle-triangle-w');
     }
+  },
+  switchStepContent : function (event) {
+    if (GUI.isAnimating) {
+      event.stopPropagation();
+      return;
+    }
+    GUI.isAnimating = true;
+    var index = $('.step-button').index($(this));
+    $('#step-contents').animate({scrollLeft: index * ($('#step-contents').width() + 10)}, 400, function () { GUI.isAnimating = false});
   },
   insertRow : function (event) {
     var colsNum = $(this).attr('class').match(/column-(\d)/)[1];
@@ -124,8 +133,8 @@ var GUI = {
   },
   onResize : function (evt) {
     var screenHeight = $(window).height();
-    $('.module-thumbs').height(screenHeight - 295);
-    $('.step-content').height(screenHeight - 265)
+    $('.module-thumbs').height(screenHeight - 292);
+    $('.step-content').height(screenHeight - 209)
     $('#cover').height(screenHeight - 20);
   },
   /**
