@@ -11,6 +11,7 @@
     <script src="js/lib/jquery-ui-1.8.16.custom.min.js"></script>
     <script src="js/lib/swfobject.js"></script>
     <script src="js/lib/swfaddress.js"></script>
+    <script src="js/Config.js"></script>
     <script src="js/BannerMaker.js"></script>
     <script src="js/Model.js"></script>
     <script src="js/RowItem.js"></script>
@@ -38,7 +39,7 @@
     <div id="sidebar" class="hidden">
       <!--弄个iframe盖住flash-->
       <iframe id="cover" scrolling="no" frameborder="0"></iframe>
-      <h3>功能面板</h3>
+      <h3>设计面板</h3>
       <hr />
       <button id="help-button" title="帮助" class="sidebar-icon-button">帮助</button>
       <button id="config-button" title="配置" class="sidebar-icon-button">配置</button>
@@ -157,9 +158,10 @@
         2.0重构中
         建议使用宽屏，享受更好的编辑体验
       </div>
-      <button id="submit-button" title="点此上传模版">
-        上传模板
-      </button>
+      <p align="center">
+        <button id="submit-button" title="上传模版" class="big-button">上传模板</button>
+        <button id="save_button" title="保存模版" class="big-button">保存模版</button>
+      </p>
       <!--模块&样式 end-->
     </div>
     <!--右侧控制板 end-->
@@ -183,6 +185,10 @@
     <!--loading，帮助等等 begin-->
     <div class="always-hidden">
       <div id="timg"></div>
+      <div id="settings">
+        <input type="checkbox" id="syncBannerCss" checked="checked" />
+        <label for="syncBannerCss">同步切换大头和样式</label>
+      </div>
     </div>
     <!--loading，帮助等等 end-->
   </body>

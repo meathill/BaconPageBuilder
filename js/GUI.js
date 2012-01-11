@@ -26,15 +26,30 @@ var GUI = {
       })
       .click(this.togglePanel);
     $("#submit-button")
-      .button()
+      .button({
+        icons: {
+          primary: 'ui-icon-upload'
+        }
+      })
       .click(this.uploadTemplate);
+    $("#save_button")
+      .button({
+        icons: {
+          primary: 'ui-icon-disk'
+        }
+      })
+      .click(this.saveTemplate);
     $(".add-row-button").click(this.insertRow);
-    $('#config-button').button({
-      icons: {
-        primary: 'ui-icon-wrench'
-      },
-      text: false
-    });
+    $('#config-button')
+      .button({
+        icons: {
+          primary: 'ui-icon-wrench'
+        },
+        text: false
+      })
+      .click(function (event) {
+        $('#settings').dialog('open');
+      });
     $('#help-button').button({
       icons: {
         primary: 'ui-icon-help'
@@ -60,6 +75,15 @@ var GUI = {
         
     // 样式切换
     $('#css-selector').change(this.changeCss);
+    
+    // 设置
+    $('#settings').dialog({
+      autoOpen: false,
+      width: 400,
+      height: 400,
+      modal: true,
+      title: '设置'
+    });
   },
   togglePanel : function (event) {
     var icon = $(this).children().first();
@@ -95,7 +119,7 @@ var GUI = {
     GUI.page.createNewRow(colsNum, isTitled);
   },
   //更新输入框 
-  uploadTemplate : function (){
+  uploadTemplate : function (event){
     $('#submit-button').prop('disabled', true);
     if (BannerMaker.isChanged) {
       if (window.confirm('您在大头生成器里进行的操作还未保存，现在提交模板的话那些操作不会生效，确定么？')) {
@@ -106,6 +130,9 @@ var GUI = {
     } else {
       Model.submit();
     }
+  },
+  saveTemplate : function (event) {
+    
   },
   log : function (str, isReset){
     if (isReset) {

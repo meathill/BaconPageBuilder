@@ -4,6 +4,19 @@
 .hidden, .always-hidden {
   display:none
 }
+::-webkit-scrollbar{
+  width:6px;
+}
+::-webkit-scrollbar-track-piece{
+  background:none;
+}
+::-webkit-scrollbar-thumb {
+  background:#DCD9DE;
+  border-radius:6px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background:#EAE6EA;
+}
 /***************************************
  *  µ¯³ö²ã 
  * ************************************/
@@ -77,7 +90,7 @@
   overflow-y: scroll;
 }
 .module-thumbs  img {
-  width:310px;
+  width:324px;
   padding:5px 0;
   cursor: pointer;
 }
@@ -101,9 +114,9 @@
   right:10px;
   top:18px;
 }
-#submit-button {
-  width:100px;
-  height:48px;
+.big-button {
+  width:120px;
+  height:40px;
   font:bolder 16px/20px microsoft yahei,simhei;
 }
 .sidebar-icon-button {

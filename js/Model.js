@@ -1,4 +1,5 @@
-var model = {
+jQuery.namespace('com.meathill.bacon');
+com.meathill.bacon.Model = {
   setTemplateName : function (name) {
     $('#templateName').val(name);
   },
@@ -24,5 +25,8 @@ var model = {
   submit : function () {
     this.refreshHTML();
     $('#htmlCodeForm').submit();
+  },
+  saveSettings : function () {
+    
   }
 }
