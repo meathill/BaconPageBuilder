@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>导航测试</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+    <script src="../js/lib/jquery-1.7.1.min.js"></script>
+    <script src="../js/lib/jQuery.namespace.js"></script>
+    <script src="../js/Navi.js"></script>
+    <style>
+      ul,li {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+      .meat-navi {
+        width:100%;
+        zoom:1;
+      }
+      .meat-navi:after {
+        clear:both;
+        visibility: hidden;
+        display: block;
+        height: 0;
+        line-height: 0;
+        content: "";
+      }
+      .meat-navi li {
+        width: 200px;
+        font: bold 14px/30px Simsun;
+        text-align: center;
+        float: left;
+        background: -webkit-linear-gradient(top, #F0F0F0, #DDD);
+        border-right:1px solid #CCC;
+        border-left:1px solid #FFF;
+        cursor:pointer;
+        position:relative;
+      }
+      .meat-navi li:hover {
+        background: #F0F0F0;
+      }
+      .meat-navi .add-button {
+        text-indent: -999px;
+        overflow: hidden;
+      }
+      .meat-navi .add-icon {
+        width: 16px;
+        height: 16px;
+        position:absolute;
+        top:50%;
+        left:50%;
+        margin-top:-8px;
+        margin-left:-8px;
+        display:block;
+        text-indent:-999px;
+        overflow:hidden;
+        background: transparent url(../css/eggplant/images/ui-icons_734d99_256x240.png) no-repeat 0 -192px;
+      }
+    </style>
+    <script>
+      var navi;
+      $(function (e) {
+        navi = new com.meathill.bacon.Navi(true);
+        navi.appendTo('body');
+        navi.addChild('首页');
+        navi.addChild('技术');
+        navi.addChild('生活');
+      });
+    </script>
+  </head>
+  <body>
+    <!--<ul class="meat-navi clr">
+      <li>首页</li>
+      <li>技术</li>
+      <li>生活</li>
+    </ul>-->
+  </body>
+</html>
