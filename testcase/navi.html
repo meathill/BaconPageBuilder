@@ -3,8 +3,10 @@
   <head>
     <title>导航测试</title>
     <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+    <link href="../css/eggplant/jquery-ui-1.8.16.custom.css" rel="stylesheet" />
     <script src="../js/lib/jquery-1.7.1.min.js"></script>
     <script src="../js/lib/jQuery.namespace.js"></script>
+    <script src="../js/lib/jquery-ui-1.8.16.custom.min.js"></script>
     <script src="../js/Navi.js"></script>
     <style>
       ul,li {
@@ -37,6 +39,12 @@
       }
       .meat-navi li:hover {
         background: #F0F0F0;
+      }
+      .meat-navi li ul {
+        display:none;
+      }
+      .meat-navi li:hover ul {
+        display:block;
       }
       .meat-navi .add-button {
         text-indent: -999px;

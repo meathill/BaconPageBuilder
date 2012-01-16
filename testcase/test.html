@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>≤‚ ‘</title>
+    <script src="../js/lib/jquery-1.7.1.min.js"></script>
+    <script>
+      var testClass = function (value) {
+        var msg = value;
+        var self = this;
+        this.say = function () {
+          alert(staticMsg);
+        }
+      }
+      testClass.prototype.newMsg = 'test';
+      $(function () {
+        var ins1 = new testClass('meat');
+        var ins2 = new testClass('hill');
+        testClass.staticMsg = 'haha';
+        $('button').click(function () {
+          ins1.newMsg = $('#mymsg').val();
+          ins2.newMsg = $('#mymsg').val() + 'haha';
+          ins1.say();
+          ins2.say();
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <input type="text" id="mymsg" />
+    <button>Click</button>
+  </body>
+</html>
