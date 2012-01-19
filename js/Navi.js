@@ -20,6 +20,9 @@ com.meathill.bacon.Navi = function (editable, css) {
       body.append(child)
     }
     var nextLevel = new com.meathill.bacon.Navi(editable, self.subClass);
+    if (body.hasClass(self.subClass)) {
+      nextLevel.moveTo(child.width(), 0);
+    }
     nextLevel.appendTo(child);
     items.push(nextLevel);
   }
@@ -28,6 +31,11 @@ com.meathill.bacon.Navi = function (editable, css) {
   }
   this.removeChildAt = function (index) {
     items.splice(index, 1);
+  }
+  this.moveTo = function (x, y) {
+    body
+      .css('left', x + 'px')
+      .css('top', y + 'px');
   }
   this.child_clickHandler = function (event) {
     count = 0;
