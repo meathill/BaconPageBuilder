@@ -26,7 +26,16 @@
         line-height: 0;
         content: "";
       }
+      .meat-navi a {
+        color:#333;
+        text-decoration: none;
+      }
+      .meat-navi a:hover {
+        color:#222;
+        text-decoration: underline;
+      }
       .meat-navi li {
+        color:#666;
         width: 200px;
         font: bold 14px/30px Simsun;
         text-align: center;
@@ -63,13 +72,36 @@
         overflow:hidden;
         background: transparent url(../css/eggplant/images/ui-icons_734d99_256x240.png) no-repeat 0 -192px;
       }
+      .link-editor-window label {
+        width:60px;
+        padding:0 6px 0 0;
+        text-align:right;
+        display:inline-block;
+      }
+      .link-editor-window input {
+        background:#333;
+        color:#FFF;
+        width:200px;
+        line-height:18px;
+        margin: 0 0 4px;
+        border-width: 1px;
+        border-style: solid;
+        border-color: #000 #666 #666 #000;
+      }
+      .link-editor-window select {
+        background:#333;
+        color:#FFF;
+        border-width: 1px;
+        border-style: solid;
+        border-color: #000 #666 #666 #000;
+      }
     </style>
     <script>
       var navi;
       $(function (e) {
         navi = new com.meathill.bacon.Navi(true);
         navi.appendTo('body');
-        navi.addChild('首页');
+        navi.addChild('首页', 'http://blog.meathill.net/');
         navi.addChild('技术');
         navi.addChild('生活');
       });
