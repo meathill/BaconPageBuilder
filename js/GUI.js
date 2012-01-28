@@ -10,6 +10,7 @@ var _is_refill = false;
 var GUI = {
   banner : null,
   page : null,
+  currentCSS: '',
   isAnimating : false,
   init : function () {
     // 显示所有内容
@@ -58,8 +59,8 @@ var GUI = {
     })
     $('.step-button')
       .click(this.switchStepContent)
-      .eq(1)
-      .click()
+      //.eq(1)
+      //.click()
       .parent()
       .buttonset();
     
@@ -74,7 +75,7 @@ var GUI = {
         });
         
     // 样式切换
-    $('#css-selector').change(this.changeCss);
+    $('#css-list').find('li').click(this.changeCss);
     
     // 设置
     $('#settings').dialog({
@@ -141,9 +142,9 @@ var GUI = {
       $('#output').append(str); 
     }
   },
-  changeCss : function (evt, isSetURL){
+  changeCss : function (event, isSetURL){
     isSetURL = isSetURL == undefined ? true : isSetURL;
-    var css = "css/" + $('#cssSelector').val() + ".css";
+    var css = "css/" + $(this).attr('class') + ".css";
     if ($('#custom-style').length > 0) {
       $('#custom-style').attr('href', css);
     } else {
@@ -154,11 +155,16 @@ var GUI = {
       }
       $('<link>', init).appendTo($('head'));
     }
+    
+    GUI.currentCSS = $(this).attr('class');
+    $('#css-list .activated').removeClass('activated');
+    $(this).addClass('activated');
+    
     if (isSetURL) {
       GUI.setAddressContent(false);
     }
   },
-  onResize : function (evt) {
+  onResize : function (event) {
     var screenHeight = $(window).height();
     $('.module-thumbs').height(screenHeight - 292);
     $('.step-content').height(screenHeight - 209)
@@ -169,7 +175,7 @@ var GUI = {
    * 只保留有内容的通栏
    */
   setAddressContent : function (bl) {
-    var _result = '/' + $('#css-selector').val() + '/';
+    var _result = '/' + GUI.currentCSS + '/';
     var _is_cols = false;
     bl = bl == undefined ? true : bl;
     $("#refreshHTML div").each(function(i) {

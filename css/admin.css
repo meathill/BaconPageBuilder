@@ -71,6 +71,7 @@
 }
 .step-button {
   width: 114px;
+  font-weight:bold;
 }
 #step-contents {
   width:100%;
@@ -84,6 +85,50 @@
   margin:0 10px 0 0;
   float:left;
 }
+/*-- step 1 CSS List */
+#step-content-1 p {
+  padding:0 0 10px;
+  margin:0;
+}
+#css-selector {
+  display:none;
+  width:170px;
+  margin:5px 0 0
+}
+#css-list {
+  overflow-y:auto;
+}
+#css-list li {
+  cursor:pointer;
+  margin: 0 4px 4px 0;
+  display:inline-block;
+  position: relative;
+}
+#css-list li img {
+  border: 4px solid #DCD9DE;
+  padding: 2px;
+  float:left;
+}
+#css-list li img:hover {
+  border-color: #EAE6EA;
+}
+#css-list li.activated {
+  background:#FFF;
+}
+#css-list li.activated img {
+  border-color: #2CC02C;
+}
+#css-list li.activated img:hover {
+  border-color:#2CC02C;
+}
+#css-list li.activated:after {
+  content:url(../images/checkmark2.png);
+  position:absolute;
+  right:6px;
+  bottom:0px;
+}
+
+/*-- step 2 Module List */
 .module-thumbs {
   padding:10px !important;
   overflow-x: hidden;
@@ -94,10 +139,7 @@
   padding:5px 0;
   cursor: pointer;
 }
-#css-selector {
-  width:170px;
-  margin:5px 0 0
-}
+/*-- step 3 Properties */
 #output {
   margin:10px 0;
   padding: 4px 6px;
