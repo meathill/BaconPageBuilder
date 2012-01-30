@@ -12,44 +12,6 @@ com.meathill.bacon.RowItem = function (colsNum, isTitled) {
     $(parent).append(body);
   }
   /**
-   * 编辑通栏标题
-   * @param {Object} event
-   * @private
-   */
-  this.editTitle = function (event) {
-    var dt = $(this).parent();
-    var input = $('<input>', {
-      val: $(this).text(),
-      'title': self.saveText,
-      'class': self.inputClass,
-      click: function (event) {
-        event.stopPropagation();
-      },
-      focusout: self.submitTitle,
-      keydown: self.submitTitle
-    });
-    $(this).remove()
-    dt.append(input);
-    input.focus();
-  }
-  /**
-   * 保存编辑的标题
-   * @param {Object} event
-   * @private
-   */
-  this.submitTitle = function (event) {
-    if (event.type == 'focusout' || (event.type == 'keydown' && event.which == 13)){
-      var dt = $(this).parent();
-      var input = $(this).remove();
-      var h3 = $('<h3>', {
-        text: input.val(),
-        click: self.editTitle
-      })
-      dt.append(h3)
-        .attr('title', self.editText);
-    }
-  }
-  /**
    * 上移通栏
    * @param {Object} event
    * @private
@@ -98,7 +60,21 @@ com.meathill.bacon.RowItem = function (colsNum, isTitled) {
   function createDL(colsNum) {
     var h3 = $('<h3>', {
       text: self.defaultTitle,
-      click: self.editTitle
+      "contenteditable": true,
+      mouseover: function (event) {
+        $(this).addClass('row-title');
+      },
+      mouseout: function (event) {
+        if (!$(this).hasClass('editing')) {
+          $(this).removeClass('row-title');
+        }
+      },
+      focusin: function (event) {
+        $(this).addClass('editing');
+      },
+      focusout: function (event) {
+        $(this).removeClass('editing row-title');
+      }
     });
     var result = $('<dl>', {
       'class': self.itemClass + ' column-' + colsNum
@@ -189,8 +165,7 @@ com.meathill.bacon.RowItem = function (colsNum, isTitled) {
   createButtons(body);
   initDroppable(body);
 }
-com.meathill.bacon.RowItem.prototype.editText = '点击编辑标题';
-com.meathill.bacon.RowItem.prototype.saveText = '回车或单击空白处确认修改';
+com.meathill.bacon.RowItem.prototype.editText = '编辑标题';
 com.meathill.bacon.RowItem.prototype.dragHere = '请将右侧的模块拖放至此';
 com.meathill.bacon.RowItem.prototype.itemClass = 'row-item';
 com.meathill.bacon.RowItem.prototype.inputClass = 'row-title';

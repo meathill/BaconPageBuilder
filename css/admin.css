@@ -205,7 +205,11 @@
   top:48px;
 }
 .row-item dt {
+  line-height:18px;
   cursor:pointer;
+}
+.row-item dt h3 {
+  padding:1px;
 }
 .row-item dd {
   padding: 5px;
@@ -214,9 +218,10 @@
   width: 100%;
 }
 .row-title {
-  border:1px #C33 solid;
-  width:50%;
-  box-shadow: 0 0 4px #F33;    
+  border:1px #F99 solid;
+  background:#FFC;
+  border-radius: 4px;
+  padding:0 !important;
 }
 .row-drag-hover {
   border:1px solid #F99;
