@@ -1,145 +1,137 @@
-﻿package src 
-{
-	import com.zol.basicMain;
-	import flash.events.Event;
-	import flash.events.IOErrorEvent;
-	import flash.events.MouseEvent;
-	import flash.events.ProgressEvent;
-	import lib.component.event.picUploaderEvent;
-	import lib.component.tips.tipsBasicView;
-	import src.event.templateEvent;
-	import src.event.toolbarEvent;
-	import src.model.templateDataModel;
-	import src.view.templateContainerView;
-	import src.view.templateThumbListView;
-	import src.view.toolBarView;
+﻿package {
+  import com.meathill.bannerFactory.model.TemplateDataModel;
+  import com.meathill.BasicMain;
+  import flash.events.Event;
+  import flash.events.IOErrorEvent;
+  import flash.events.ProgressEvent;
+  import lib.component.event.picUploaderEvent;
+  import lib.component.tips.tipsBasicView;
+  import src.event.templateEvent;
+  import src.event.toolbarEvent;
+  import src.view.templateContainerView;
+  import src.view.templateThumbListView;
+  import src.view.toolBarView;
 	
 	/**
 	 * 专题模板自主搭建系统
 	 * 大头生成器
-	 * 使用已有的大头模板，让编辑填写文字生成所需大头
+	 * 根据模板，填写文字生成图片
 	 * image上设置php接收程序来进行接收储存
 	 * @author	Meathill
 	 * @version	0.2(2010-10-08)
 	 */
-	public class bannerProducerMain extends basicMain
-	{
-		private var _data:templateDataModel;
-		private var _toolbar:toolBarView;
-		private var _template_con:templateContainerView;
-		private var _tlist:templateThumbListView;
-		
-		public function bannerProducerMain() 
-		{
-			super();
-		}
-		
+  [Embeded(
+	public class BannerProducerMain extends BasicMain	{
+		private var data:TemplateDataModel;
+		private var buttonSet:toolBarView;
+		private var templatesContainer:templateContainerView;
+		private var templateThumbsList:templateThumbListView;
 		/**************
 		 * functions
 		 * ***********/
-		override protected function init(evt:Event = null):void {
-			super.init(evt);
+		override protected function init(event:Event = null):void {
+			super.init(event);
 			
-			_menu.version = '0.2';
+			_menu.version = [Version.Major, Version.Minor, Version.Build, Version.Revision].join('.');
 			
 			dataInit();
 			displayInit();
 		}
-		override protected function dataInit(evt:Event = null):void {
-			_data = new templateDataModel();
-			_data.addEventListener(Event.COMPLETE, dataLoadComplete);
-			_data.addEventListener(IOErrorEvent.IO_ERROR, dataLoadFailed);
-			_data.addEventListener(ProgressEvent.PROGRESS, progressHandler);
-			_data.addEventListener(picUploaderEvent.ENCODE_COMPLETE, encodeCompleteHandler);
-			_data.addEventListener(picUploaderEvent.UPLOAD_COMPLETE, uploadCompleteHandler);
-			_data.load();
+		override protected function dataInit(event:Event = null):void {
+			data = new TemplateDataModel();
+			data.addEventListener(Event.COMPLETE, data_completeHandler);
+			data.addEventListener(IOErrorEvent.IO_ERROR, data_errorHandler);
+			data.addEventListener(ProgressEvent.PROGRESS, progressHandler);
+			data.addEventListener(picUploaderEvent.ENCODE_COMPLETE, data_encodeCompleteHandler);
+			data.addEventListener(picUploaderEvent.UPLOAD_COMPLETE, data_uploadCompleteHandler);
+			data.load();
 		}
-		override protected function displayInit(evt:Event = null):void {
+		override protected function displayInit(event:Event = null):void {
 			tipsBasicView.init(stage);
 			
-			_toolbar = toolBarView(getChildAt(0));
-			_toolbar.addEventListener(toolbarEvent.SHOW_LIST, showList);
-			_toolbar.addEventListener(toolbarEvent.SUBMIT, submitHandler);
-			_toolbar.addEventListener(toolbarEvent.LOCAL_UPLOAD, _data.browse);
-			_toolbar.enabled = false;
+			buttonSet = toolBarView(getChildAt(0));
+			buttonSet.addEventListener(toolbarEvent.SHOW_LIST, showList);
+			buttonSet.addEventListener(toolbarEvent.SUBMIT, submitHandler);
+			buttonSet.addEventListener(toolbarEvent.LOCAL_UPLOAD, data.browse);
+			buttonSet.enabled = false;
 			
-			_template_con = new templateContainerView(_data.getDefaultHead(loaderInfo.parameters));
-			_template_con.addEventListener(ProgressEvent.PROGRESS, progressHandler);
-			_template_con.addEventListener(templateEvent.TEMPLATE_LOAD_COMPLETE, templateLoadComplete);
-			_template_con.addEventListener(templateEvent.TEMPLATE_LOAD_FAILED, templateLoadFailed);
-			_template_con.addEventListener(Event.CHANGE, templateChanged);
-			addChildAt(_template_con, 0);
+			templatesContainer = new templateContainerView(data.getDefaultHead(loaderInfo.parameters));
+			templatesContainer.addEventListener(ProgressEvent.PROGRESS, progressHandler);
+			templatesContainer.addEventListener(templateEvent.TEMPLATE_LOAD_COMPLETE, templateLoadComplete);
+			templatesContainer.addEventListener(templateEvent.TEMPLATE_LOAD_FAILED, templateLoadFailed);
+			templatesContainer.addEventListener(Event.CHANGE, templateChanged);
+			addChildAt(templatesContainer, 0);
 			
-			_toolbar.addEventListener(toolbarEvent.PREV_TEMPLATE, _template_con.changeTemplate);
-			_toolbar.addEventListener(toolbarEvent.NEXT_TEMPLATE, _template_con.changeTemplate);
+			buttonSet.addEventListener(toolbarEvent.PREV_TEMPLATE, templatesContainer.changeTemplate);
+			buttonSet.addEventListener(toolbarEvent.NEXT_TEMPLATE, templatesContainer.changeTemplate);
 		}
-		private function progressHandler(evt:ProgressEvent):void {
-			_toolbar.showProgress(evt.bytesLoaded / evt.bytesTotal);
+		private function progressHandler(event:ProgressEvent):void {
+			buttonSet.showProgress(event.bytesLoaded / event.bytesTotal);
 		}
-		private function dataLoadComplete(evt:Event):void {
-			_toolbar.text = '配置加载完毕，您可以点击按钮切换模板';
+		private function dataLoadComplete(event:Event):void {
+			buttonSet.text = '配置加载完毕，您可以点击按钮切换模板';
 			
-			_toolbar.removeEventListener(Event.COMPLETE, dataLoadComplete);
+			buttonSet.removeEventListener(Event.COMPLETE, dataLoadComplete);
 			
 			// 加载默认模板
-			_template_con.data = _data;
-			_template_con.loadTemplate();
+			templatesContainer.data = data;
+			templatesContainer.loadTemplate();
 		}
-		private function dataLoadFailed(evt:IOErrorEvent):void {
-			_toolbar.text = '加载失败，请联系翟路，看看是啥问题。本专题将采用默认大头。';
+		private function dataLoadFailed(event:IOErrorEvent):void {
+			buttonSet.text = '加载失败，请联系翟路，看看是啥问题。本专题将采用默认大头。';
 		}
-		private function templateLoadComplete(evt:templateEvent):void {
-			if (evt.index != -1) {
-				if (_data.hasMSYH) {
-					_toolbar.text = '模板加载成功，点击标题文字开始编辑';
+		private function templateLoadComplete(event:templateEvent):void {
+			if (event.index != -1) {
+				if (data.hasMSYH) {
+					buttonSet.text = '模板加载成功，点击标题文字开始编辑';
 				} else {
-					_toolbar.htmlText = '您的电脑中没有雅黑字体，请先 <a href="event:download">下载</a> 并复制到Windows/Font/目录下，再刷新';
+					buttonSet.htmlText = '您的电脑中没有雅黑字体，请先 <a href="event:download">下载</a> 并复制到Windows/Font/目录下，再刷新';
 				}
-				_toolbar.submitable = true;
-				_toolbar.uploadable = false;
+				buttonSet.submitable = true;
+				buttonSet.uploadable = false;
 			} else {
-				_toolbar.text = '当前是默认大头，不能编辑。您可以上传自制大头以替换之。';
+				buttonSet.text = '当前是默认大头，不能编辑。您可以上传自制大头以替换之。';
 				
-				_toolbar.enabled = true;
-				_toolbar.uploadable = true;
-				_toolbar.submitable = _template_con.uploaded;
+				buttonSet.enabled = true;
+				buttonSet.uploadable = true;
+				buttonSet.submitable = templatesContainer.uploaded;
 			}
-			_data.setStageHeight(_template_con.height);
+			data.setStageHeight(templatesContainer.height);
 		}
-		private function templateLoadFailed(evt:templateEvent):void {
-			_toolbar.text = evt.msg;
+		private function templateLoadFailed(event:templateEvent):void {
+			buttonSet.text = event.msg;
 		}
-		private function submitHandler(evt:toolbarEvent):void {
-			_toolbar.text = '上传图片，会先生成jpg图片再上传，请稍后';
-			_toolbar.enabled = false;
-			_data.uploadPic(_template_con.template);
+		private function submitHandler(event:toolbarEvent):void {
+			buttonSet.text = '上传图片，会先生成jpg图片再上传，请稍后';
+			buttonSet.enabled = false;
+			data.uploadPic(templatesContainer.template);
 		}
-		private function encodeCompleteHandler(evt:picUploaderEvent):void {
-			_toolbar.text = '生成完毕，开始上传';
+		private function encodeCompleteHandler(event:picUploaderEvent):void {
+			buttonSet.text = '生成完毕，开始上传';
 		}
-		private function uploadCompleteHandler(evt:picUploaderEvent):void {
-			_data.edited = false;
-			_toolbar.enabled = true;
-			_toolbar.text = '上传完毕，大头地址已经更换到模板内';
+		private function uploadCompleteHandler(event:picUploaderEvent):void {
+			data.edited = false;
+			buttonSet.enabled = true;
+			buttonSet.text = '上传完毕，大头地址已经更换到模板内';
 		}
-		private function showList(evt:toolbarEvent):void {
-			if (null != _tlist && contains(_tlist)) {
-				removeChild(_tlist);
+		private function showList(event:toolbarEvent):void {
+			if (null != templateThumbsList && contains(templateThumbsList)) {
+				removeChild(templateThumbsList);
 			} else {
-				if (null == _tlist) {
-					_tlist = new templateThumbListView(this, 10, 55);
-					_tlist.data = _data;
-					_tlist.showThumbList();
-					_tlist.addEventListener(toolbarEvent.CHANGE_TEMPLATE, changeTemplate);
+				if (null == templateThumbsList) {
+					templateThumbsList = new templateThumbListView(this, 10, 55);
+					templateThumbsList.data = data;
+					templateThumbsList.showThumbList();
+					templateThumbsList.addEventListener(toolbarEvent.CHANGE_TEMPLATE, changeTemplate);
 				}
-				addChild(_tlist);
+				addChild(templateThumbsList);
 			}
 		}
-		private function changeTemplate(evt:toolbarEvent):void {
-			_template_con.changeTemplate(null, evt.index);
+		private function changeTemplate(event:toolbarEvent):void {
+			templatesContainer.changeTemplate(null, event.index);
 		}
-		private function templateChanged(evt:Event):void {
-			_data.edited = true;
+		private function templateChanged(event:Event):void {
+			data.edited = true;
 		}
 	}
 }
