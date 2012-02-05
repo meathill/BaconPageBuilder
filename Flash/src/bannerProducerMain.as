@@ -1,5 +1,6 @@
 ﻿package {
   import com.meathill.bannerFactory.model.TemplateDataModel;
+  import com.meathill.bannerFactory.view.ToolBar;
   import com.meathill.BasicMain;
   import flash.events.Event;
   import flash.events.IOErrorEvent;
@@ -20,15 +21,14 @@
 	 * @author	Meathill
 	 * @version	0.2(2010-10-08)
 	 */
-  [Embeded(
 	public class BannerProducerMain extends BasicMain	{
 		private var data:TemplateDataModel;
-		private var buttonSet:toolBarView;
+		private var buttonSet:ToolBar;
 		private var templatesContainer:templateContainerView;
 		private var templateThumbsList:templateThumbListView;
-		/**************
-		 * functions
-		 * ***********/
+		//=========================================================================
+    //  Private Functions
+    //=========================================================================
 		override protected function init(event:Event = null):void {
 			super.init(event);
 			
@@ -64,21 +64,6 @@
 			
 			buttonSet.addEventListener(toolbarEvent.PREV_TEMPLATE, templatesContainer.changeTemplate);
 			buttonSet.addEventListener(toolbarEvent.NEXT_TEMPLATE, templatesContainer.changeTemplate);
-		}
-		private function progressHandler(event:ProgressEvent):void {
-			buttonSet.showProgress(event.bytesLoaded / event.bytesTotal);
-		}
-		private function dataLoadComplete(event:Event):void {
-			buttonSet.text = '配置加载完毕，您可以点击按钮切换模板';
-			
-			buttonSet.removeEventListener(Event.COMPLETE, dataLoadComplete);
-			
-			// 加载默认模板
-			templatesContainer.data = data;
-			templatesContainer.loadTemplate();
-		}
-		private function dataLoadFailed(event:IOErrorEvent):void {
-			buttonSet.text = '加载失败，请联系翟路，看看是啥问题。本专题将采用默认大头。';
 		}
 		private function templateLoadComplete(event:templateEvent):void {
 			if (event.index != -1) {
@@ -132,6 +117,24 @@
 		}
 		private function templateChanged(event:Event):void {
 			data.edited = true;
+		}
+    //=========================================================================
+    //  Event Handlers
+    //=========================================================================
+		private function progressHandler(event:ProgressEvent):void {
+			buttonSet.showProgress(event.bytesLoaded / event.bytesTotal);
+		}
+		private function data_completeHandler(event:Event):void {
+			buttonSet.text = '配置加载完毕，您可以点击按钮切换模板';
+			
+			buttonSet.removeEventListener(Event.COMPLETE, dataLoadComplete);
+			
+			// 加载默认模板
+			templatesContainer.data = data;
+			templatesContainer.loadTemplate();
+		}
+		private function data_errorHandler(event:IOErrorEvent):void {
+			buttonSet.text = '加载失败，请联系翟路，看看是啥问题。本专题将采用默认大头。';
 		}
 	}
 }
