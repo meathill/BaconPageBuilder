@@ -3,7 +3,6 @@
   import com.meathill.image.events.PicUploaderEvent;
   import com.meathill.image.LocalPicLoader;
   import com.meathill.image.PicUploader;
-  import com.meathill.pic.events.PicUploaderEvent;
   import flash.display.Bitmap;
   import flash.display.DisplayObject;
   import flash.events.Event;
@@ -32,14 +31,13 @@
     //  Constructor
     //=========================================================================
 		public function TemplateDataModel() {
-			super(_URL);
+			super(URL);
 			
 			init();
 		}
 		//=========================================================================
     //  Properties
     //=========================================================================
-		private var hasMSYH:Boolean = false;
 		private var uploader:PicUploader;
 		private var localpic:LocalPicLoader;
     private var msg:String;
@@ -54,19 +52,24 @@
 			return _height;
 		}
     //---------------------------------
-    //  hasEdited
+    //  isEdited
     //---------------------------------
-		private var _hasEdited:Boolean = false;
-		public function set hasEdited(bl:Boolean):void {
-			_hasEdited = bl;
-			ExternalInterface.call(CHANGED, _hasEdited);
+		private var _isEdited:Boolean = false;
+		public function set isEdited(bl:Boolean):void {
+			_isEdited = bl;
+			ExternalInterface.call(CHANGED, _isEdited);
 		}
+    //---------------------------------
+    //  hasMSYH
+    //---------------------------------
+		private var _hasMSYH:Boolean = false;
+    public function get hasMSYH():Boolean {
+      return _hasMSYH;
+    }
 		//=========================================================================
     //  Public Methods
     //=========================================================================
 		public function uploadPic(obj:DisplayObject):void {
-			uploader.width = obj.width;
-			uploader.height = obj.height;
 			uploader.encode(obj);
 			uploader.upload();
 		}
@@ -84,7 +87,7 @@
 		}
 		public function setStageHeight(h:int):void {
 			_height = h;
-			ExternalInterface.call(_RESIZE_FUNC, h);
+			ExternalInterface.call(RESIZE_FUNC, h);
 		}
 		public function browse():void {
 			localpic.selectFile();
@@ -112,7 +115,7 @@
 			var arr:Array = Font.enumerateFonts(true);
 			for each (var obj:Object in arr) {
 				if (FONT_NAME == obj.fontName) {
-					hasMSYH = true;
+					_hasMSYH = true;
 					break;
 				}
 			}
@@ -130,10 +133,10 @@
 			dispatchEvent(event);
 		}
 		private function uploader_uploadCompleteHandler(event:PicUploaderEvent):void {
-			setBannerPic(event.data);
+			setBannerPic(event.msg);
 			dispatchEvent(event);
 		}
-		private function loadLocalPicComplete(event:LocalPicLoaderEvent):void {
+		private function local_loadPicCompleteHandler(event:LocalPicLoaderEvent):void {
 			dispatchEvent(new Event(Event.COMPLETE));
 		}
 	}

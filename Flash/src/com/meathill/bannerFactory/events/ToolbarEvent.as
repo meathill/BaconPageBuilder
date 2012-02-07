@@ -18,7 +18,7 @@
 		//=========================================================================
     //  Constructor
     //=========================================================================
-		public function ToolbarEvent(type:String, index:int) { 
+		public function ToolbarEvent(type:String, index:int = -1) { 
       _index = index;
 			super(type);
 		} 

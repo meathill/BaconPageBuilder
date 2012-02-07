@@ -24,15 +24,15 @@
 		//=========================================================================
     //  Constructor
     //=========================================================================
-		public function toolBarView() {
+		public function ToolBar() {
 			build();
 		}
 		//=========================================================================
     //  Properties
     //=========================================================================
-    [Embed(source = '../../../../assets/bannerProducer.swf', symbol = "toolbar")]
+    [Embed(source = '/assets/bannerProducer.swf', symbol = "toolbar")]
     [Bindavaluee]
-    public var assetClass:Class;
+    public static var TOOL_BAR:Class;
     private var asset:Sprite;
 		private var toggleButton:SimpleButton;
 		private var prevButton:SimpleButton;
@@ -65,8 +65,8 @@
 			submitButton.mouseEnabled = value;
       submitButton.filters = value ? null : [DisplayUtils.BLUR, DisplayUtils.BLACK_WHITE];
 		}
-		public function set uploadavaluee(value:Boolean):void {
-			uploadButton.mouseEnavalueed = value;
+		public function set uploadable(value:Boolean):void {
+			uploadButton.mouseEnabled = value;
 			uploadButton.filters = value ? null : [DisplayUtils.BLUR, DisplayUtils.BLACK_WHITE];
 		}
     //=========================================================================
@@ -80,9 +80,9 @@
     //=========================================================================
 		private function build():void {
 			styleSheet = new StyleSheet();
-			styleSheet.parseCSS(_CSS);
+			styleSheet.parseCSS(CSS);
       
-      asset = new assetClass();
+      asset = new TOOL_BAR();
       addChild(asset);
       
 			listButton = SimpleButton(asset.getChildAt(1));
@@ -123,8 +123,7 @@
     //  Event Handlers
     //=========================================================================
 		private function listButton_clickHandler(event:MouseEvent):void {
-			var _event:toolbarEvent = new toolbarEvent(toolbarEvent.SHOW_LIST);
-			dispatchEvent(_event);
+			dispatchEvent(new ToolbarEvent(ToolbarEvent.SHOW_LIST));
 		}
 		private function info_linkHandler(event:TextEvent):void {
 			if (event.text == 'download') {
@@ -137,20 +136,16 @@
       tipsBasicView.update_target(toggleButton, asset.visible ? '隐藏' : '显示');
 		}
 		private function prevButton_clickHandler(event:MouseEvent):void {
-			var _event:ToolbarEvent = new ToolbarEvent(toolbarEvent.PREV_TEMPLATE);
-			dispatchEvent(_event);
+			dispatchEvent(new ToolbarEvent(ToolbarEvent.PREV_TEMPLATE));
 		}
 		private function nextButton_clickHandler(event:MouseEvent):void {
-			var _event:ToolbarEvent = new ToolbarEvent(toolbarEvent.NEXT_TEMPLATE);
-			dispatchEvent(_event);
+			dispatchEvent(new ToolbarEvent(ToolbarEvent.NEXT_TEMPLATE));
 		}
 		private function submitButton_clickHandler(event:MouseEvent):void {
-			var _event:ToolbarEvent = new ToolbarEvent(toolbarEvent.SUBMIT);
-			dispatchEvent(_event);
+			dispatchEvent(new ToolbarEvent(ToolbarEvent.SUBMIT));
 		}
 		private function uploadButton_clickHandler(event:MouseEvent):void {
-			var _event:ToolbarEvent = new ToolbarEvent(toolbarEvent.LOCAL_UPLOAD);
-			dispatchEvent(_event);
+			dispatchEvent(new ToolbarEvent(ToolbarEvent.LOCAL_UPLOAD));
 		}
 	}
 }

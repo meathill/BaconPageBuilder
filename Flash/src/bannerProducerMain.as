@@ -6,6 +6,7 @@
   import com.meathill.bannerFactory.view.TemplateThumbList;
   import com.meathill.bannerFactory.view.ToolBar;
   import com.meathill.BasicMain;
+  import com.meathill.MeatVersion;
   import flash.events.Event;
   import flash.events.IOErrorEvent;
   import flash.events.ProgressEvent;
@@ -31,7 +32,7 @@
 		override protected function init(event:Event = null):void {
 			super.init(event);
 			
-			_menu.version = [Version.Major, Version.Minor, Version.Build, Version.Revision].join('.');
+			MeatVersion.createVersion(this);
 			
 			dataInit();
 			displayInit();
@@ -69,13 +70,16 @@
 		private function progressHandler(event:ProgressEvent):void {
 			buttonSet.showProgress(event.bytesLoaded / event.bytesTotal);
 		}
+    //---------------------------------
+    //  data
+    //---------------------------------
 		private function data_completeHandler(event:Event):void {
 			buttonSet.text = '配置加载完毕，您可以点击按钮切换模板';
 			
-			buttonSet.removeEventListener(Event.COMPLETE, dataLoadComplete);
+			buttonSet.removeEventListener(Event.COMPLETE, data_completeHandler);
 			
 			// 加载默认模板
-			templateContainer.data = data;
+			templateContainer.templateDataModel = data;
 			templateContainer.loadTemplate();
 		}
 		private function data_errorHandler(event:IOErrorEvent):void {
@@ -85,27 +89,30 @@
 			buttonSet.text = '生成完毕，开始上传';
 		}
 		private function data_uploadCompleteHandler(event:picUploaderEvent):void {
-			data.edited = false;
+			data.isEdited = false;
 			buttonSet.enabled = true;
 			buttonSet.text = '上传完毕，大头地址已经更换到模板内';
 		}
+    //---------------------------------
+    //  buttonSet
+    //---------------------------------
 		private function buttonSet_showListHandler(event:ToolbarEvent):void {
-			buttonSet.text = '上传图片，会先生成jpg图片再上传，请稍后';
-			buttonSet.enabled = false;
-			data.uploadPic(templateContainer.template);
-		}
-		private function showList(event:ToolbarEvent):void {
 			if (null != templateThumbsList && contains(templateThumbsList)) {
 				removeChild(templateThumbsList);
 			} else {
 				if (null == templateThumbsList) {
 					templateThumbsList = new TemplateThumbList(this, 10, 55);
-					templateThumbsList.data = data;
+					templateThumbsList.templateDataModel = data;
 					templateThumbsList.showThumbList();
 					templateThumbsList.addEventListener(ToolbarEvent.CHANGE_TEMPLATE, changeTemplate);
 				}
 				addChild(templateThumbsList);
 			}
+		}
+		private function buttonSet_submitHandler(event:ToolbarEvent):void {
+			buttonSet.text = '上传图片，会先生成jpg图片再上传，请稍后';
+			buttonSet.enabled = false;
+			data.uploadPic(templateContainer.templateContent);
 		}
     private function buttonSet_localUploadHandler(event:ToolbarEvent):void {
       data.browse();
@@ -117,7 +124,10 @@
         templateContainer.changeTemplate(templateContainer.currTemplateIndex + 1);
       }
     }
-		private function templateLoadComplete(event:TemplateEvent):void {
+    //---------------------------------
+    //  template
+    //---------------------------------
+		private function templateLoadCompleteHandler(event:TemplateEvent):void {
 			if (event.index != -1) {
 				if (data.hasMSYH) {
 					buttonSet.text = '模板加载成功，点击标题文字开始编辑';
@@ -131,7 +141,7 @@
 				
 				buttonSet.enabled = true;
 				buttonSet.uploadable = true;
-				buttonSet.submitable = templateContainer.uploaded;
+				buttonSet.submitable = templateContainer.isUploaded;
 			}
 			data.setStageHeight(templateContainer.height);
 		}
@@ -139,10 +149,10 @@
 			buttonSet.text = event.msg;
 		}
 		private function changeTemplate(event:ToolbarEvent):void {
-			templateContainer.changeTemplate(null, event.index);
+			templateContainer.changeTemplate(event.index);
 		}
-		private function templateChanged(event:Event):void {
-			data.edited = true;
+		private function templateChangedHandler(event:Event):void {
+			data.isEdited = true;
 		}
 	}
 }
