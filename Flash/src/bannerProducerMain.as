@@ -1,5 +1,9 @@
-﻿package {
+﻿package src {
+  import com.meathill.bannerFactory.events.TemplateEvent;
+  import com.meathill.bannerFactory.events.ToolbarEvent;
   import com.meathill.bannerFactory.model.TemplateDataModel;
+  import com.meathill.bannerFactory.view.TemplateContainer;
+  import com.meathill.bannerFactory.view.TemplateThumbList;
   import com.meathill.bannerFactory.view.ToolBar;
   import com.meathill.BasicMain;
   import flash.events.Event;
@@ -7,11 +11,6 @@
   import flash.events.ProgressEvent;
   import lib.component.event.picUploaderEvent;
   import lib.component.tips.tipsBasicView;
-  import src.event.templateEvent;
-  import src.event.toolbarEvent;
-  import src.view.templateContainerView;
-  import src.view.templateThumbListView;
-  import src.view.toolBarView;
 	
 	/**
 	 * 专题模板自主搭建系统
@@ -24,8 +23,8 @@
 	public class BannerProducerMain extends BasicMain	{
 		private var data:TemplateDataModel;
 		private var buttonSet:ToolBar;
-		private var templatesContainer:templateContainerView;
-		private var templateThumbsList:templateThumbListView;
+		private var templateContainer:TemplateContainer;
+		private var templateThumbsList:TemplateThumbList;
 		//=========================================================================
     //  Private Functions
     //=========================================================================
@@ -49,74 +48,20 @@
 		override protected function displayInit(event:Event = null):void {
 			tipsBasicView.init(stage);
 			
-			buttonSet = toolBarView(getChildAt(0));
-			buttonSet.addEventListener(toolbarEvent.SHOW_LIST, showList);
-			buttonSet.addEventListener(toolbarEvent.SUBMIT, submitHandler);
-			buttonSet.addEventListener(toolbarEvent.LOCAL_UPLOAD, data.browse);
+			buttonSet = new ToolBar();
+			buttonSet.addEventListener(ToolbarEvent.SHOW_LIST, buttonSet_showListHandler);
+			buttonSet.addEventListener(ToolbarEvent.SUBMIT, buttonSet_submitHandler);
+			buttonSet.addEventListener(ToolbarEvent.LOCAL_UPLOAD, buttonSet_localUploadHandler);
+			buttonSet.addEventListener(ToolbarEvent.PREV_TEMPLATE, buttonSet_changeTemplateHandler);
+			buttonSet.addEventListener(ToolbarEvent.NEXT_TEMPLATE, buttonSet_changeTemplateHandler);
 			buttonSet.enabled = false;
 			
-			templatesContainer = new templateContainerView(data.getDefaultHead(loaderInfo.parameters));
-			templatesContainer.addEventListener(ProgressEvent.PROGRESS, progressHandler);
-			templatesContainer.addEventListener(templateEvent.TEMPLATE_LOAD_COMPLETE, templateLoadComplete);
-			templatesContainer.addEventListener(templateEvent.TEMPLATE_LOAD_FAILED, templateLoadFailed);
-			templatesContainer.addEventListener(Event.CHANGE, templateChanged);
-			addChildAt(templatesContainer, 0);
-			
-			buttonSet.addEventListener(toolbarEvent.PREV_TEMPLATE, templatesContainer.changeTemplate);
-			buttonSet.addEventListener(toolbarEvent.NEXT_TEMPLATE, templatesContainer.changeTemplate);
-		}
-		private function templateLoadComplete(event:templateEvent):void {
-			if (event.index != -1) {
-				if (data.hasMSYH) {
-					buttonSet.text = '模板加载成功，点击标题文字开始编辑';
-				} else {
-					buttonSet.htmlText = '您的电脑中没有雅黑字体，请先 <a href="event:download">下载</a> 并复制到Windows/Font/目录下，再刷新';
-				}
-				buttonSet.submitable = true;
-				buttonSet.uploadable = false;
-			} else {
-				buttonSet.text = '当前是默认大头，不能编辑。您可以上传自制大头以替换之。';
-				
-				buttonSet.enabled = true;
-				buttonSet.uploadable = true;
-				buttonSet.submitable = templatesContainer.uploaded;
-			}
-			data.setStageHeight(templatesContainer.height);
-		}
-		private function templateLoadFailed(event:templateEvent):void {
-			buttonSet.text = event.msg;
-		}
-		private function submitHandler(event:toolbarEvent):void {
-			buttonSet.text = '上传图片，会先生成jpg图片再上传，请稍后';
-			buttonSet.enabled = false;
-			data.uploadPic(templatesContainer.template);
-		}
-		private function encodeCompleteHandler(event:picUploaderEvent):void {
-			buttonSet.text = '生成完毕，开始上传';
-		}
-		private function uploadCompleteHandler(event:picUploaderEvent):void {
-			data.edited = false;
-			buttonSet.enabled = true;
-			buttonSet.text = '上传完毕，大头地址已经更换到模板内';
-		}
-		private function showList(event:toolbarEvent):void {
-			if (null != templateThumbsList && contains(templateThumbsList)) {
-				removeChild(templateThumbsList);
-			} else {
-				if (null == templateThumbsList) {
-					templateThumbsList = new templateThumbListView(this, 10, 55);
-					templateThumbsList.data = data;
-					templateThumbsList.showThumbList();
-					templateThumbsList.addEventListener(toolbarEvent.CHANGE_TEMPLATE, changeTemplate);
-				}
-				addChild(templateThumbsList);
-			}
-		}
-		private function changeTemplate(event:toolbarEvent):void {
-			templatesContainer.changeTemplate(null, event.index);
-		}
-		private function templateChanged(event:Event):void {
-			data.edited = true;
+			templateContainer = new TemplateContainer(data.getDefaultHead(loaderInfo.parameters));
+			templateContainer.addEventListener(ProgressEvent.PROGRESS, progressHandler);
+			templateContainer.addEventListener(TemplateEvent.TEMPLATE_LOAD_COMPLETE, templateLoadCompleteHandler);
+			templateContainer.addEventListener(TemplateEvent.TEMPLATE_LOAD_FAILED, templateLoadFailedHandler);
+			templateContainer.addEventListener(Event.CHANGE, templateChangedHandler);
+			addChildAt(templateContainer, 0);
 		}
     //=========================================================================
     //  Event Handlers
@@ -130,11 +75,74 @@
 			buttonSet.removeEventListener(Event.COMPLETE, dataLoadComplete);
 			
 			// 加载默认模板
-			templatesContainer.data = data;
-			templatesContainer.loadTemplate();
+			templateContainer.data = data;
+			templateContainer.loadTemplate();
 		}
 		private function data_errorHandler(event:IOErrorEvent):void {
 			buttonSet.text = '加载失败，请联系翟路，看看是啥问题。本专题将采用默认大头。';
+		}
+		private function data_encodeCompleteHandler(event:picUploaderEvent):void {
+			buttonSet.text = '生成完毕，开始上传';
+		}
+		private function data_uploadCompleteHandler(event:picUploaderEvent):void {
+			data.edited = false;
+			buttonSet.enabled = true;
+			buttonSet.text = '上传完毕，大头地址已经更换到模板内';
+		}
+		private function buttonSet_showListHandler(event:ToolbarEvent):void {
+			buttonSet.text = '上传图片，会先生成jpg图片再上传，请稍后';
+			buttonSet.enabled = false;
+			data.uploadPic(templateContainer.template);
+		}
+		private function showList(event:ToolbarEvent):void {
+			if (null != templateThumbsList && contains(templateThumbsList)) {
+				removeChild(templateThumbsList);
+			} else {
+				if (null == templateThumbsList) {
+					templateThumbsList = new TemplateThumbList(this, 10, 55);
+					templateThumbsList.data = data;
+					templateThumbsList.showThumbList();
+					templateThumbsList.addEventListener(ToolbarEvent.CHANGE_TEMPLATE, changeTemplate);
+				}
+				addChild(templateThumbsList);
+			}
+		}
+    private function buttonSet_localUploadHandler(event:ToolbarEvent):void {
+      data.browse();
+    }
+    private function buttonSet_changeTemplateHandler(event:ToolbarEvent):void {
+      if (event.type == ToolbarEvent.PREV_TEMPLATE) {
+        templateContainer.changeTemplate(templateContainer.currTemplateIndex - 1);
+      } else {
+        templateContainer.changeTemplate(templateContainer.currTemplateIndex + 1);
+      }
+    }
+		private function templateLoadComplete(event:TemplateEvent):void {
+			if (event.index != -1) {
+				if (data.hasMSYH) {
+					buttonSet.text = '模板加载成功，点击标题文字开始编辑';
+				} else {
+					buttonSet.htmlText = '您的电脑中没有雅黑字体，请先 <a href="event:download">下载</a> 并复制到Windows/Font/目录下，再刷新';
+				}
+				buttonSet.submitable = true;
+				buttonSet.uploadable = false;
+			} else {
+				buttonSet.text = '当前是默认大头，不能编辑。您可以上传自制大头以替换之。';
+				
+				buttonSet.enabled = true;
+				buttonSet.uploadable = true;
+				buttonSet.submitable = templateContainer.uploaded;
+			}
+			data.setStageHeight(templateContainer.height);
+		}
+		private function templateLoadFailedHandler(event:TemplateEvent):void {
+			buttonSet.text = event.msg;
+		}
+		private function changeTemplate(event:ToolbarEvent):void {
+			templateContainer.changeTemplate(null, event.index);
+		}
+		private function templateChanged(event:Event):void {
+			data.edited = true;
 		}
 	}
 }

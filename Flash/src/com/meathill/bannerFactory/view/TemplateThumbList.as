@@ -27,10 +27,10 @@ package com.meathill.bannerFactory.view {
 		public function set templateDataModel(value:TemplateDataModel):void {
 			_templateDataModel = value;
 			
-			setSize(940, _data.height - 65);
+			setSize(940, _templateDataModel.height - 65);
 			col = 5;
 			space = 5;
-			bgAlpha = .5;
+			//bgAlpha = .5;
 			itemWidth = 160;
 			itemHeight = 60;
 		}

@@ -1,7 +1,7 @@
-﻿package src.view.template 
-{
+﻿package com.meathill.bannerFactory.view.template {
 	import flash.display.Bitmap;
 	import flash.display.Sprite;
+  import flash.system.ApplicationDomain;
 	import flash.system.Security;
 	import flash.text.TextField;
 	import src.view.template.ITemplate;
@@ -10,19 +10,13 @@
 	 * 大头模板类
 	 * @author Meathill
 	 */
-	public class templateView extends Sprite implements ITemplate
-	{
+	public class AbstractTemplate extends Sprite implements ITemplate	{
 		private var _label1:TextField;
 		private var _label2:TextField;
 		private var _bg:Bitmap;
 		
-		public function templateView() 
-		{
-			Security.allowDomain("*");
-			
-			//_label1 = title1;
-			//_label2 = title2;
-			//trace(_label1.filters);
+		public function AbstractTemplate() {
+			Security.allowDomain(ApplicationDomain.currentDomain);
 		}
 		
 		/***************

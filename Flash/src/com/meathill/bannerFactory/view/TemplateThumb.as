@@ -27,7 +27,7 @@ package com.meathill.bannerFactory.view {
     //  Constructor
     //=========================================================================
 		public function TemplateThumb(src:String, n:String) {
-      build(src, );
+      build(src, n);
 		}
     //=========================================================================
     //  Properties
@@ -46,7 +46,7 @@ package com.meathill.bannerFactory.view {
     //=========================================================================
     //  Private Functions
     //=========================================================================
-    private function build():void {
+    private function build(src:String, n:String):void {
       bg = createBG();
 			
 			label = createLabel();
@@ -56,7 +56,7 @@ package com.meathill.bannerFactory.view {
 			loader.contentLoaderInfo.addEventListener(ProgressEvent.PROGRESS, loader_progressHandler);
 			loader.contentLoaderInfo.addEventListener(IOErrorEvent.IO_ERROR, loader_errorHandler);
 			
-			url = new URLRequest(str);
+			url = new URLRequest(src);
 			templateName = n;
       
 			buttonMode = true;
@@ -77,7 +77,7 @@ package com.meathill.bannerFactory.view {
       var txt:TextField = new TextField();
       txt.y = 9;
       txt.width = WIDTH;
-      txt.defaultTextFormat = txt;
+      txt.defaultTextFormat = tf;
       txt.text = '等待加载图片';
       addChild(txt);
       return txt;

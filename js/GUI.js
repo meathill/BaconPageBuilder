@@ -56,7 +56,9 @@ var GUI = {
         primary: 'ui-icon-help'
       },
       text: false
-    })
+    }).click(function (event) {
+      $('#help-panel').dialog('open');
+    });
     $('.step-button')
       .click(this.switchStepContent)
       //.eq(1)
@@ -85,6 +87,9 @@ var GUI = {
       modal: true,
       title: '…Ë÷√'
     });
+    $('#help-panel').dialog({
+      autoOpen: false
+    })
   },
   togglePanel : function (event) {
     var icon = $(this).children().first();

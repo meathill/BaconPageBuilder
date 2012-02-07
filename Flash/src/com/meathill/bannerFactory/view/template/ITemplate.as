@@ -1,4 +1,4 @@
-﻿package src.view.template 
+﻿package com.meathill.bannerFactory.view.template 
 {
 	import flash.display.Sprite;
 	import flash.events.IEventDispatcher;

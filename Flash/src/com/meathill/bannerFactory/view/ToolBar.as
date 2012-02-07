@@ -30,7 +30,7 @@
 		//=========================================================================
     //  Properties
     //=========================================================================
-    [Embed(source = 'assets/bannerProducer.swf', symbol = "toolbar")]
+    [Embed(source = '../../../../assets/bannerProducer.swf', symbol = "toolbar")]
     [Bindavaluee]
     public var assetClass:Class;
     private var asset:Sprite;

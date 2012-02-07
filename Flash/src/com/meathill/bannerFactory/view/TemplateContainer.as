@@ -1,25 +1,20 @@
 package com.meathill.bannerFactory.view {
   import com.meathill.bannerFactory.events.TemplateEvent;
   import com.meathill.bannerFactory.model.TemplateDataModel;
+  import com.meathill.bannerFactory.view.template.ITemplate;
   import com.meathill.image.events.LocalPicLoaderEvent;
-	import flash.display.Bitmap;
-	import flash.display.BitmapData;
-	import flash.display.DisplayObject;
-	import flash.display.IBitmapDrawable;
-	import flash.display.Loader;
-	import flash.display.Sprite;
-	import flash.events.Event;
-	import flash.events.IOErrorEvent;
-	import flash.events.MouseEvent;
-	import flash.events.ProgressEvent;
-	import flash.geom.Point;
-	import flash.geom.Rectangle;
-	import flash.net.URLRequest;
-	import flash.system.LoaderContext;
-	import src.event.templateEvent;
-	import src.event.toolbarEvent;
-	import src.model.templateDataModel;
-	import src.view.template.ITemplate;
+  import flash.display.Bitmap;
+  import flash.display.BitmapData;
+  import flash.display.DisplayObject;
+  import flash.display.Loader;
+  import flash.display.Sprite;
+  import flash.events.Event;
+  import flash.events.IOErrorEvent;
+  import flash.events.ProgressEvent;
+  import flash.geom.Point;
+  import flash.geom.Rectangle;
+  import flash.net.URLRequest;
+  import flash.system.LoaderContext;
 	
 	/**
 	 * 存放模板的层
@@ -47,7 +42,7 @@ package com.meathill.bannerFactory.view {
 		private var editor2:TextEditor;
 		private var defaultHead:Bitmap;
 		private var loadedHeads:Array;
-		public function get template():DisplayObject {
+		public function get templateContent():DisplayObject {
 			if (-1 == currTemplateIndex) {
 				return defaultHead;
 			} else {
@@ -66,7 +61,7 @@ package com.meathill.bannerFactory.view {
     //---------------------------------
 		private var _templateDataModel:TemplateDataModel;
 		public function set templateDataModel(value:TemplateDataModel):void {
-			_templateDataModel = obj;
+			_templateDataModel = value;
 			_templateDataModel.addEventListener(LocalPicLoaderEvent.LOAD_PIC_COMPLETE, templateDataModel_loadPicComplateHandler);
 		}
     //---------------------------------
@@ -111,7 +106,7 @@ package com.meathill.bannerFactory.view {
 				}
 			} else {
 				if (hasItem(index)) {
-					template = getItem(i);
+					template = getItem(index);
 					
 					editor1.init(template.getTextField(1));
 					addChild(editor1);
@@ -169,7 +164,7 @@ package com.meathill.bannerFactory.view {
 			return undefined != loadedHeads[index];
 		}
 		private function dispatchComplete():void {
-			dispatchEvent(TemplateEvent(templateEvent.TEMPLATE_LOAD_COMPLETE, _currTemplateIndex));
+			dispatchEvent(new TemplateEvent(TemplateEvent.TEMPLATE_LOAD_COMPLETE, _currTemplateIndex));
 		}
     //=========================================================================
     //  Event Handlers
@@ -191,7 +186,7 @@ package com.meathill.bannerFactory.view {
 				} else {
 					// 将新加载的内容合并到头图上
 					var bmpd:BitmapData = new BitmapData(defaultHead.width, defaultHead.height + loader.height);
-					bmpd.copyPixels(defaultHead.bitmapData, new Rectangle(0, 0, defaultHead.width, defaultHead.height), _BASE_POINT);
+					bmpd.copyPixels(defaultHead.bitmapData, new Rectangle(0, 0, defaultHead.width, defaultHead.height), BASE_POINT);
 					bmpd.copyPixels(Bitmap(loader.content).bitmapData, new Rectangle(0, 0, loader.width, loader.height), new Point(0, defaultHead.height));
 					Bitmap(loader.content).bitmapData.dispose();
 					defaultHead.bitmapData.dispose();
@@ -209,7 +204,7 @@ package com.meathill.bannerFactory.view {
 			if (heads == null || heads.length == 0) {
 				dispatchComplete();
 			} else {
-				makeLoader();
+				createLoader();
 				loader.load(new URLRequest(heads.shift()), new LoaderContext(true));
 			}
 		}
@@ -217,14 +212,12 @@ package com.meathill.bannerFactory.view {
 			dispatchEvent(event);
 		}
 		private function loader_errorHandler(event:IOErrorEvent):void {
-			var _event:templateEvent = new templateEvent(templateEvent.TEMPLATE_LOAD_COMPLETE);
-			_event.msg = '加载模板失败';
-			dispatchEvent(_event);
+			dispatchEvent(new TemplateEvent(TemplateEvent.TEMPLATE_LOAD_COMPLETE, _currTemplateIndex,  '加载模板失败'));
 		}
 		private function templateDataModel_loadPicComplateHandler(event:LocalPicLoaderEvent):void {
 			removeChild(defaultHead);
 			
-			defaultHead = templateDataModel.bmp;
+			defaultHead = _templateDataModel.bmp;
 			_isUploaded = true;
 			loadTemplate();
 		}
