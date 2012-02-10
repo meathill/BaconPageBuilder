@@ -56,6 +56,7 @@
 			buttonSet.addEventListener(ToolbarEvent.PREV_TEMPLATE, buttonSet_changeTemplateHandler);
 			buttonSet.addEventListener(ToolbarEvent.NEXT_TEMPLATE, buttonSet_changeTemplateHandler);
 			buttonSet.enabled = false;
+      addChild(buttonSet);
 			
 			templateContainer = new TemplateContainer(data.getDefaultHead(loaderInfo.parameters));
 			templateContainer.addEventListener(ProgressEvent.PROGRESS, progressHandler);

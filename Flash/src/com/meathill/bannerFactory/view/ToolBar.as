@@ -98,7 +98,6 @@
 			toggleButton.addEventListener(MouseEvent.CLICK, toggleButton_clickHandler);
       toggleButton.x += asset.x;
       toggleButton.y += asset.y;
-      addChild(toggleButton);
 			tipsBasicView.add_target(toggleButton, '隐藏');
 			
 			prevButton = SimpleButton(asset.getChildAt(4));
