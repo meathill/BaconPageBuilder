@@ -33,9 +33,6 @@
 			super.init(event);
 			
 			MeatVersion.createVersion(this);
-			
-			dataInit();
-			displayInit();
 		}
 		override protected function dataInit(event:Event = null):void {
 			data = new TemplateDataModel();
@@ -58,7 +55,7 @@
 			buttonSet.enabled = false;
       addChild(buttonSet);
 			
-			templateContainer = new TemplateContainer(data.getDefaultHead(loaderInfo.parameters));
+			templateContainer = new TemplateContainer();
 			templateContainer.addEventListener(ProgressEvent.PROGRESS, progressHandler);
 			templateContainer.addEventListener(TemplateEvent.TEMPLATE_LOAD_COMPLETE, templateLoadCompleteHandler);
 			templateContainer.addEventListener(TemplateEvent.TEMPLATE_LOAD_FAILED, templateLoadFailedHandler);
@@ -81,7 +78,7 @@
 			
 			// 加载默认模板
 			templateContainer.templateDataModel = data;
-			templateContainer.loadTemplate();
+			templateContainer.loadDefaultTemplate();
 		}
 		private function data_errorHandler(event:IOErrorEvent):void {
 			buttonSet.text = '加载失败，请联系翟路，看看是啥问题。本专题将采用默认大头。';

@@ -15,6 +15,7 @@ package com.meathill.bannerFactory.view {
   import flash.geom.Rectangle;
   import flash.net.URLRequest;
   import flash.system.LoaderContext;
+  import flash.utils.Dictionary;
 	
 	/**
 	 * 存放模板的层
@@ -25,17 +26,15 @@ package com.meathill.bannerFactory.view {
     //  Class Constants
     //=========================================================================
 		public static const BASE_POINT:Point = new Point(0, 0);
-		public static const DEFAULT_HEAD:String = 'images/head.jpg';
 		//=========================================================================
     //  Constructor
     //=========================================================================
-		public function TemplateContainer(headSrc:String = '') {
-			build(headSrc);
+		public function TemplateContainer() {
+			build();
 		}
 		//=========================================================================
     //  Properties
     //=========================================================================
-		private var heads:Array;
 		private var loader:Loader;
 		private var template:ITemplate;
 		private var editor1:TextEditor;
@@ -43,11 +42,7 @@ package com.meathill.bannerFactory.view {
 		private var defaultHead:Bitmap;
 		private var loadedHeads:Array;
 		public function get templateContent():DisplayObject {
-			if (-1 == currTemplateIndex) {
-				return defaultHead;
-			} else {
-				return template.self;
-			}
+			return getChildAt(0);
 		}
     //---------------------------------
     //  currTemplateIndex
@@ -89,59 +84,45 @@ package com.meathill.bannerFactory.view {
 			if (defaultHead != null && contains(defaultHead)) { 
 				removeChild(defaultHead);
 			}
-			
-			if ( -1 == index) {
-				// 加载默认模班
-				if (defaultHead != null) {
-					addChildAt(defaultHead, 0);
-					
-					dispatchComplete();
-				} else {
-					loader = createLoader();
-					if (heads != null) {
-						loader.load(new URLRequest(heads.shift()), new LoaderContext(true));
-					} else {
-						loader.load(new URLRequest(DEFAULT_HEAD), new LoaderContext(true));
-					}
-				}
-			} else {
-				if (hasItem(index)) {
-					template = getItem(index);
-					
-					editor1.init(template.getTextField(1));
-					addChild(editor1);
-					editor2.init(template.getTextField(2));
-					addChild(editor2);
-					
-					addChildAt(template.self, 0);
-					
-					dispatchComplete();
-				} else {
-					loader = createLoader();
-					loader.load(new URLRequest(url), new LoaderContext(true));
-				}
-			}
-			
-			if ( -1 != _currTemplateIndex && index != _currTemplateIndex) {
-        _currTemplateIndex = index;
-        dispatchEvent(new Event(Event.CHANGE));
-			}
+      
+      if (loadedHeads[index] is DisplayObject) {
+        if (loadedHeads[index] is ITemplate) {
+          showTemplate(loadedHeads[index]);
+        } else {
+          showDefaultHead();
+        }
+        
+        dispatchComplete();
+      } else {
+        loader = createLoader();
+        loader.load(new URLRequest(url), new LoaderContext(true));
+      }
+      _currTemplateIndex = index;
+      dispatchEvent(new Event(Event.CHANGE));
 		}
 		/**
 		 * 变换模板
 		 * @param	event
 		 */
-		public function changeTemplate(toTemplateIndex:int = 0):void {
-			loadTemplate(toTemplateIndex, _templateDataModel.getTemplateSrc(toTemplateIndex));
+		public function changeTemplate(to:int = 0):void {
+      if (to < 0) {
+        to = _templateDataModel.length;
+      } else if (to > _templateDataModel.length) {
+        to = 0;
+      }
+      if (to == 0) {
+        loadDefaultTemplate();
+      } else {
+        loadTemplate(to, _templateDataModel.getTemplateSrc(to - 1));
+      }
 		}
+    public function loadDefaultTemplate():void {
+      loadTemplate(0, TemplateDataModel.DEFAULT_HEAD);
+    }
     //=========================================================================
     //  Private Functions
     //=========================================================================
-		private function build(str:String = ''):void {
-      if (str != '') {
-        heads = str.split('###');
-      }
-			
+		private function build():void {
 			editor1 = new TextEditor();
 			editor2 = new TextEditor();
 			
@@ -154,15 +135,24 @@ package com.meathill.bannerFactory.view {
 			loader.contentLoaderInfo.addEventListener(ProgressEvent.PROGRESS, loader_progressHandler);
       return loader;
 		}
-		private function addItem(template:ITemplate,index:int):void {
-			loadedHeads[index] = template;
-		}
-		private function getItem(index:int):ITemplate {
-			return loadedHeads[index];
-		}
-		private function hasItem(index:int):Boolean {
-			return undefined != loadedHeads[index];
-		}
+    private function showTemplate(content:ITemplate):void {
+      template = content;
+      editor1.init(template.getTextField(1));
+      addChild(editor1);
+      editor2.init(template.getTextField(2));
+      addChild(editor2);
+      addChildAt(template.self, 0);
+    }
+    private function showDefaultHead(content:Bitmap = null):void {
+      defaultHead = defaultHead || content;
+      if (contains(editor1)) {
+        removeChild(editor1);
+      }
+      if (contains(editor2)) {
+        removeChild(editor2);
+      }
+      addChildAt(defaultHead, 0);
+    }
 		private function dispatchComplete():void {
 			dispatchEvent(new TemplateEvent(TemplateEvent.TEMPLATE_LOAD_COMPLETE, _currTemplateIndex));
 		}
@@ -170,48 +160,25 @@ package com.meathill.bannerFactory.view {
     //  Event Handlers
     //=========================================================================
 		private function loader_completeHandler(event:Event):void {
-			if ( -1 != _currTemplateIndex) {
-				template = ITemplate(loader.content);
-				addItem(template, _currTemplateIndex);
-				
-				editor1.init(template.getTextField(1));
-				addChild(editor1);
-				editor2.init(template.getTextField(2));
-				addChild(editor2);
-				
-				addChildAt(loader.content, 0);
-			} else {
-				if (null == defaultHead) {
-					defaultHead = Bitmap(loader.content);
-				} else {
-					// 将新加载的内容合并到头图上
-					var bmpd:BitmapData = new BitmapData(defaultHead.width, defaultHead.height + loader.height);
-					bmpd.copyPixels(defaultHead.bitmapData, new Rectangle(0, 0, defaultHead.width, defaultHead.height), BASE_POINT);
-					bmpd.copyPixels(Bitmap(loader.content).bitmapData, new Rectangle(0, 0, loader.width, loader.height), new Point(0, defaultHead.height));
-					Bitmap(loader.content).bitmapData.dispose();
-					defaultHead.bitmapData.dispose();
-					defaultHead.bitmapData = bmpd;
-				}
-				
-				addChildAt(defaultHead, 0);
-			}
+      if (loader.content is ITemplate) {
+        showTemplate(ITemplate(loader.content));
+      } else {
+        showDefaultHead(Bitmap(loader.content));
+      }
+      loadedHeads[_currTemplateIndex] = loader.content;
 			
 			loader.contentLoaderInfo.removeEventListener(Event.COMPLETE, loader_completeHandler);
 			loader.contentLoaderInfo.removeEventListener(IOErrorEvent.IO_ERROR, loader_errorHandler);
 			loader.contentLoaderInfo.removeEventListener(ProgressEvent.PROGRESS, loader_progressHandler);
 			loader = null;
 			
-			if (heads == null || heads.length == 0) {
-				dispatchComplete();
-			} else {
-				createLoader();
-				loader.load(new URLRequest(heads.shift()), new LoaderContext(true));
-			}
+			dispatchComplete();
 		}
 		private function loader_progressHandler(event:ProgressEvent):void {
 			dispatchEvent(event);
 		}
 		private function loader_errorHandler(event:IOErrorEvent):void {
+      trace('load template error');
 			dispatchEvent(new TemplateEvent(TemplateEvent.TEMPLATE_LOAD_COMPLETE, _currTemplateIndex,  '加载模板失败'));
 		}
 		private function templateDataModel_loadPicComplateHandler(event:LocalPicLoaderEvent):void {

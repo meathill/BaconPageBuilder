@@ -27,6 +27,7 @@
 		public static const RESIZE_FUNC:String = "BannerMaker.setBannerHeight";
 		public static const CHANGED:String = "BannerMaker.setBannerChanged";
 		public static const FONT_NAME:String = '微软雅黑';
+		public static const DEFAULT_HEAD:String = '../images/head.jpg';
     //=========================================================================
     //  Constructor
     //=========================================================================
@@ -57,7 +58,9 @@
 		private var _isEdited:Boolean = false;
 		public function set isEdited(bl:Boolean):void {
 			_isEdited = bl;
-			ExternalInterface.call(CHANGED, _isEdited);
+      if (ExternalInterface.available) {
+        ExternalInterface.call(CHANGED, _isEdited);
+      }
 		}
     //---------------------------------
     //  hasMSYH
@@ -87,7 +90,9 @@
 		}
 		public function setStageHeight(h:int):void {
 			_height = h;
-			ExternalInterface.call(RESIZE_FUNC, h);
+      if (ExternalInterface.available) {
+        ExternalInterface.call(RESIZE_FUNC, h);
+      }
 		}
 		public function browse():void {
 			localpic.selectFile();
