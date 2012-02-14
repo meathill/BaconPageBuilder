@@ -6,7 +6,7 @@
     <movie input="" />
     <movie path="..\swf\BannerProducer.swf" />
     <movie fps="20" />
-    <movie width="1000" />
+    <movie width="960" />
     <movie height="200" />
     <movie version="11" />
     <movie minorVersion="0" />

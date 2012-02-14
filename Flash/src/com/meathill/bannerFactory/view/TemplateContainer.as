@@ -4,7 +4,6 @@ package com.meathill.bannerFactory.view {
   import com.meathill.bannerFactory.view.template.ITemplate;
   import com.meathill.image.events.LocalPicLoaderEvent;
   import flash.display.Bitmap;
-  import flash.display.BitmapData;
   import flash.display.DisplayObject;
   import flash.display.Loader;
   import flash.display.Sprite;
@@ -12,10 +11,9 @@ package com.meathill.bannerFactory.view {
   import flash.events.IOErrorEvent;
   import flash.events.ProgressEvent;
   import flash.geom.Point;
-  import flash.geom.Rectangle;
   import flash.net.URLRequest;
+  import flash.system.ApplicationDomain;
   import flash.system.LoaderContext;
-  import flash.utils.Dictionary;
 	
 	/**
 	 * 存放模板的层
@@ -95,7 +93,7 @@ package com.meathill.bannerFactory.view {
         dispatchComplete();
       } else {
         loader = createLoader();
-        loader.load(new URLRequest(url), new LoaderContext(true));
+        loader.load(new URLRequest(url), new LoaderContext(false, ApplicationDomain.currentDomain));
       }
       _currTemplateIndex = index;
       dispatchEvent(new Event(Event.CHANGE));

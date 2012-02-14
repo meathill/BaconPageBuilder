@@ -1,10 +1,9 @@
 ﻿package com.meathill.bannerFactory.view.template {
-	import flash.display.Bitmap;
-	import flash.display.Sprite;
+  import flash.display.Bitmap;
+  import flash.display.Sprite;
   import flash.system.ApplicationDomain;
-	import flash.system.Security;
-	import flash.text.TextField;
-	import src.view.template.ITemplate;
+  import flash.system.Security;
+  import flash.text.TextField;
 	
 	/**
 	 * 大头模板类
@@ -16,7 +15,7 @@
 		private var _bg:Bitmap;
 		
 		public function AbstractTemplate() {
-			Security.allowDomain(ApplicationDomain.currentDomain);
+			
 		}
 		
 		/***************

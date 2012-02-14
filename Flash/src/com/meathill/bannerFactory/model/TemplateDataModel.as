@@ -21,7 +21,7 @@
     //=========================================================================
     //  Class Constants
     //=========================================================================
-		public static const URL:String = 'http://article.zol.com.cn/zt/templateDIY/template_list.xml';
+		public static const URL:String = '../template_list.xml';
 		public static const UPLOAD_URL:String = 'http://image.zol.com.cn/article/templateDIY/upload.php';
 		public static const HEAD_FUNC:String = "BannerMaker.setHeadPic";
 		public static const RESIZE_FUNC:String = "BannerMaker.setBannerHeight";

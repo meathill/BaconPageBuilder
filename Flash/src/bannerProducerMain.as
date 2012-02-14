@@ -126,7 +126,7 @@
     //  template
     //---------------------------------
 		private function templateLoadCompleteHandler(event:TemplateEvent):void {
-			if (event.index != -1) {
+			if (event.index != 0) {
 				if (data.hasMSYH) {
 					buttonSet.text = '模板加载成功，点击标题文字开始编辑';
 				} else {
@@ -135,7 +135,7 @@
 				buttonSet.submitable = true;
 				buttonSet.uploadable = false;
 			} else {
-				buttonSet.text = '当前是默认大头，不能编辑。您可以上传自制大头以替换之。';
+				buttonSet.text = '当前是默认大头，不能编辑。您可以上传自制大头替换。';
 				
 				buttonSet.enabled = true;
 				buttonSet.uploadable = true;
