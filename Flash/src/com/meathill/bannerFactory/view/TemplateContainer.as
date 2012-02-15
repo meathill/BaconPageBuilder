@@ -93,7 +93,7 @@ package com.meathill.bannerFactory.view {
         dispatchComplete();
       } else {
         loader = createLoader();
-        loader.load(new URLRequest(url), new LoaderContext(false, ApplicationDomain.currentDomain));
+        loader.load(new URLRequest(url));
       }
       _currTemplateIndex = index;
       dispatchEvent(new Event(Event.CHANGE));

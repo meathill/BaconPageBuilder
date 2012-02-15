@@ -21,20 +21,20 @@
     //=========================================================================
     //  Class Constants
     //=========================================================================
-		public static const URL:String = '../template_list.xml';
+		public static const URL:String = 'template/template_list.xml';
 		public static const UPLOAD_URL:String = 'http://image.zol.com.cn/article/templateDIY/upload.php';
-		public static const HEAD_FUNC:String = "BannerMaker.setHeadPic";
-		public static const RESIZE_FUNC:String = "BannerMaker.setBannerHeight";
-		public static const CHANGED:String = "BannerMaker.setBannerChanged";
+		public static const HEAD_FUNC:String = "GUI.banner.setHeadPic";
+		public static const RESIZE_FUNC:String = "GUI.banner.setBannerHeight";
+		public static const CHANGED:String = "GUI.banner.setBannerChanged";
 		public static const FONT_NAME:String = '微软雅黑';
-		public static const DEFAULT_HEAD:String = '../images/head.jpg';
+		public static const DEFAULT_HEAD:String = 'images/head.jpg';
     //=========================================================================
     //  Constructor
     //=========================================================================
-		public function TemplateDataModel() {
+		public function TemplateDataModel(parameters:Object) {
 			super(URL);
 			
-			init();
+			init(parameters);
 		}
 		//=========================================================================
     //  Properties
@@ -108,7 +108,7 @@
 		//=========================================================================
     //  Private Functions
     //=========================================================================
-		private function init():void {
+		private function init(parameters:Object):void {
 			_type = DataModelType.XML;
 			
 			uploader = new PicUploader(UPLOAD_URL);

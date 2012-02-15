@@ -4,7 +4,7 @@
   <output>
     <movie outputType="Application" />
     <movie input="" />
-    <movie path="..\swf\BannerProducer.swf" />
+    <movie path="..\BannerProducer.swf" />
     <movie fps="20" />
     <movie width="960" />
     <movie height="200" />

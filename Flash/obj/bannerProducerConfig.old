@@ -4,6 +4,7 @@
 <flex-config>
   <target-player>11.0</target-player>
   <benchmark>false</benchmark>
+  <use-network>false</use-network>
   <static-link-runtime-shared-libraries>true</static-link-runtime-shared-libraries>
   <compiler>
     <define append="true">

@@ -35,7 +35,7 @@
 			MeatVersion.createVersion(this);
 		}
 		override protected function dataInit(event:Event = null):void {
-			data = new TemplateDataModel();
+			data = new TemplateDataModel(loaderInfo.parameters);
 			data.addEventListener(Event.COMPLETE, data_completeHandler);
 			data.addEventListener(IOErrorEvent.IO_ERROR, data_errorHandler);
 			data.addEventListener(ProgressEvent.PROGRESS, progressHandler);

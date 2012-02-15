@@ -23,10 +23,12 @@ com.meathill.bacon.BannerMaker = function () {
       allowScriptAccess: 'always',
       wmode:'window'
     };
-    var flashvars = {};
+    var flashvars = {
+      
+    };
     var width = 960;
     var height = 220;
-    var src = "swf/bannerProducer.swf";
+    var src = "BannerProducer.swf";
     var express = "swf/expressInstall.swf";
     var version = '11';
     so.embedSWF(src, domid, width, height, version, express, flashvars, param);
@@ -38,7 +40,7 @@ com.meathill.bacon.BannerMaker = function () {
    * @private
    */
   var setHeadPic = function (url) {
-    this.headPicUrl = url;
+    headPicUrl = url;
     if (this.callback != null) {
       callback();
     }
@@ -48,10 +50,10 @@ com.meathill.bacon.BannerMaker = function () {
    * @param {Object} height
    * @private
    */
-  var setBannerHeight = function (height){
+  var setHeight = function (height){
     $('#banner-maker, #header').height(height);
   }
-  var setBannerChanged = function (bl) {
+  var changedHandler = function (bl) {
     this.isChanged = bl;
   }
   

@@ -10,9 +10,6 @@
 	 * @author Meathill
 	 */
 	public class AbstractTemplate extends Sprite implements ITemplate	{
-		private var _label1:TextField;
-		private var _label2:TextField;
-		private var _bg:Bitmap;
 		
 		public function AbstractTemplate() {
 			
