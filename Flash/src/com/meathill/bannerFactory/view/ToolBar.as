@@ -15,6 +15,12 @@
 	 * 按钮控制栏
 	 * @author Meathill
 	 */
+  [Event(name = "prevTemplate", type = "com.meathill.bannerFactory.events.ToolbarEvent")]
+  [Event(name = "nextTemplate", type = "com.meathill.bannerFactory.events.ToolbarEvent")]
+  [Event(name = "changeTemplate", type = "com.meathill.bannerFactory.events.ToolbarEvent")]
+  [Event(name = "submit", type = "com.meathill.bannerFactory.events.ToolbarEvent")]
+  [Event(name = "showList", type = "com.meathill.bannerFactory.events.ToolbarEvent")]
+  [Event(name = "localUpload", type = "com.meathill.bannerFactory.events.ToolbarEvent")]
 	public class ToolBar extends Sprite {
     //=========================================================================
     //  Class Constants

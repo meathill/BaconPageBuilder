@@ -4,12 +4,23 @@
  * @version 0.1 (2011-11-18)
  */
 jQuery.namespace('com.meathill.bacon');
+com.meathill.bacon.BannerModel = Backbone.Model.extend({
+  default: {
+    "headPicUrl": '', // 大头图片url
+    "callback": null,
+    "saveURL": '',
+    "styleIndex": -1,
+    "domID": "banner-maker",
+    "body": "header"
+  }
+});
 com.meathill.bacon.BannerMaker = function () {
   var headPicUrl = ''; // 大头图片url
   var callback = null;
-  var isChanged = false;
   var saveURL = '';
+  var styleIndex = -1;
   var domID = "banner-maker";
+  var body = "header";
   /**
    * @constructor
    */
@@ -32,14 +43,14 @@ com.meathill.bacon.BannerMaker = function () {
     var express = "swf/expressInstall.swf";
     var version = '11';
     so.embedSWF(src, domid, width, height, version, express, flashvars, param);
-    $('#header').height(height);
+    $('#' + body).height(height);
   }
   /**
    * 将大头图片替换在页面代码内
    * @param {Object} id 大头图片id
    * @private
    */
-  var setHeadPic = function (url) {
+  this.setHeadPic = function (url) {
     headPicUrl = url;
     if (this.callback != null) {
       callback();
@@ -50,11 +61,12 @@ com.meathill.bacon.BannerMaker = function () {
    * @param {Object} height
    * @private
    */
-  var setHeight = function (height){
-    $('#banner-maker, #header').height(height);
+  this.setHeight = function (height){
+    $('#' + domID).height(height);
+    $('#' + body).height(height);
   }
-  var changedHandler = function (bl) {
-    this.isChanged = bl;
+  this.setStyle = function (index) {
+    styleIndex = index;
+    console.log('change css to : ', index);
   }
-  
 }

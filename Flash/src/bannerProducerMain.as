@@ -6,11 +6,11 @@
   import com.meathill.bannerFactory.view.TemplateThumbList;
   import com.meathill.bannerFactory.view.ToolBar;
   import com.meathill.BasicMain;
+  import com.meathill.image.events.PicUploaderEvent;
   import com.meathill.MeatVersion;
   import flash.events.Event;
   import flash.events.IOErrorEvent;
   import flash.events.ProgressEvent;
-  import lib.component.event.picUploaderEvent;
   import lib.component.tips.tipsBasicView;
 	
 	/**
@@ -39,8 +39,9 @@
 			data.addEventListener(Event.COMPLETE, data_completeHandler);
 			data.addEventListener(IOErrorEvent.IO_ERROR, data_errorHandler);
 			data.addEventListener(ProgressEvent.PROGRESS, progressHandler);
-			data.addEventListener(picUploaderEvent.ENCODE_COMPLETE, data_encodeCompleteHandler);
-			data.addEventListener(picUploaderEvent.UPLOAD_COMPLETE, data_uploadCompleteHandler);
+      data.addEventListener(ToolbarEvent.CHANGE_TEMPLATE, changeTemplateHandler);
+			data.addEventListener(PicUploaderEvent.ENCODE_COMPLETE, data_encodeCompleteHandler);
+			data.addEventListener(PicUploaderEvent.UPLOAD_COMPLETE, data_uploadCompleteHandler);
 			data.load();
 		}
 		override protected function displayInit(event:Event = null):void {
@@ -50,8 +51,9 @@
 			buttonSet.addEventListener(ToolbarEvent.SHOW_LIST, buttonSet_showListHandler);
 			buttonSet.addEventListener(ToolbarEvent.SUBMIT, buttonSet_submitHandler);
 			buttonSet.addEventListener(ToolbarEvent.LOCAL_UPLOAD, buttonSet_localUploadHandler);
-			buttonSet.addEventListener(ToolbarEvent.PREV_TEMPLATE, buttonSet_changeTemplateHandler);
-			buttonSet.addEventListener(ToolbarEvent.NEXT_TEMPLATE, buttonSet_changeTemplateHandler);
+			buttonSet.addEventListener(ToolbarEvent.PREV_TEMPLATE, changeTemplateHandler);
+			buttonSet.addEventListener(ToolbarEvent.NEXT_TEMPLATE, changeTemplateHandler);
+      buttonSet.addEventListener(ToolbarEvent.CHANGE_TEMPLATE, changeTemplateHandler);
 			buttonSet.enabled = false;
       addChild(buttonSet);
 			
@@ -83,10 +85,10 @@
 		private function data_errorHandler(event:IOErrorEvent):void {
 			buttonSet.text = '加载失败，请联系翟路，看看是啥问题。本专题将采用默认大头。';
 		}
-		private function data_encodeCompleteHandler(event:picUploaderEvent):void {
+		private function data_encodeCompleteHandler(event:PicUploaderEvent):void {
 			buttonSet.text = '生成完毕，开始上传';
 		}
-		private function data_uploadCompleteHandler(event:picUploaderEvent):void {
+		private function data_uploadCompleteHandler(event:PicUploaderEvent):void {
 			data.isEdited = false;
 			buttonSet.enabled = true;
 			buttonSet.text = '上传完毕，大头地址已经更换到模板内';
@@ -102,7 +104,7 @@
 					templateThumbsList = new TemplateThumbList(this, 10, 55);
 					templateThumbsList.templateDataModel = data;
 					templateThumbsList.showThumbList();
-					templateThumbsList.addEventListener(ToolbarEvent.CHANGE_TEMPLATE, changeTemplate);
+					templateThumbsList.addEventListener(ToolbarEvent.CHANGE_TEMPLATE, changeTemplateHandler);
 				}
 				addChild(templateThumbsList);
 			}
@@ -115,12 +117,16 @@
     private function buttonSet_localUploadHandler(event:ToolbarEvent):void {
       data.browse();
     }
-    private function buttonSet_changeTemplateHandler(event:ToolbarEvent):void {
+    private function changeTemplateHandler(event:ToolbarEvent):void {
       if (event.type == ToolbarEvent.PREV_TEMPLATE) {
         templateContainer.changeTemplate(templateContainer.currTemplateIndex - 1);
-      } else {
-        templateContainer.changeTemplate(templateContainer.currTemplateIndex + 1);
+        return;
       }
+      if (event.type == ToolbarEvent.NEXT_TEMPLATE) {
+        templateContainer.changeTemplate(templateContainer.currTemplateIndex + 1);
+        return;
+      }
+      templateContainer.changeTemplate(event.index);
     }
     //---------------------------------
     //  template
@@ -146,11 +152,9 @@
 		private function templateLoadFailedHandler(event:TemplateEvent):void {
 			buttonSet.text = event.msg;
 		}
-		private function changeTemplate(event:ToolbarEvent):void {
-			templateContainer.changeTemplate(event.index);
-		}
 		private function templateChangedHandler(event:Event):void {
 			data.isEdited = true;
+      data.setStyle(templateContainer.currTemplateIndex);
 		}
 	}
 }

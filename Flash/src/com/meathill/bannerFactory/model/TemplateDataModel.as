@@ -1,4 +1,5 @@
 ﻿package com.meathill.bannerFactory.model {
+  import com.meathill.bannerFactory.events.ToolbarEvent;
   import com.meathill.image.events.LocalPicLoaderEvent;
   import com.meathill.image.events.PicUploaderEvent;
   import com.meathill.image.LocalPicLoader;
@@ -17,6 +18,7 @@
    * 这次重构后
 	 * @author Meathill
 	 */
+  [Event(name="changeTemplate", type="com.meathill.bannerFactory.events.ToolbarEvent")]
 	public class TemplateDataModel extends DataBasicModel {
     //=========================================================================
     //  Class Constants
@@ -24,8 +26,8 @@
 		public static const URL:String = 'template/template_list.xml';
 		public static const UPLOAD_URL:String = 'http://image.zol.com.cn/article/templateDIY/upload.php';
 		public static const HEAD_FUNC:String = "GUI.banner.setHeadPic";
-		public static const RESIZE_FUNC:String = "GUI.banner.setBannerHeight";
-		public static const CHANGED:String = "GUI.banner.setBannerChanged";
+		public static const SET_HEIGHT:String = "GUI.banner.setHeight";
+		public static const SET_STYLE:String = "GUI.banner.setStyle";
 		public static const FONT_NAME:String = '微软雅黑';
 		public static const DEFAULT_HEAD:String = 'images/head.jpg';
     //=========================================================================
@@ -58,9 +60,6 @@
 		private var _isEdited:Boolean = false;
 		public function set isEdited(bl:Boolean):void {
 			_isEdited = bl;
-      if (ExternalInterface.available) {
-        ExternalInterface.call(CHANGED, _isEdited);
-      }
 		}
     //---------------------------------
     //  hasMSYH
@@ -88,12 +87,6 @@
 		public function getTemplateThumb(i:int):String {
 			return _data_xml.template[i].@thumb;
 		}
-		public function setStageHeight(h:int):void {
-			_height = h;
-      if (ExternalInterface.available) {
-        ExternalInterface.call(RESIZE_FUNC, h);
-      }
-		}
 		public function browse():void {
 			localpic.selectFile();
 		}
@@ -105,6 +98,19 @@
 			}
 			return _result;
 		}
+		public function setStageHeight(h:int):void {
+      trace('call js : ' + SET_HEIGHT, 'param : ' + h);
+			_height = h;
+      if (ExternalInterface.available) {
+        ExternalInterface.call(SET_HEIGHT, h);
+      }
+		}
+    public function setStyle(currTemplateIndex:int):void {
+      trace('call js : ' + SET_STYLE, 'param : ' + currTemplateIndex);
+      if (ExternalInterface.available) {
+        ExternalInterface.call(SET_STYLE, currTemplateIndex);
+      }
+    }
 		//=========================================================================
     //  Private Functions
     //=========================================================================
@@ -127,10 +133,17 @@
 			
 			localpic = new LocalPicLoader();
 			localpic.addEventListener(LocalPicLoaderEvent.LOAD_PIC_COMPLETE, local_loadPicCompleteHandler);
+      
+      if (ExternalInterface.available) {
+        ExternalInterface.addCallback("changeTemplate", changeTemplateCallback);
+      }
 		}
 		private function setBannerPic(msg:String):void {
 			ExternalInterface.call(HEAD_FUNC, msg);
 		}
+    private function changeTemplateCallback(index:int):void {
+      dispatchEvent(new ToolbarEvent(ToolbarEvent.CHANGE_TEMPLATE, index));
+    }
 		//=========================================================================
     //  Event Handlers
     //=========================================================================
