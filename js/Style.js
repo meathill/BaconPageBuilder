@@ -29,7 +29,7 @@ com.meathill.bacon.BannerMaker = Backbone.View.extend({
   model: style,
   initialize: function () {
     this.setElement($('#' + this.model.get('body')));
-    this.model.bind('change', this.model_changeHandler, this);
+    this.model.on('change:styleIndex', this.model_changeHandler, this);
   },
   install: function () {
     var param = {
@@ -48,7 +48,7 @@ com.meathill.bacon.BannerMaker = Backbone.View.extend({
     this.setHeight(height);
   },
   setHeadPic: function (src) {
-    this.model.set('headPicUrl', url);
+    this.model.set({'headPicUrl': url});
   },
   setHeight: function (height) {
     console.log('set height: ', height, this.$el);
@@ -56,10 +56,11 @@ com.meathill.bacon.BannerMaker = Backbone.View.extend({
     this.$el.find('#' + this.model.get('domID')).height(height);
   },
   setStyle: function (index) {
-    console.log('change css to : ', index);
-    this.model.set('styleIndex', index);
+    console.log('banner change css : ', this.model.get('styleIndex'), 'to', index);
+    this.model.set({'styleIndex': index});
   },
   model_changeHandler: function (event) {
+    console.log("banner handler :", event.attributes);
     this.getSelf().changeTemplate(event.attributes.styleIndex);
   },
   getSelf: function () {
@@ -81,22 +82,29 @@ com.meathill.bacon.StyleThumbList = Backbone.View.extend({
   cssLink: null,
   initialize: function () {
     this.setElement($('#css-list'));
-    this.model.bind('change', this.model_changeHandler, this);
+    this.model.on('change:styleIndex', this.model_changeHandler, this);
   },
   events: {
     "click li": "clickHandler"
   },
-  model_changehandler: function (event) {
+  model_changeHandler: function (event) {
+    console.log("thumb handler :", event.attributes);
     this.changeCss(event.attributes.styleIndex);
   },
   clickHandler: function (event) {
-    console.log(event);
-    this.currentItem = $(event.currentTarget);
-    var index = this.currentItem.parent().children().index(this.currentItem);
+    var index = $(event.currentTarget).index() + 1;
+    console.log('thumb change css : ', this.model.get('styleIndex'), 'to', index);
     this.changeCss(index);
-    this.model.set('styleIndex', index);
+    this.model.set({'styleIndex': index});
   },
   changeCss: function (index) {
+    if (index == 0) {
+      return;
+    }
+    this.currentItem = this.$el.find('li').eq(index - 1);
+    if (this.currentItem.hasClass('activated')) {
+      return;
+    }
     var css = "css/" + this.currentItem.attr('class') + ".css";
     if (this.cssLink == null) {
       var init = {

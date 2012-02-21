@@ -90,11 +90,6 @@
   padding:0 0 10px;
   margin:0;
 }
-#css-selector {
-  display:none;
-  width:170px;
-  margin:5px 0 0
-}
 #css-list {
   overflow-y:auto;
 }

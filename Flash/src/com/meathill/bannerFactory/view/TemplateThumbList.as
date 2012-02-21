@@ -61,7 +61,7 @@ package com.meathill.bannerFactory.view {
 			}
 		}
 		public function thumb_clickHandler(event:MouseEvent):void {
-			dispatchEvent(new ToolbarEvent(ToolbarEvent.CHANGE_TEMPLATE, getItemIndex(TemplateThumb(event.target))));
+			dispatchEvent(new ToolbarEvent(ToolbarEvent.CHANGE_TEMPLATE, getItemIndex(TemplateThumb(event.target)) + 1));
 		}
 	}
 }

@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <data>
-	<template id="1" name="ZDC通用" src="template/banner.swf" thumb="template/banner.jpg" />
-	<template id="2" name="全球深蓝" src="template/banner2.swf" thumb="template/banner2.jpg" />
+	<template id="1" name="全球深蓝" src="template/banner.swf" thumb="template/banner.jpg" />
+	<template id="2" name="ZDC通用" src="template/banner2.swf" thumb="template/banner2.jpg" />
 	<template id="3" name="科技感深蓝" src="template/banner3.swf" thumb="template/banner3.jpg" />
 	<template id="4" name="喜气大红色" src="template/banner4.swf" thumb="template/banner4.jpg" />
 	<template id="5" name="足球场绿色" src="template/banner5.swf" thumb="template/banner5.jpg" />

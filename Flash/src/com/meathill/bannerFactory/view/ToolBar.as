@@ -100,25 +100,26 @@
 			info.styleSheet = styleSheet;
 			info.background = true;
 			
-			toggleButton = SimpleButton(asset.getChildAt(3));
+			toggleButton = SimpleButton(asset.removeChildAt(3));
 			toggleButton.addEventListener(MouseEvent.CLICK, toggleButton_clickHandler);
       toggleButton.x += asset.x;
       toggleButton.y += asset.y;
+      addChild(toggleButton);
 			tipsBasicView.add_target(toggleButton, '隐藏');
 			
-			prevButton = SimpleButton(asset.getChildAt(4));
+			prevButton = SimpleButton(asset.getChildAt(3));
 			prevButton.addEventListener(MouseEvent.CLICK, prevButton_clickHandler);
 			tipsBasicView.add_target(prevButton, '上一个模板');
 			
-			nextButton = SimpleButton(asset.getChildAt(5));
+			nextButton = SimpleButton(asset.getChildAt(4));
 			nextButton.addEventListener(MouseEvent.CLICK, nextButton_clickHandler);
 			tipsBasicView.add_target(nextButton, '下一个模板');
 			
-			submitButton = SimpleButton(asset.getChildAt(6));
+			submitButton = SimpleButton(asset.getChildAt(5));
 			submitButton.addEventListener(MouseEvent.CLICK, submitButton_clickHandler);
 			tipsBasicView.add_target(submitButton, '保存图片');
 			
-			uploadButton = SimpleButton(asset.getChildAt(7));
+			uploadButton = SimpleButton(asset.getChildAt(6));
 			uploadButton.addEventListener(MouseEvent.CLICK, uploadButton_clickHandler);
 			tipsBasicView.add_target(uploadButton, '上传本地图片');
 			

@@ -54,6 +54,8 @@
 			buttonSet.addEventListener(ToolbarEvent.PREV_TEMPLATE, changeTemplateHandler);
 			buttonSet.addEventListener(ToolbarEvent.NEXT_TEMPLATE, changeTemplateHandler);
       buttonSet.addEventListener(ToolbarEvent.CHANGE_TEMPLATE, changeTemplateHandler);
+      buttonSet.x = 10;
+      buttonSet.y = 10;
 			buttonSet.enabled = false;
       addChild(buttonSet);
 			
