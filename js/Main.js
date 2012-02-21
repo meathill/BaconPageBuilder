@@ -1,5 +1,6 @@
 $(function (evt) {
   var banner = new com.meathill.bacon.BannerMaker();
+  var styleThumbList= new com.meathill.bacon.StyleThumbList();
   banner.install(swfobject);
   var page = new com.meathill.bacon.Page('#page-container');
   GUI.init();

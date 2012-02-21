@@ -75,9 +75,6 @@ var GUI = {
           helper: 'clone',
           scope: 'element'
         });
-        
-    // ÑùÊ½ÇÐ»»
-    $('#css-list').find('li').click(this.changeCss);
     
     // ÉèÖÃ
     $('#settings').dialog({
@@ -145,28 +142,6 @@ var GUI = {
       $('#output').html(str);
     } else {
       $('#output').append(str); 
-    }
-  },
-  changeCss : function (event, isSetURL){
-    isSetURL = isSetURL == undefined ? true : isSetURL;
-    var css = "css/" + $(this).attr('class') + ".css";
-    if ($('#custom-style').length > 0) {
-      $('#custom-style').attr('href', css);
-    } else {
-      var init = {
-        href : css,
-        id : 'custom-style',
-        rel : 'stylesheet'
-      }
-      $('<link>', init).appendTo($('head'));
-    }
-    
-    GUI.currentCSS = $(this).attr('class');
-    $('#css-list .activated').removeClass('activated');
-    $(this).addClass('activated');
-    
-    if (isSetURL) {
-      GUI.setAddressContent(false);
     }
   },
   onResize : function (event) {
