@@ -101,10 +101,10 @@ com.meathill.bacon.StyleThumbList = Backbone.View.extend({
     if (index == 0) {
       return;
     }
-    this.currentItem = this.$el.find('li').eq(index - 1);
-    if (this.currentItem.hasClass('activated')) {
+    if (this.currentItem != null && this.currentItem.index() == index - 1) {
       return;
     }
+    this.currentItem = this.$el.find('li').eq(index - 1);
     var css = "css/" + this.currentItem.attr('class') + ".css";
     if (this.cssLink == null) {
       var init = {
