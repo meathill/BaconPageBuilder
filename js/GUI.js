@@ -1,70 +1,41 @@
-var _is_refill = false;
 /*****************************************
- * 这个直接实例化的东西控制所有面板上的操作
- * 因为和页面耦合度极高，所以就不单独写成类了
- * 当成开始就有的东西，其它需要全局使用的东西也从这个对象里面取
+ * 控制所有面板上的操作
+ * 作为全局变量GUI，其它需要全局使用的东西也从这个对象里面取
  * 
  * @author Meathill
- * @version 0.2(2011-12-27)
+ * @version 0.3(2012-02-25)
  ****************************************/
-var GUI = {
-  banner : null,
-  page : null,
-  currentCSS: '',
-  isAnimating : false,
-  init : function () {
-    // 显示所有内容
-    $('#preloader').remove();
-    $('.hidden').fadeIn();
-    
-    // 按钮事件绑定
-    $('#toggle-panel-button')
-      .button({
-        icons: {
-          primary: "ui-icon-circle-triangle-e"
-        },
-        text: false
-      })
-      .click(this.togglePanel);
-    $("#submit-button")
-      .button({
-        icons: {
-          primary: 'ui-icon-upload'
-        }
-      })
-      .click(this.uploadTemplate);
-    $("#save_button")
-      .button({
-        icons: {
-          primary: 'ui-icon-disk'
-        }
-      })
-      .click(this.saveTemplate);
-    $(".add-row-button").click(this.insertRow);
-    $('#config-button')
-      .button({
-        icons: {
-          primary: 'ui-icon-wrench'
-        },
-        text: false
-      })
-      .click(function (event) {
-        $('#settings').dialog('open');
-      });
-    $('#help-button').button({
-      icons: {
-        primary: 'ui-icon-help'
-      },
-      text: false
-    }).click(function (event) {
-      $('#help-panel').dialog('open');
-    });
-    $('.step-button')
-      .click(this.switchStepContent)
-      //.eq(1)
-      //.click()
-      .parent()
-      .buttonset();
+jQuery.namespace("com.meathill.bacon.GUI");
+com.meathill.bacon.GUI = Backbone.View.extend({
+  body: {
+    banner: null,
+    navi: null,
+    page: null,
+  },
+  styleList: null,
+  sidebar: null,
+  isAnimating: false,
+  events: {
+    "click #toggle-panel-button": "togglePanel",
+    "click #submit-button": "uploadTemplate",
+    "click #save_button": "saveTemplate",
+    "click .add-navi-button": "addNavi",
+    "click .add-row-button": "addRow",
+    "click #config-button": "showConfig",
+    "click #help-button": "showHelp",
+    "click .step-button": "switchStepContent"
+  },
+  initialize: function () {
+    this.setElement($("body"));
+    this.styleList = new com.meathill.bacon.StyleThumbList();
+    this.body.banner = new com.meathill.bacon.BannerMaker();
+    this.body.page = new com.meathill.bacon.Page('#page-container');
+    this.sidebar = $('#sidebar');
+    this.render();
+    $(window).resize(this.resizeHandler);
+  },
+  render: function () {
+    this.addButtonFaces();
     
     // 拖动
     $("#modules")
@@ -86,45 +57,89 @@ var GUI = {
     });
     $('#help-panel').dialog({
       autoOpen: false
-    })
+    });
+    
+    this.removeLoading();
+    this.resizeHandler();
   },
-  togglePanel : function (event) {
-    var icon = $(this).children().first();
-    if ($('#sidebar').hasClass('outside')) {
-      $('#sidebar').animate({"right": 0}, 400, function () {
-        $(this).removeClass('outside')
-      });
-      icon
-        .removeClass('ui-icon-circle-triangle-w')
-        .addClass('ui-icon-circle-triangle-e');
-    } else {
-      $('#sidebar').animate({"right": -20 - $('#sidebar').width()}, 400, function () {
-        $(this).addClass('outside');
-      });
-      icon
-        .removeClass('ui-icon-circle-triangle-e')
-        .addClass('ui-icon-circle-triangle-w');
-    }
+  removeLoading: function () {
+    $('#preloader').remove();
+    $('.hidden').fadeIn();
   },
-  switchStepContent : function (event) {
-    if (GUI.isAnimating) {
+  addButtonFaces: function () {
+    $('#toggle-panel-button')
+      .button({
+        icons: {
+          primary: "ui-icon-circle-triangle-e"
+        },
+        text: false
+      });
+    $("#submit-button")
+      .button({
+        icons: {
+          primary: 'ui-icon-upload'
+        }
+      });
+    $("#save_button")
+      .button({
+        icons: {
+          primary: 'ui-icon-disk'
+        }
+      });
+    $(".add-row-button")
+      .button();
+    $(".add-navi-button")
+      .button();
+    $('#config-button')
+      .button({
+        icons: {
+          primary: 'ui-icon-wrench'
+        },
+        text: false
+      });
+    $('#help-button')
+      .button({
+        icons: {
+          primary: 'ui-icon-help'
+        },
+        text: false
+      });
+    $('#steps')
+      .buttonset();
+  },
+  togglePanel: function (event) {
+    $(event.target)
+      .toggleClass('ui-icon-circle-triangle-w ui-icon-circle-triangle-e');
+    var targetPosition = !this.sidebar.hasClass('outside') ? -20 - this.sidebar.width() : 0;
+    this.sidebar.animate({"right": targetPosition}, 400, function () {
+      $(this).toggleClass('outside')
+    });
+  },
+  switchStepContent: function (event) {
+    if (this.isAnimating) {
       event.stopPropagation();
       return;
     }
-    GUI.isAnimating = true;
-    var index = $('.step-button').index($(this));
-    $('#step-contents').animate({scrollLeft: index * ($('#step-contents').width() + 10)}, 400, function () { GUI.isAnimating = false});
+    this.isAnimating = true;
+    var self = this;
+    var index = $(event.currentTarget).index() >> 1;
+    $('#step-contents').animate({scrollLeft: index * ($('#step-contents').width() + 10)}, 400, function () { self.isAnimating = false});
   },
-  insertRow : function (event) {
-    var colsNum = $(this).attr('class').match(/column-(\d)/)[1];
-    var isTitled = $(this).hasClass('no-title') ? ' no-title' : '';
-    console.log(isTitled);
-    GUI.page.createNewRow(colsNum, isTitled);
+  addNavi: function (event) {
+    if (this.body.navi == null) {
+      this.body.navi = new com.meathill.bacon.Navi();
+      this.body.navi.addChild('首页');
+      this.body.navi.$el.insertAfter(this.body.banner.el);
+    }
   },
-  //更新输入框 
-  uploadTemplate : function (event){
+  addRow: function (event) {
+    var colsNum = $(event.currentTarget).attr('class').match(/column-(\d)/)[1];
+    var isTitled = $(event.currentTarget).hasClass('no-title') ? ' no-title' : '';
+    this.page.createNewRow(colsNum, isTitled);
+  },
+  uploadTemplate: function (event){
     $('#submit-button').prop('disabled', true);
-    if (BannerMaker.isChanged) {
+    if (this.banner.isChanged) {
       if (window.confirm('您在大头生成器里进行的操作还未保存，现在提交模板的话那些操作不会生效，确定么？')) {
         Model.submit();
       } else{
@@ -134,20 +149,26 @@ var GUI = {
       Model.submit();
     }
   },
-  saveTemplate : function (event) {
+  saveTemplate: function (event) {
     
   },
-  log : function (str, isReset){
+  showConfig: function (event) {
+    $('#settings').dialog('open');
+  },
+  showHelp: function (event) {
+    $('#help-panel').dialog('open');
+  },
+  log: function (str, isReset){
     if (isReset) {
       $('#output').html(str);
     } else {
       $('#output').append(str); 
     }
   },
-  onResize : function (event) {
+  resizeHandler : function (event) {
     var screenHeight = $(window).height();
     $('.module-thumbs').height(screenHeight - 292);
     $('.step-content').height(screenHeight - 209)
     $('#cover').height(screenHeight - 20);
   }
-}
+});

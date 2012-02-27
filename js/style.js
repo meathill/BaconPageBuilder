@@ -31,7 +31,7 @@ com.meathill.bacon.BannerMaker = Backbone.View.extend({
     this.setElement($('#' + this.model.get('body')));
     this.model.on('change:styleIndex', this.model_changeHandler, this);
   },
-  install: function () {
+  install: function (so) {
     var param = {
       allowScriptAccess: 'always',
       wmode: 'window'
@@ -44,7 +44,7 @@ com.meathill.bacon.BannerMaker = Backbone.View.extend({
     var src = "BannerProducer.swf";
     var express = "swf/expressInstall.swf";
     var version = '11';
-    swfobject.embedSWF(src, this.model.get('domID'), width, height, version, express, flashvars, param);
+    so.embedSWF(src, this.model.get('domID'), width, height, version, express, flashvars, param);
     this.setHeight(height);
   },
   setHeadPic: function (src) {
@@ -101,10 +101,10 @@ com.meathill.bacon.StyleThumbList = Backbone.View.extend({
     if (index == 0) {
       return;
     }
-    this.currentItem = this.$el.find('li').eq(index - 1);
-    if (this.currentItem.hasClass('activated')) {
+    if (this.currentItem != null && this.currentItem.index() == index - 1) {
       return;
     }
+    this.currentItem = this.$el.find('li').eq(index - 1);
     var css = "css/" + this.currentItem.attr('class') + ".css";
     if (this.cssLink == null) {
       var init = {

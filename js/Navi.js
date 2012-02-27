@@ -1,43 +1,75 @@
 jQuery.namespace('com.meathill.bacon');
-com.meathill.bacon.Navi = function (editable, css) {
-  this.appendTo = function (parent) {
-    $(parent).append(body);
-  }
-  this.addChild = function (label, link, target) {
+com.meathill.bacon.Navi = Backbone.View.extend({
+  tagName: "ul",
+  className: 'navi',
+  subClass: 'sub-navi',
+  editable: false,
+  addItemButton: null,
+  items: [],
+  count: 0,
+  events: {
+    "click .add-item-button": "addButton_clickHandler"
+  },
+  initialize: function (option) {
+    if (option != null) {
+      this.editable = option.editable || this.editable;
+      this.className = option.className || this.className;
+    }
+    this.render();
+  },
+  render: function () {
+    this.make();
+    if (this.editable) {
+      this.addItemButton = this.createAddItemButton();
+      this.$el.append(this.addItemButton);
+    }
+  },
+  createAddItemButton: function () {
+    var init = {
+      "class": "add-item-button",
+      html: "<span>add</span>",
+      "title": "Add"
+    }
+    var button = $('<li>', init)
+                   .append($('<span>', {"class": "add-icon"}));
+    return button;
+  },
+  addChild: function (label, link, target) {
+    var child;
     if (link) {
       var init = {"title": label, text: label, "href": link};
       if (target) {
         init.target = target;
       }
-      var child = $('<li>').append($('<a>', init));
+      child = $('<li>').append($('<a>', init));
     } else {
-      var child = $('<li>', {text: label});
+      child = $('<li>', {text: label});
     }
-    if (editable) {
-      child.insertBefore(addButton); 
-      child.click(self.child_clickHandler);
+    if (this.editable) {
+      child.insertBefore(this.addItemButton);
+      var nextLevel = new com.meathill.bacon.Navi({editable: this.editable, className: this.subClass});
+      if (this.$el.hasClass(self.subClass)) {
+        nextLevel.moveTo(child.width(), 0);
+      }
+      nextLevel.$el.appendTo(child);
     } else {
-      body.append(child)
+      this.$el.append(child)
     }
-    var nextLevel = new com.meathill.bacon.Navi(editable, self.subClass);
-    if (body.hasClass(self.subClass)) {
-      nextLevel.moveTo(child.width(), 0);
-    }
-    nextLevel.appendTo(child);
-    items.push(nextLevel);
-  }
-  this.getChildAt = function (index) {
-    return items[index];
-  }
-  this.removeChildAt = function (index) {
-    items.splice(index, 1);
-  }
-  this.moveTo = function (x, y) {
-    body
+    this.items.push(child);
+  },
+  getChildAt: function (index) {
+    return this.items[index];
+  },
+  removeChildAt: function (index) {
+    this.$(this.items[index]).remove();
+    this.items.splice(index, 1);
+  },
+  moveTo: function (x, y) {
+    this.$el
       .css('left', x + 'px')
       .css('top', y + 'px');
-  }
-  this.child_clickHandler = function (event) {
+  },
+  child_clickHandler: function (event) {
     count = 0;
     var child = $(this).children().not('ul');
     var inputs = com.meathill.bacon.LinkEditorWindow.find('input');
@@ -52,8 +84,8 @@ com.meathill.bacon.Navi = function (editable, css) {
       .dialog("open")
       .find('select').val(child.attr('target'));
     return false;
-  }
-  this.addButton_clickHandler = function (event) {
+  },
+  addButton_clickHandler: function (event) {
     count = 0;
     com.meathill.bacon.LinkEditorWindow
       .addClass('add')
@@ -63,8 +95,8 @@ com.meathill.bacon.Navi = function (editable, css) {
       .dialog("open")
       .find('input, select').val('');
     event.stopPropagation();
-  }
-  this.editor_submitHandler = function (event) {
+  },
+  editor_submitHandler: function (event) {
     var inputs = $(this).find('input');
     var label = inputs.last().val();
     var link = inputs.first().val();
@@ -90,39 +122,11 @@ com.meathill.bacon.Navi = function (editable, css) {
       $(this).removeClass('target' + index);
     }
     com.meathill.bacon.LinkEditorWindow.off();
-  }
-  this.editor_closeHandler = function (event) {
+  },
+  editor_closeHandler: function (event) {
     com.meathill.bacon.LinkEditorWindow.off();
   }
-  function createBody() {
-    var init = {
-      "class": self.mainClass
-    }
-    var result = $('<ul>', init);
-    if (editable) {
-      init = {
-        "class": "add-button",
-        html: "<span>add</span>",
-        "title": "Add"
-      }
-      addButton = $('<li>', init);
-      addButton
-        .append($('<span>', {"class": "add-icon"}))
-        .appendTo(result);
-      $('.add-button', result).on("click", self.addButton_clickHandler);
-    }
-    return result;
-  }
-  var editable = editable;
-  var addButton;
-  var self = this;
-  var items = [];
-  var count = 0;
-  this.mainClass = css || this.mainClass;
-  var body = createBody();
-}
-com.meathill.bacon.Navi.prototype.mainClass = 'meat-navi';
-com.meathill.bacon.Navi.prototype.subClass = 'sub-meat-navi';
+});
 com.meathill.bacon.LinkEditorWindow = $('<div>', {"class": "link-editor-window"})
   .append($('<label>', {"for": "link-editor-window-link", text: 'Á´½Ó'}))
   .append($('<input>', {"id": "link-editor-window-link"}))

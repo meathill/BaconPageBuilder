@@ -108,3 +108,87 @@ a:hover {
 .rows dd {
   background:#FFF;
 }
+.navi {
+  width:100%;
+  zoom:1;
+}
+.navi:after {
+  clear:both;
+  visibility: hidden;
+  display: block;
+  height: 0;
+  line-height: 0;
+  content: "";
+}
+.navi a {
+  color:#333;
+  text-decoration: none;
+}
+.navi a:hover {
+  color:#222;
+  text-decoration: underline;
+}
+.navi li {
+  color:#666;
+  width: 200px;
+  font: bold 14px/30px Simsun;
+  text-align: center;
+  float: left;
+  background: -webkit-linear-gradient(top, #F0F0F0, #DDD);
+  border-right:1px solid #CCC;
+  border-left:1px solid #FFF;
+  cursor:pointer;
+  position:relative;
+}
+.navi li:hover {
+  background: #F0F0F0;
+}
+.navi li ul {
+  display:none;
+}
+.navi li:hover ul {
+  display:block;
+}
+.navi .add-item-button {
+  text-indent: -999px;
+  overflow: hidden;
+}
+.navi .add-icon {
+  width: 16px;
+  height: 16px;
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-top:-8px;
+  margin-left:-8px;
+  display:block;
+  text-indent:-999px;
+  overflow:hidden;
+  background: transparent url(../css/eggplant/images/ui-icons_734d99_256x240.png) no-repeat 0 -192px;
+}
+.sub-navi {
+  position: absolute;
+}
+.link-editor-window label {
+  width:60px;
+  padding:0 6px 0 0;
+  text-align:right;
+  display:inline-block;
+}
+.link-editor-window input {
+  background:#333;
+  color:#FFF;
+  width:200px;
+  line-height:18px;
+  margin: 0 0 4px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #000 #666 #666 #000;
+}
+.link-editor-window select {
+  background:#333;
+  color:#FFF;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #000 #666 #666 #000;
+}

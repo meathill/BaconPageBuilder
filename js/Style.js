@@ -31,7 +31,7 @@ com.meathill.bacon.BannerMaker = Backbone.View.extend({
     this.setElement($('#' + this.model.get('body')));
     this.model.on('change:styleIndex', this.model_changeHandler, this);
   },
-  install: function () {
+  install: function (so) {
     var param = {
       allowScriptAccess: 'always',
       wmode: 'window'
@@ -44,7 +44,7 @@ com.meathill.bacon.BannerMaker = Backbone.View.extend({
     var src = "BannerProducer.swf";
     var express = "swf/expressInstall.swf";
     var version = '11';
-    swfobject.embedSWF(src, this.model.get('domID'), width, height, version, express, flashvars, param);
+    so.embedSWF(src, this.model.get('domID'), width, height, version, express, flashvars, param);
     this.setHeight(height);
   },
   setHeadPic: function (src) {

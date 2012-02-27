@@ -25,9 +25,9 @@
     //=========================================================================
 		public static const URL:String = 'template/template_list.xml';
 		public static const UPLOAD_URL:String = 'http://image.zol.com.cn/article/templateDIY/upload.php';
-		public static const HEAD_FUNC:String = "GUI.banner.setHeadPic";
-		public static const SET_HEIGHT:String = "GUI.banner.setHeight";
-		public static const SET_STYLE:String = "GUI.banner.setStyle";
+		public static const HEAD_FUNC:String = "GUI.body.banner.setHeadPic";
+		public static const SET_HEIGHT:String = "GUI.body.banner.setHeight";
+		public static const SET_STYLE:String = "GUI.body.banner.setStyle";
 		public static const FONT_NAME:String = '微软雅黑';
 		public static const DEFAULT_HEAD:String = 'images/head.jpg';
     //=========================================================================

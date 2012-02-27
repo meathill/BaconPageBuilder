@@ -7,6 +7,8 @@
     <script src="../js/lib/jquery-1.7.1.min.js"></script>
     <script src="../js/lib/jQuery.namespace.js"></script>
     <script src="../js/lib/jquery-ui-1.8.16.custom.min.js"></script>
+    <script src="../js/lib/underscore-min.js"></script>
+    <script src="../js/lib/backbone-min.js"></script>
     <script src="../js/Navi.js"></script>
     <style>
       ul,li {
@@ -14,11 +16,11 @@
         padding: 0;
         margin: 0;
       }
-      .meat-navi {
+      .navi {
         width:100%;
         zoom:1;
       }
-      .meat-navi:after {
+      .navi:after {
         clear:both;
         visibility: hidden;
         display: block;
@@ -26,15 +28,15 @@
         line-height: 0;
         content: "";
       }
-      .meat-navi a {
+      .navi a {
         color:#333;
         text-decoration: none;
       }
-      .meat-navi a:hover {
+      .navi a:hover {
         color:#222;
         text-decoration: underline;
       }
-      .meat-navi li {
+      .navi li {
         color:#666;
         width: 200px;
         font: bold 14px/30px Simsun;
@@ -46,20 +48,20 @@
         cursor:pointer;
         position:relative;
       }
-      .meat-navi li:hover {
+      .navi li:hover {
         background: #F0F0F0;
       }
-      .meat-navi li ul {
+      .navi li ul {
         display:none;
       }
-      .meat-navi li:hover ul {
+      .navi li:hover ul {
         display:block;
       }
-      .meat-navi .add-button {
+      .navi .add-item-button {
         text-indent: -999px;
         overflow: hidden;
       }
-      .meat-navi .add-icon {
+      .navi .add-icon {
         width: 16px;
         height: 16px;
         position:absolute;
@@ -72,7 +74,7 @@
         overflow:hidden;
         background: transparent url(../css/eggplant/images/ui-icons_734d99_256x240.png) no-repeat 0 -192px;
       }
-      .sub-meat-navi {
+      .sub-navi {
         position: absolute;
       }
       .link-editor-window label {
@@ -102,8 +104,8 @@
     <script>
       var navi;
       $(function (e) {
-        navi = new com.meathill.bacon.Navi(true);
-        navi.appendTo('body');
+        navi = new com.meathill.bacon.Navi({editable: true});
+        navi.$el.appendTo('body');
         navi.addChild('首页', 'http://blog.meathill.net/');
         navi.addChild('技术');
         navi.addChild('生活');
@@ -111,7 +113,7 @@
     </script>
   </head>
   <body>
-    <!--<ul class="meat-navi clr">
+    <!--<ul class="navi clr">
       <li>首页</li>
       <li>技术</li>
       <li>生活</li>

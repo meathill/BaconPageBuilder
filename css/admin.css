@@ -67,10 +67,12 @@
 	box-shadow:-1px 2px 1px #666;
 }
 #steps {
+  width:360px;
+  overflow:hidden;
   margin: 0 0 10px;
 }
 .step-button {
-  width: 114px;
+  width: 116px;
   font-weight:bold;
 }
 #step-contents {
