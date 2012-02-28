@@ -127,7 +127,7 @@ com.meathill.bacon.GUI = Backbone.View.extend({
   },
   addNavi: function (event) {
     if (this.body.navi == null) {
-      this.body.navi = new com.meathill.bacon.Navi();
+      this.body.navi = new com.meathill.bacon.Navi({editable: true});
       this.body.navi.addChild('Ê×Ò³');
       this.body.navi.$el.insertAfter(this.body.banner.el);
     }
@@ -135,7 +135,7 @@ com.meathill.bacon.GUI = Backbone.View.extend({
   addRow: function (event) {
     var colsNum = $(event.currentTarget).attr('class').match(/column-(\d)/)[1];
     var isTitled = $(event.currentTarget).hasClass('no-title') ? ' no-title' : '';
-    this.page.createNewRow(colsNum, isTitled);
+    this.body.page.createNewRow(colsNum, isTitled);
   },
   uploadTemplate: function (event){
     $('#submit-button').prop('disabled', true);

@@ -108,9 +108,12 @@ a:hover {
 .rows dd {
   background:#FFF;
 }
+
 .navi {
   width:100%;
   zoom:1;
+  background:#F0F0F0;
+  margin:0 0 10px;
 }
 .navi:after {
   clear:both;

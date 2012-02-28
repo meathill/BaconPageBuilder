@@ -4,30 +4,17 @@
  * @version 0.1(2011-12-17)
  */
 jQuery.namespace('com.meathill.bacon');
-com.meathill.bacon.Page = function (target) {
-  /**
-   * Variables
-   */
-  var body = null;
-  var self = this;
-  /**
-   * ¹¹Ôìº¯Êý
-   * @constructor
-   */
-  body = $(target);
-  /**
-   * Properties
-   */
-  /**
-   * Public Methods
-   */
-  this.createNewRow = function (colsNum, isTitled) {
+com.meathill.bacon.Page = Backbone.View.extend({
+  initialize: function (option) {
+    this.setElement(option.body);
+  },
+  createNewRow: function (colsNum, isTitled) {
     colsNum = colsNum || 1;
     var row = new com.meathill.bacon.RowItem(colsNum, isTitled);
-    row.appendTo(body);
+    this.$el.append(row);
+  },
+  clearAll: function (bl) {
+    this.$el.find('img').unbind('click', start);
+    this.$el.find('div').remove();
   }
-  this.clearAll = function (bl) {
-    body.find('img').unbind('click', start);
-    body.find('div').remove();
-  }
-}
+});
