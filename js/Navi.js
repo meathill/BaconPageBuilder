@@ -4,11 +4,12 @@ com.meathill.bacon.Navi = Backbone.View.extend({
   className: 'navi',
   subClass: 'sub-navi',
   editable: false,
+  editor: null,
   addItemButton: null,
   items: [],
-  count: 0,
   events: {
-    "click .add-item-button": "addButton_clickHandler"
+    "click .add-item-button": "addButton_clickHandler",
+    "click li": "child_clickHandler"
   },
   initialize: function (option) {
     if (option != null) {
@@ -23,6 +24,10 @@ com.meathill.bacon.Navi = Backbone.View.extend({
       this.addItemButton = this.createAddItemButton();
       this.$el.append(this.addItemButton);
     }
+  },
+  setEditor: function (obj) {
+    this.editor = obj;
+    this.editor.on('submit', this.editor_submitHandler, this);
   },
   createAddItemButton: function () {
     var init = {
@@ -70,93 +75,35 @@ com.meathill.bacon.Navi = Backbone.View.extend({
       .css('top', y + 'px');
   },
   child_clickHandler: function (event) {
-    count = 0;
-    var child = $(this).children().not('ul');
-    var inputs = com.meathill.bacon.LinkEditorWindow.find('input');
-    inputs.first().val(child.attr('href'));
-    inputs.last().val(child.text());
-    com.meathill.bacon.LinkEditorWindow
-      .addClass('edit')
-      .addClass('target' + $(this).parent().children().index($(this)))
-      .submit(self.editor_submitHandler)
-      .on('close', self.editor_closeHandler)
-      .dialog({title: "编辑 " + child.text()})
-      .dialog("open")
-      .find('select').val(child.attr('target'));
+    if (!this.editable) {
+      return true;
+    }
+    this.editor.edit(event.currentTarget, this.editor_submitHandler);
     return false;
   },
   addButton_clickHandler: function (event) {
-    count = 0;
-    com.meathill.bacon.LinkEditorWindow
-      .addClass('add')
-      .submit(self.editor_submitHandler)
-      .on('close', self.editor_closeHandler)
-      .dialog({title: "添加新菜单项"})
-      .dialog("open")
-      .find('input, select').val('');
+    this.editor.newItem(this.editor_submitHandler);
     event.stopPropagation();
   },
-  editor_submitHandler: function (event) {
-    var inputs = $(this).find('input');
-    var label = inputs.last().val();
-    var link = inputs.first().val();
-    var target = $(this).find('select').val();
-    if ($(this).hasClass('add')) {
-      $(this).removeClass('add');
-      self.addChild(label, link, target);
+  editor_submitHandler: function (target) {
+    if (target === null) {
+      this.addChild(this.editor.model.get('title'), this.editor.model.get('link'), this.editor.model.get('target'));
     } else {
-      $(this).removeClass('edit');
-      var classes = $(this).attr('class');
-      var index = classes.match(/target(\d)/)[1];
-      var target = body.children().eq(index);
-      if (link) {
-        var init = {"title": label, text: label, "href": link};
-        if (target) {
-          init.target = target;
+      var subMenu = target.find('ul').remove();
+      if (this.editor.model.get('link') !== '') {
+        if (target.find('a').length > 0) {
+          target.find('a').attr('href', this.editor.model.get('link'));
+        } else {
+          target.html('<a href="' + this.editor.model.get('link') + '"></a>');
         }
-        var a = $('<a>', init);
-        target.empty().append(a);
+        if (this.editor.model.get('target') != '') {
+          target.find('a').attr('target', this.editor.model.get('target'));
+        }
+        target.find('a').text(this.editor.model.get('title'));
       } else {
-        target.text(label);
+        target.text(this.editor.model.get('title'));
       }
-      $(this).removeClass('target' + index);
+      target.append(subMenu);
     }
-    com.meathill.bacon.LinkEditorWindow.off();
   },
-  editor_closeHandler: function (event) {
-    com.meathill.bacon.LinkEditorWindow.off();
-  }
 });
-com.meathill.bacon.LinkEditorWindow = $('<div>', {"class": "link-editor-window"})
-  .append($('<label>', {"for": "link-editor-window-link", text: '链接'}))
-  .append($('<input>', {"id": "link-editor-window-link"}))
-  .append('<br>')
-  .append($('<label>', {"for": "link-editor-window-title", text: '标题'}))
-  .append($('<input>', {"id": "link-editor-window-title"}))
-  .append('<br>')
-  .append($('<label>', {"for": "link-editor-window-type", text: '打开方式'}))
-  .append(
-    $('<select>', {"id": 'link-editor-window-type'})
-      .append($('<option>', {val: "", text: "（空）"}))
-      .append($('<option>', {val: "_blank", text: "_blank"}))
-      .append($('<option>', {val: "_self", text: "_self"}))
-      .append($('<option>', {val: "_top", text: "_top"})));
-// statrup
-$(function () {
-  com.meathill.bacon.LinkEditorWindow.dialog({
-    autoOpen: false,
-    modal: true,
-    resizable: false,
-    buttons: {
-      "确定": function () {
-        $(this).dialog("close");
-        $(this).submit();
-      },
-      "取消": function () {
-        $(this).dialog("close");
-        $(this).trigger('close');
-      }
-    }
-  });
-});      
-  

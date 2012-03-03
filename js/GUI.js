@@ -133,6 +133,7 @@ com.meathill.bacon.GUI = Backbone.View.extend({
     }
   },
   addRow: function (event) {
+    console.log(event);
     var colsNum = $(event.currentTarget).attr('class').match(/column-(\d)/)[1];
     var isTitled = $(event.currentTarget).hasClass('no-title') ? ' no-title' : '';
     this.body.page.createNewRow(colsNum, isTitled);

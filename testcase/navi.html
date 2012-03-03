@@ -9,6 +9,7 @@
     <script src="../js/lib/jquery-ui-1.8.16.custom.min.js"></script>
     <script src="../js/lib/underscore-min.js"></script>
     <script src="../js/lib/backbone-min.js"></script>
+    <script src="../js/Component.js"></script>
     <script src="../js/Navi.js"></script>
     <style>
       ul,li {
@@ -102,9 +103,9 @@
       }
     </style>
     <script>
-      var navi;
       $(function (e) {
-        navi = new com.meathill.bacon.Navi({editable: true});
+        var navi = new com.meathill.bacon.Navi({editable: true});
+        navi.setEditor(com.meathill.bacon.linkEditor);
         navi.$el.appendTo('body');
         navi.addChild('Ê×Ò³', 'http://blog.meathill.net/');
         navi.addChild('¼¼Êõ');
