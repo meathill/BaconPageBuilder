@@ -104,8 +104,9 @@
     </style>
     <script>
       $(function (e) {
-        var navi = new com.meathill.bacon.Navi({editable: true});
-        navi.setEditor(com.meathill.bacon.linkEditor);
+        var navi = new com.meathill.bacon.Navi({
+          editor: com.meathill.bacon.linkEditor
+        });
         navi.$el.appendTo('body');
         navi.addChild('Ê×Ò³', 'http://blog.meathill.net/');
         navi.addChild('¼¼Êõ');

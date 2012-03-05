@@ -4,100 +4,83 @@
  * @version 0.1(2011-12-22)
  * ************************************/
 jQuery.namespace('com.meathill.bacon');
-com.meathill.bacon.RowItem = function (colsNum, isTitled) {
+jQuery.namespace('com.meathill.bacon.LangBundle');
+com.meathill.bacon.LangBundle.RowItem = {
+  editText: '编辑标题',
+  dragHere: '请将右侧的模块拖放至此',
+  defaultTitle: '标题',
+  upButtonTitle: '将整个通栏上移',
+  upBattonValue: '上移',
+  downButtonTitle: '将整个通栏下移',
+  downBattonValue: '下移',
+  removeButtonTitle: '删除通栏',
+  removeBattonValue: '删除',
+}
+com.meathill.bacon.RowItem = Backbone.View.extend({
+  tagName: 'div',
+  className: 'rows clr',
+  colsNum: 1,
+  isTitled: '',
+  langBundle: com.meathill.bacon.LangBundle.RowItem,
+  events: {
+    "mouseover h3": "h3_mouseOverHandler",
+    "mouseout h3": "h3_mouseOutHandler",
+    "focusin h3": "h3_focusInHandler",
+    "focusout h3": "h3_focusOutHandler",
+    "click .up": "upButton_clickHandler",
+    "click .down": "downButton_clickHandler",
+    "click .remove": "removeButton_clickHandler",
+    "drop dd": "dropHandler"
+  },
   /**
-   * 添加通栏到页面
+   * 构造函数
    */
-  this.appendTo = function (parent) {
-    $(parent).append(body);
-  }
-  /**
-   * 上移通栏
-   * @param {Object} event
-   * @private
-   */
-  this.moveUp = function (event) {
-    body.insertBefore(body.prev());
-  }
-  /**
-   * 下移通栏
-   * @param {Object} event
-   * @private
-   */
-  this.moveDown = function (event) {
-    body.insertAfter(body.next());
-  }
-  /**
- * 删除通栏
- * @param {Object} event
- * @private
- */ 
-  this.remove = function (event) {
-    body.remove();
-  }
-  /**
-   * 创建dom
-   * @param {Number} colsNum
-   * @private
-   */
-  function createBody(colsNum, isTitled){
-    isTitled = isTitled || '';
-    var result = $('<div>', {
-      'class' : 'rows clr' + isTitled
-    });
-    for (var i = 0; i < colsNum ; i++) {
-      result.append(createDL(colsNum));
+  initialize: function () {
+    this.colsNum = this.options.colsNum || this.colsNum;
+    this.isTitled = this.options.isTitled || this.isTitled;
+    this.render();
+    //this.initDroppable();
+  },
+  render: function () {
+    this.make(this.tagName);
+    for (var i = 0; i < this.colsNum ; i++) {
+      this.$el.append(this.createDL(this.colsNum));
     }
-    if (colsNum > 1) {
-      result.find('dl').last().addClass('last-column');
+    if (this.colsNum > 1) {
+      this.$el.find('dl').last().addClass('last-column');
     }
-    return result;
-  }
+    this.createButtons();
+  },
   /**
    * 创建dl，dl是基础结构
    * @private
    */
-  function createDL(colsNum) {
+  createDL: function (colsNum) {
     var h3 = $('<h3>', {
-      text: self.defaultTitle,
+      text: this.langBundle.defaultTitle,
       "contenteditable": true,
-      mouseover: function (event) {
-        $(this).addClass('row-title');
-      },
-      mouseout: function (event) {
-        if (!$(this).hasClass('editing')) {
-          $(this).removeClass('row-title');
-        }
-      },
-      focusin: function (event) {
-        $(this).addClass('editing');
-      },
-      focusout: function (event) {
-        $(this).removeClass('editing row-title');
-      }
     });
     var result = $('<dl>', {
-      'class': self.itemClass + ' column-' + colsNum
+      'class': 'row-item column-' + colsNum
     })
       .append($('<dt>', {
-          'title': self.editText
+          'title': this.langBundle.editText
         }).append(h3))
       .append($('<dd>', {
-        text: self.dragHere
+        text: this.langBundle.dragHere
       }));
     return result;
-  }
+  },
   /**
    * 创建功能按钮
    * @param {jQuery Object} container
    * @private
    */
-  function createButtons(container) {
+  createButtons: function () {
     var upButton = $('<button>', {
       'class': 'operation-buttons up',
-      'click': self.moveUp,
-      'title': '将整个通栏上移',
-      val: '上移'
+      'title': this.langBundle.upButtonTitle,
+      val: this.langBundle.upBattonValue
     }).button({
       icons: {
         primary: "ui-icon-arrowthick-1-n"
@@ -106,9 +89,8 @@ com.meathill.bacon.RowItem = function (colsNum, isTitled) {
     });
     var downButton = $('<button>', {
       'class': 'operation-buttons down',
-      'click': self.moveDown,
-      'title': '将整个通栏下移',
-      val: '下移'
+      'title': this.langBundle.downButtonTitle,
+      val: this.langBundle.downBattonValue
     }).button({
       icons: {
         primary: "ui-icon-arrowthick-1-s"
@@ -117,56 +99,73 @@ com.meathill.bacon.RowItem = function (colsNum, isTitled) {
     });
     var removeButton = $('<button>', {
       'class': 'operation-buttons remove',
-      'click': self.remove,
-      'title': '删除通栏',
-      val: '删除'
+      'title': this.langBundle.removeButtonTitle,
+      val: this.langBundle.removeBattonValue
     }).button({
       icons: {
         primary: "ui-icon-close"
       },
       text: false
     });
-    container
+    this.$el
       .append(upButton)
       .append(downButton)
       .append(removeButton);
-  }
+  },
   /**
    * 初始化放置图片的功能
    * @param {jQuery Object} body
    * @private
    */
-  function initDroppable(body) {
-    body.find('dd').droppable({
+  initDroppable: function () {
+    this.$el.find('dd').droppable({
       scope: "element",
-      hoverClass: "row-drag-hover",
-      drop: function (event, ui) {
-        var item = ui.draggable.clone()
-                    .removeClass('ui-draggable')
-                    .addClass('element-item');
-        if ($(this).html() == self.dragHere) {
-          $(this).html('');
-        }
-        $(this).append(item);
-        $('#page-container dd').sortable({
-          placeholder: "placeholder",
-          connectWith: "#page-container dd"
-        }).disableSelection();
-      }
+      hoverClass: "row-drag-hover"
     })
-  }
+  },
+  dropHandler: function (event, ui) {
+    var item = ui.draggable.clone();
+    item
+      .removeClass('ui-draggable')
+      .addClass('element-item');
+    if (event.currentTarget.innerHTML == this.langBundle.dragHere) {
+      event.currentTarget.innerHTML = '';
+    }
+    $(event.currentTarget).append(item);
+    this.trigger("addItem");
+  },
+  h3_mouseOverHandler: function (event) {
+    $(event.currentTarget).addClass('row-title');
+  },
+  h3_mouseOutHandler: function (event) {
+    if (!$(event.currentTarget).hasClass('editing')) {
+      $(event.currentTarget).removeClass('row-title');
+    }
+  },
+  h3_focusInHandler: function (event) {
+    $(event.currentTarget).addClass('editing');
+  },
+  h3_focusOutHandler: function (event) {
+    $(event.currentTarget).removeClass('editing row-title');
+  },
   /**
-   * 构造函数部分
+   * 上移通栏
+   * @param {Object} event
+   * @private
    */
-  var self = this;
-  var index = 0;
-  colsNum = colsNum == undefined ? 1 : colsNum;
-  var body = createBody(colsNum, isTitled);
-  createButtons(body);
-  initDroppable(body);
-}
-com.meathill.bacon.RowItem.prototype.editText = '编辑标题';
-com.meathill.bacon.RowItem.prototype.dragHere = '请将右侧的模块拖放至此';
-com.meathill.bacon.RowItem.prototype.itemClass = 'row-item';
-com.meathill.bacon.RowItem.prototype.inputClass = 'row-title';
-com.meathill.bacon.RowItem.prototype.defaultTitle = '标题';
+  upButton_clickHandler: function (event) {
+    this.$el.insertBefore(this.$el.prev());
+  },
+  /**
+   * 下移通栏
+   * @param {Object} event
+   * @private
+   */
+  downButton_clickHandler: function (event) {
+    this.$el.insertAfter(this.$el.next());
+  },
+  removeButton_clickHandler: function (event) {
+    this.off();
+    this.$el.remove();
+  }
+});

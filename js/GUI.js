@@ -7,20 +7,15 @@
  ****************************************/
 jQuery.namespace("com.meathill.bacon.GUI");
 com.meathill.bacon.GUI = Backbone.View.extend({
-  body: {
-    banner: null,
-    navi: null,
-    page: null,
-  },
+  page: null,
   styleList: null,
+  elements: null,
   sidebar: null,
   isAnimating: false,
   events: {
     "click #toggle-panel-button": "togglePanel",
     "click #submit-button": "uploadTemplate",
     "click #save_button": "saveTemplate",
-    "click .add-navi-button": "addNavi",
-    "click .add-row-button": "addRow",
     "click #config-button": "showConfig",
     "click #help-button": "showHelp",
     "click .step-button": "switchStepContent"
@@ -28,24 +23,18 @@ com.meathill.bacon.GUI = Backbone.View.extend({
   initialize: function () {
     this.setElement($("body"));
     this.styleList = new com.meathill.bacon.StyleThumbList();
-    this.body.banner = new com.meathill.bacon.BannerMaker();
-    this.body.page = new com.meathill.bacon.Page('#page-container');
+    this.page = this.options.page;
+    this.elements = new com.meathill.bacon.Elements({
+      buttons: 'insert-buttons',
+      list: 'elements',
+      page: this.page
+    });
     this.sidebar = $('#sidebar');
     this.render();
     $(window).resize(this.resizeHandler);
   },
   render: function () {
     this.addButtonFaces();
-    
-    // ÍÏ¶¯
-    $("#modules")
-      .tabs()
-      .find('img')
-        .draggable({
-          opacity: 0.7,
-          helper: 'clone',
-          scope: 'element'
-        });
     
     // ÉèÖÃ
     $('#settings').dialog({
@@ -86,10 +75,6 @@ com.meathill.bacon.GUI = Backbone.View.extend({
           primary: 'ui-icon-disk'
         }
       });
-    $(".add-row-button")
-      .button();
-    $(".add-navi-button")
-      .button();
     $('#config-button')
       .button({
         icons: {
@@ -124,19 +109,6 @@ com.meathill.bacon.GUI = Backbone.View.extend({
     var self = this;
     var index = $(event.currentTarget).index() >> 1;
     $('#step-contents').animate({scrollLeft: index * ($('#step-contents').width() + 10)}, 400, function () { self.isAnimating = false});
-  },
-  addNavi: function (event) {
-    if (this.body.navi == null) {
-      this.body.navi = new com.meathill.bacon.Navi({editable: true});
-      this.body.navi.addChild('Ê×Ò³');
-      this.body.navi.$el.insertAfter(this.body.banner.el);
-    }
-  },
-  addRow: function (event) {
-    console.log(event);
-    var colsNum = $(event.currentTarget).attr('class').match(/column-(\d)/)[1];
-    var isTitled = $(event.currentTarget).hasClass('no-title') ? ' no-title' : '';
-    this.body.page.createNewRow(colsNum, isTitled);
   },
   uploadTemplate: function (event){
     $('#submit-button').prop('disabled', true);

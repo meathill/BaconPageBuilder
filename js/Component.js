@@ -1,6 +1,18 @@
 jQuery.namespace('com.meathill.bacon');
+jQuery.namespace('com.meathill.bacon.LangBundle');
+com.meathill.bacon.LangBundle.LinkEditorWindow = {
+  title: '标题',
+  link: '链接',
+  target: '打开方式',
+  empty: '（空）',
+  ok: '确定',
+  cancel: '取消',
+  edit: '编辑',
+  add: '添加新菜单项'
+}
 com.meathill.bacon.LinkEditorWindow = Backbone.View.extend({
   target: null,
+  langBundle: com.meathill.bacon.LangBundle.LinkEditorWindow,
   events: {
     'change input,select': 'onChange',
     'submit div': 'onSubmit'
@@ -22,13 +34,13 @@ com.meathill.bacon.LinkEditorWindow = Backbone.View.extend({
   render: function () {
     var content = $('<div>', {"class": "link-editor-window"})
       .append('\
-        <label for="link-editor-window-title">标题</label>\
+        <label for="link-editor-window-title">' + this.langBundle.title + '</label>\
         <input id="link-editor-window-title" name="title" /><br>\
-        <label for="link-editor-window-link">链接</label>\
+        <label for="link-editor-window-link">' + this.langBundle.link + '</label>\
         <input id="link-editor-window-link" name="link" /><br>\
-        <label for="link-editor-window-type">打开方式</label>\
+        <label for="link-editor-window-type">' + this.langBundle.target + '</label>\
         <select id="link-editor-window-type" name="target">\
-          <option value="">（空）</option>\
+          <option value="">' + this.langBundle.empty + '</option>\
           <option value="_blank">_blank</option>\
           <option value="_self">_self</option>\
           <option value="_top">_top</option>\
@@ -37,19 +49,19 @@ com.meathill.bacon.LinkEditorWindow = Backbone.View.extend({
   },
   addToStage: function () {
     this.$el.appendTo($('body'));
+    var buttonHandler = {};
+    buttonHandler[this.langBundle.ok] = function () {
+      $(this).dialog("close");
+      this.trigger('submit');
+    }
+    buttonHandler[this.langBundle.cancel] = function () {
+      $(this).dialog("close");
+    }
     this.$el.dialog({
       autoOpen: false,
       modal: true,
       resizable: false,
-      buttons: {
-        "确定": function () {
-          $(this).dialog("close");
-          this.trigger('submit');
-        },
-        "取消": function () {
-          $(this).dialog("close");
-        }
-      }
+      buttons: buttonHandler
     });
   },
   edit: function (target) {
@@ -57,7 +69,7 @@ com.meathill.bacon.LinkEditorWindow = Backbone.View.extend({
     var currentNode = this.target.clone();
     currentNode.find('ul').remove();
     this.$el
-      .dialog({title: "编辑 " + this.target.text()})
+      .dialog({title: this.langBundle.edit + ' ' + this.target.text()})
       .dialog("open")
       .find('#link-editor-window-title')
         .val(currentNode.text())
@@ -73,7 +85,7 @@ com.meathill.bacon.LinkEditorWindow = Backbone.View.extend({
   },
   newItem: function () {
     this.$el
-      .dialog({title: "添加新菜单项"})
+      .dialog({title: this.langBundle.edit})
       .dialog("open")
       .find('input, select')
         .val('');

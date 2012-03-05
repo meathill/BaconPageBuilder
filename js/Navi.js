@@ -11,10 +11,11 @@ com.meathill.bacon.Navi = Backbone.View.extend({
     "click .add-item-button": "addButton_clickHandler",
     "click li": "child_clickHandler"
   },
-  initialize: function (option) {
-    if (option != null) {
-      this.editable = option.editable || this.editable;
-      this.className = option.className || this.className;
+  initialize: function () {
+    if (this.options != null) {
+      this.editable = this.options.editor !== null;
+      this.editor = this.options.editor;
+      this.className = this.options.className || this.className;
     }
     this.render();
   },
@@ -24,10 +25,6 @@ com.meathill.bacon.Navi = Backbone.View.extend({
       this.addItemButton = this.createAddItemButton();
       this.$el.append(this.addItemButton);
     }
-  },
-  setEditor: function (obj) {
-    this.editor = obj;
-    this.editor.on('submit', this.editor_submitHandler, this);
   },
   createAddItemButton: function () {
     var init = {
@@ -52,7 +49,11 @@ com.meathill.bacon.Navi = Backbone.View.extend({
     }
     if (this.editable) {
       child.insertBefore(this.addItemButton);
-      var nextLevel = new com.meathill.bacon.Navi({editable: this.editable, className: this.subClass});
+      var nextLevel = new com.meathill.bacon.Navi({
+        editable: this.editable,
+        editor: this.editor,
+        className: this.subClass
+      });
       if (this.$el.hasClass(self.subClass)) {
         nextLevel.moveTo(child.width(), 0);
       }
@@ -78,14 +79,17 @@ com.meathill.bacon.Navi = Backbone.View.extend({
     if (!this.editable) {
       return true;
     }
-    this.editor.edit(event.currentTarget, this.editor_submitHandler);
+    this.editor.edit(event.currentTarget);
+    this.editor.on('submit', this.editor_submitHandler, this);
     return false;
   },
   addButton_clickHandler: function (event) {
-    this.editor.newItem(this.editor_submitHandler);
-    event.stopPropagation();
+    this.editor.newItem();
+    this.editor.on('submit', this.editor_submitHandler, this);
+    event.stopImmediatePropagation();
   },
   editor_submitHandler: function (target) {
+    this.editor.off();
     if (target === null) {
       this.addChild(this.editor.model.get('title'), this.editor.model.get('link'), this.editor.model.get('target'));
     } else {

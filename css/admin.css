@@ -125,16 +125,15 @@
   bottom:0px;
 }
 
-/*-- step 2 Module List */
-.module-thumbs {
+/*-- step 2 elements List */
+.elements-thumbs {
   padding:10px !important;
   overflow-x: hidden;
   overflow-y: scroll;
 }
-.module-thumbs  img {
+.elements-thumbs img {
   width:324px;
   padding:5px 0;
-  cursor: pointer;
 }
 /*-- step 3 Properties */
 #output {
