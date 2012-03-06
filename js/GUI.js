@@ -7,9 +7,6 @@
  ****************************************/
 jQuery.namespace("com.meathill.bacon.GUI");
 com.meathill.bacon.GUI = Backbone.View.extend({
-  page: null,
-  styleList: null,
-  elements: null,
   sidebar: null,
   isAnimating: false,
   events: {
@@ -22,13 +19,17 @@ com.meathill.bacon.GUI = Backbone.View.extend({
   },
   initialize: function () {
     this.setElement($("body"));
-    this.styleList = new com.meathill.bacon.StyleThumbList();
-    this.page = this.options.page;
-    this.elements = new com.meathill.bacon.Elements({
+    var styleList = new com.meathill.bacon.StyleThumbList();
+    var elements = new com.meathill.bacon.Elements({
       buttons: 'insert-buttons',
       list: 'elements',
-      page: this.page
+      page: this.options.page
     });
+    var pageSettings = new com.meathill.bacon.PageSettings({
+      attributes: {
+        id: 'step-content-3'
+      }
+    })
     this.sidebar = $('#sidebar');
     this.render();
     $(window).resize(this.resizeHandler);
@@ -69,10 +70,16 @@ com.meathill.bacon.GUI = Backbone.View.extend({
           primary: 'ui-icon-upload'
         }
       });
-    $("#save_button")
+    $("#save-button")
       .button({
         icons: {
           primary: 'ui-icon-disk'
+        }
+      });
+    $("#export-button")
+      .button({
+        icons: {
+          primary: 'ui-icon-arrowreturnthick-1-n'
         }
       });
     $('#config-button')

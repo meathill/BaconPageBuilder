@@ -5,9 +5,14 @@
  */
 jQuery.namespace('com.meathill.bacon');
 com.meathill.bacon.Page = Backbone.View.extend({
+  ADD_ROW: 'addRow',
   ADD_ITEM: 'addItem',
   header: null,
   navi: null,
+  events: {
+    "sortchange dd": "sortchangeHandler",
+    "sortremove dd": "test"
+  },
   initialize: function () {
     this.setElement($('#' + this.attributes.id));
     this.header = new com.meathill.bacon.BannerMaker();
@@ -25,18 +30,20 @@ com.meathill.bacon.Page = Backbone.View.extend({
       colsNum: colsNum,
       isTitled: isTitled
     });
-    row.on(this.ADD_ITEM, this.addItemHandler, this);
     this.$el.append(row.el);
+    console.log("#" + this.attributes.id + " .column-" + colsNum + " dd");
+    row.$el.find('dd').sortable({
+      placeholder: "ui-state-highlight",
+      connectWith: "#" + this.attributes.id + " .column-" + colsNum + " dd"
+    }).disableSelection();
+    this.trigger(this.ADD_ROW);
   },
-  clearAll: function (bl) {
-    this.$el.find('img').unbind('click', start);
-    this.$el.find('div').remove();
+  sortchangeHandler: function (event, ui) {
+    console.log('change : ', event, ui);
+    console.log($(event.currentTarget).children());
+    $(event.currentTarget).find('.placeholder').hide();
   },
-  addItemHandler: function (event) {
-    this.$el.find('dd').sortable({
-      placeholder: "placeholder",
-      connectWith: "#" + this.attributes.id + " dd"
-    });
-    this.trigger(this.ADD_ITEM);
+  test: function (event, ui) {
+    console.log('remove : ', event, ui);
   }
 });

@@ -7,7 +7,6 @@ jQuery.namespace('com.meathill.bacon');
 jQuery.namespace('com.meathill.bacon.LangBundle');
 com.meathill.bacon.LangBundle.RowItem = {
   editText: '编辑标题',
-  dragHere: '请将右侧的模块拖放至此',
   defaultTitle: '标题',
   upButtonTitle: '将整个通栏上移',
   upBattonValue: '上移',
@@ -19,8 +18,6 @@ com.meathill.bacon.LangBundle.RowItem = {
 com.meathill.bacon.RowItem = Backbone.View.extend({
   tagName: 'div',
   className: 'rows clr',
-  colsNum: 1,
-  isTitled: '',
   langBundle: com.meathill.bacon.LangBundle.RowItem,
   events: {
     "mouseover h3": "h3_mouseOverHandler",
@@ -29,24 +26,21 @@ com.meathill.bacon.RowItem = Backbone.View.extend({
     "focusout h3": "h3_focusOutHandler",
     "click .up": "upButton_clickHandler",
     "click .down": "downButton_clickHandler",
-    "click .remove": "removeButton_clickHandler",
-    "drop dd": "dropHandler"
+    "click .remove": "removeButton_clickHandler"
   },
   /**
    * 构造函数
    */
   initialize: function () {
-    this.colsNum = this.options.colsNum || this.colsNum;
-    this.isTitled = this.options.isTitled || this.isTitled;
     this.render();
-    //this.initDroppable();
   },
   render: function () {
     this.make(this.tagName);
-    for (var i = 0; i < this.colsNum ; i++) {
-      this.$el.append(this.createDL(this.colsNum));
+    this.$el.addClass(this.options.isTitled);
+    for (var i = 0; i < this.options.colsNum ; i++) {
+      this.$el.append(this.createDL(this.options.colsNum));
     }
-    if (this.colsNum > 1) {
+    if (this.options.colsNum > 1) {
       this.$el.find('dl').last().addClass('last-column');
     }
     this.createButtons();
@@ -66,9 +60,7 @@ com.meathill.bacon.RowItem = Backbone.View.extend({
       .append($('<dt>', {
           'title': this.langBundle.editText
         }).append(h3))
-      .append($('<dd>', {
-        text: this.langBundle.dragHere
-      }));
+      .append('<dd><div class="placeholder">&nbsp;</div></dd>');
     return result;
   },
   /**
@@ -111,17 +103,6 @@ com.meathill.bacon.RowItem = Backbone.View.extend({
       .append(upButton)
       .append(downButton)
       .append(removeButton);
-  },
-  /**
-   * 初始化放置图片的功能
-   * @param {jQuery Object} body
-   * @private
-   */
-  initDroppable: function () {
-    this.$el.find('dd').droppable({
-      scope: "element",
-      hoverClass: "row-drag-hover"
-    })
   },
   dropHandler: function (event, ui) {
     var item = ui.draggable.clone();

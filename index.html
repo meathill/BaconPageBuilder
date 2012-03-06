@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>专题模版搭建系统</title>
+    <title>五花肉页面制作工具</title>
     <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
     <link href="css/eggplant/jquery-ui-1.8.16.custom.css" rel="stylesheet" />
     <link href="css/new.css" rel="stylesheet" />
@@ -20,6 +20,7 @@
     <script src="js/Page.js"></script>
     <script src="js/Navi.js"></script>
     <script src="js/Elements.js"></script>
+    <script src="js/PageSettings.js"></script>
     <script src="js/GUI.js"></script>
     <script src="js/Main.js"></script>
   </head>
@@ -55,7 +56,7 @@
       <div id="step-contents">
         <div id="step-contents-container" class="clr">
           <div id="step-content-1" class="step-content">
-            <p class="bai14">请选择样式：</p>
+            <label>请选择样式：</label>
             <ul id="css-list">
               <li class="slan"><img src="template/banner.jpg" alt="样式缩略图1" /></li>
               <li class="zdc"><img src="template/banner2.jpg" alt="样式缩略图2" /></li>
@@ -74,11 +75,11 @@
           <div id="step-content-2" class="step-content">
             <!--模块&样式 begin-->
             <div id="insert-buttons">
-              <input type="button" value="导航" class="add-navi-button" />
-              <input type="button" value="单列无标题" class="add-row-button column-1 no-title" />
-              <input type="button" value="单列有标题" class="add-row-button column-1" />
-              <input type="button" value="双列含标题" class="add-row-button column-2" />
-              <input type="button" value="三列含标题" class="add-row-button column-3" />
+              <button class="add-navi-button">导航</button>
+              <button class="add-row-button column-1 no-title" />单列无标题</button>
+              <button class="add-row-button column-1" />单列有标题</button>
+              <button class="add-row-button column-2" />双列含标题</button>
+              <button class="add-row-button column-3" />三列含标题</button>
             </div>
             <div id="elements">
               <ul>
@@ -144,7 +145,12 @@
             </div>
           </div>
           <div id="step-content-3" class="step-content">
-            
+            <label for="page-title">标题</label>
+            <input type="text" name="title" id="page-title" />
+            <label for="page-keywords">关键字</label>
+            <input type="text" name="keywords" id="page-keywords" placeholder="用英文逗号分割" />
+            <label for="page-description">描述</label>
+            <textarea name="description" id="page-description" rows="5"></textarea>
           </div>
         </div>
         
@@ -154,8 +160,9 @@
         建议使用宽屏，享受更好的编辑体验
       </div>
       <p align="center">
-        <button id="submit-button" title="上传模版" class="big-button" disabled="disabled">上传模板</button>
-        <button id="save_button" title="保存模版" class="big-button">保存模版</button>
+        <button id="submit-button" title="上传" class="big-button" disabled="disabled">上传</button>
+        <button id="save-button" title="保存" class="big-button" disabled="disabled">保存</button>
+        <button id="export-button" title="导出" class="big-button">导出</button>
       </p>
       <!--模块&样式 end-->
     </div>

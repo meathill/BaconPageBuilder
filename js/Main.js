@@ -4,9 +4,9 @@ $(function (evt) {
       id: 'page-container'
     }
   });
+  page.header.install(swfobject);
   GUI= new com.meathill.bacon.GUI({
     page: page
   });
-  GUI.page.header.install(swfobject);
 });
 var GUI;

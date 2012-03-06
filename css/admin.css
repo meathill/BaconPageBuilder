@@ -20,15 +20,10 @@
 /***************************************
  *  弹出层 
  * ************************************/
-#preloader { 
-  width: 280px;
-  margin: 20px auto 0;
-  float: none;
-  padding: 10px;
-  border: 3px dashed #69c;
-}
-#preloader strong {
-  font-size:14px;
+.ui-state-highlight {
+  width:100%;
+  height: 30px;
+  line-height: 25px;
 }
 /***************************************
  *  功能侧边栏
@@ -62,9 +57,7 @@
   top:0;
   z-index:-1;
   background:url(eggplant/images/ui-bg_gloss-wave_30_3d3644_500x100.png) repeat-x #3D3644;
-  opacity: .9;
   border-radius:10px 0 0 10px;
-	box-shadow:-1px 2px 1px #666;
 }
 #steps {
   width:360px;
@@ -87,6 +80,11 @@
   margin:0 10px 0 0;
   float:left;
 }
+.step-content label {
+  font:14px/20px simsun;
+  display:block;
+  text-shadow: 0 -1px 0 #333;
+}
 /*-- step 1 CSS List */
 #step-content-1 p {
   padding:0 0 10px;
@@ -94,6 +92,7 @@
 }
 #css-list {
   overflow-y:auto;
+  margin:10px 0 0;
 }
 #css-list li {
   cursor:pointer;
@@ -136,6 +135,17 @@
   padding:5px 0;
 }
 /*-- step 3 Properties */
+#step-content-3 input, #step-content-3 textarea {
+  width: 348px;
+  line-height: 20px;
+  margin:5px 0 10px;
+  padding: 0 5px;
+  background:#F0F0F0;
+  border-radius: 4px;
+  border: 1px solid #666;
+  box-shadow: inset 1px 1px 1px #999;
+}
+/*-- output */
 #output {
   margin:10px 0;
   padding: 4px 6px;
@@ -148,13 +158,9 @@
 /***************************************
  *  按钮
  **************************************/
-#toggle-panel-button {
-  right:10px;
-  top:18px;
-}
 .big-button {
-  width:120px;
-  height:40px;
+  width:100px;
+  height:35px;
   font:bolder 16px/20px microsoft yahei,simhei;
 }
 .sidebar-icon-button {
@@ -163,6 +169,10 @@
   position:absolute;
   z-index: 2;
   top:8px;
+}
+#toggle-panel-button {
+  right:10px;
+  top:18px;
 }
 #help-button {
   right:36px;
@@ -207,11 +217,10 @@
 .row-item dt h3 {
   padding:1px;
 }
-.row-item dd {
-  padding: 5px;
-}
-.row-item img {
-  width: 100%;
+.row-item .placeholder {
+  width:100%;
+  height:80px;
+  background:#EEE url(../images/placeholder.png) center center no-repeat;
 }
 .row-title {
   border:1px #F99 solid;
@@ -222,9 +231,4 @@
 .row-drag-hover {
   border:1px solid #F99;
   background:#FF9;
-}
-.placeholder {
-  height: 22px;
-  line-height: 22px;
-  border:4px dashed #c00;
 }
