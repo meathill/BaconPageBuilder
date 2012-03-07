@@ -60,7 +60,7 @@ com.meathill.bacon.RowItem = Backbone.View.extend({
       .append($('<dt>', {
           'title': this.langBundle.editText
         }).append(h3))
-      .append('<dd><div class="placeholder">&nbsp;</div></dd>');
+      .append('<dd></dd>');
     return result;
   },
   /**

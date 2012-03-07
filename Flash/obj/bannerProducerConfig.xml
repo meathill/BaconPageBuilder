@@ -8,17 +8,18 @@
   <compiler>
     <define append="true">
       <name>CONFIG::debug</name>
-      <value>true</value>
-    </define>
-    <define append="true">
-      <name>CONFIG::release</name>
       <value>false</value>
     </define>
     <define append="true">
-      <name>CONFIG::timeStamp</name>
-      <value>'2012/2/26'</value>
+      <name>CONFIG::release</name>
+      <value>true</value>
     </define>
-    <verbose-stacktraces>true</verbose-stacktraces>
+    <define append="true">
+      <name>CONFIG::timeStamp</name>
+      <value>'2012/3/7'</value>
+    </define>
+    <omit-trace-statements>true</omit-trace-statements>
+    <verbose-stacktraces>false</verbose-stacktraces>
     <source-path append="true">
       <path-element>F:\Projects\Bacon\Flash</path-element>
       <path-element>F:\Projects\Bacon\Flash\src</path-element>

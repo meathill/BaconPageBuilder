@@ -7,6 +7,7 @@
  ****************************************/
 jQuery.namespace("com.meathill.bacon.GUI");
 com.meathill.bacon.GUI = Backbone.View.extend({
+  page: null,
   sidebar: null,
   isAnimating: false,
   events: {
@@ -18,6 +19,7 @@ com.meathill.bacon.GUI = Backbone.View.extend({
     "click .step-button": "switchStepContent"
   },
   initialize: function () {
+    this.page = this.options.page;
     this.setElement($("body"));
     var styleList = new com.meathill.bacon.StyleThumbList();
     var elements = new com.meathill.bacon.Elements({

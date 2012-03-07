@@ -9,10 +9,6 @@ com.meathill.bacon.Page = Backbone.View.extend({
   ADD_ITEM: 'addItem',
   header: null,
   navi: null,
-  events: {
-    "sortchange dd": "sortchangeHandler",
-    "sortremove dd": "test"
-  },
   initialize: function () {
     this.setElement($('#' + this.attributes.id));
     this.header = new com.meathill.bacon.BannerMaker();
@@ -31,19 +27,10 @@ com.meathill.bacon.Page = Backbone.View.extend({
       isTitled: isTitled
     });
     this.$el.append(row.el);
-    console.log("#" + this.attributes.id + " .column-" + colsNum + " dd");
     row.$el.find('dd').sortable({
       placeholder: "ui-state-highlight",
       connectWith: "#" + this.attributes.id + " .column-" + colsNum + " dd"
     }).disableSelection();
     this.trigger(this.ADD_ROW);
   },
-  sortchangeHandler: function (event, ui) {
-    console.log('change : ', event, ui);
-    console.log($(event.currentTarget).children());
-    $(event.currentTarget).find('.placeholder').hide();
-  },
-  test: function (event, ui) {
-    console.log('remove : ', event, ui);
-  }
 });
