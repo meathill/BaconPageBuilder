@@ -110,7 +110,6 @@ a:hover {
 }
 
 .navi {
-  width:100%;
   zoom:1;
   background:#F0F0F0;
   margin:0 0 10px;
@@ -171,6 +170,7 @@ a:hover {
 }
 .sub-navi {
   position: absolute;
+  z-index: 5;
 }
 .link-editor-window label {
   width:60px;

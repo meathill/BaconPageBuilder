@@ -16,7 +16,7 @@ com.meathill.bacon.Page = Backbone.View.extend({
   createNavi: function () {
     if (this.navi == null) {
       this.navi = new com.meathill.bacon.Navi({editor: com.meathill.bacon.linkEditor});
-      this.navi.addChild('Ê×Ò³');
+      this.navi.addChild('Ê×Ò³', '#');
       this.navi.$el.insertAfter(this.header.el);
     }
   },

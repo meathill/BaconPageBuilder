@@ -1,33 +1,71 @@
-body{background:#e7e7e7;}
-a{color:#7D172E;}
-a:hover{color:#CB3A5B;}
+body {
+  background:#E7E7E7;
+  color:#DB889A;
+}
+a {
+  color:#7D172E;
+}
+a:hover {
+  color:#CB3A5B;
+}
 
-.zti1 td{color:#DB889A;}
-.zti1 a{color:#fff;}
+.navi {
+  padding:0 0 4px;
+  background:url(lovered/nav.jpg);
+}
+.navi li {
+  width:115px;
+  border:none;
+  background:url(lovered/nav1.gif) top right no-repeat;
+}
+.navi li, .navi li a {
+  font:bold 14px/40px microsoft yahei,simhei;
+  color:#FFF;
+}
+.navi li:hover, .navi li:hover a {
+  background:url(lovered/nav1.gif) top right no-repeat;
+  color:#F4C177;
+}
+.sub-navi {
+  background:url(lovered/nav.jpg);
+}
 
-.z0 a img,.z1 a img,.z2 a img,.z3 a img,.z4 a img{border:#EBBACE 1px solid;}
-.z0 a:hover img,.z1 a:hover img,.z2 a:hover img,.z3 a:hover img,.z4 a:hover img{border:#EC76A1 1px solid;}
+.rows dl.column-2 {
+  width:475px;
+}
+.rows dl.column-3 {
+  width:312px;
+}
 
-.nav{padding:0 0 4px;background:url(../images/lovered/nav.jpg);width:100%}
-  .nav,.nav a{font:bold 14px/40px microsoft yahei,simhei;color:#fff;}
-  .nav a{width:115px;text-align:center;display:inline-block;background:url(../images/lovered/nav1.gif) top right no-repeat;}
-  .nav a:hover{background:url(../images/lovered/nav1.gif) top right no-repeat;color:#F4C177;text-decoration:none}
+.row-item {
+  border:none;
+}
+.row-item dt {
+  color:#fff;
+  background:#F6DCE2 url(lovered/a1.jpg) right;
+  line-height:31px;
+  padding: 0 10px;
+}
+.row-item dd {
+  border:#9b9b9b 1px solid;
+  background:#fff;
+}
+.row-item a img {
+  border:#EBBACE 1px solid;
+}
+.row-item a:hover img {
+  border-color:#EC76A1;
+}
 
+  
 .z0n2 .m dl{border-bottom:#ddd 1px dotted;}
 .z0n2 .r td{border-bottom:#ddd 1px dotted;}
-
-.z1 dt.z_con,.z2 dt.z_con,.z4 dt.z_con,.z3a1 dt,.z3a2 dt,.z3a3 dt{color:#fff;background:#F6DCE2 url(../images/lovered/a1.jpg) right;line-height:31px;color:#fff}
-.z0 dd.z_con,.z1 dd.z_con,.z2 dd.z_con,.z4 dd.z_con,.z3a1 dd,.z3a2 dd,.z3a3 dd{border:#9b9b9b 1px solid;background:#fff;}
-  .z3a1,.z3a2,.z3a3,.z3a1 dt,.z3a2 dt,.z3a3 dt{border:none}
-  .z3a1{width:360px}
-  .z3a2{width:220px}
-  .z3a3{width:730px}
 
 .z1n3 .l{border:#ECB4C0 1px solid;background:#F9EAEE;}
 .z1n6 .b{border:#ECB4C0 1px solid;background:#F9EAEE;}
 .z1n7 .zt_tb td{border:#ECB4C0 1px solid;background:#F9EAEE;}
 .z1n19 .l{border:#ECB4C0 1px solid;background:#F9EAEE;}
-.z1n20{background:url(../images/lovered/bg.jpg)}
+.z1n20{background:url(lovered/bg.jpg)}
   .z1n20 .t,.z1n20 .r{background:none}
 
 .z2n5 dl{border:#ECB4C0 1px solid;background:#F9EAEE;}

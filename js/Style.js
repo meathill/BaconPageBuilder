@@ -105,7 +105,7 @@ com.meathill.bacon.StyleThumbList = Backbone.View.extend({
       return;
     }
     this.currentItem = this.$el.find('li').eq(index - 1);
-    var css = "css/" + this.currentItem.attr('class') + ".css";
+    var css = "css/" + this.currentItem.attr('class') + ".css?v=" + (new Date()).getTime();
     if (this.cssLink == null) {
       var init = {
         href : css,

@@ -1,24 +1,65 @@
-body{background:#98C918;}
-a{color:#668000;}
-a:hover{color:#ff6600;}
-.zti1 td,.zti2 td{color:#607022;}
+body {
+  background:#98C918;
+  color:#607022;
+}
+a {
+  color:#680;
+}
+a:hover {
+  color:#F60;
+}
 
-.z0 a img,.z1 a img,.z2 a img,.z3 a img,.z4 a img{border:#A9D10B 1px solid;}
-.z0 a:hover img,.z1 a:hover img,.z2 a:hover img,.z3 a:hover img,.z4 a:hover img{border:#91B601 1px solid;}
+.navi {
+  padding:0 5px;
+  background:url(techhui/nav.jpg) center top;
+}
+.navi li {
+  width:110px;
+  background:url(techhui/nav1.jpg) top right no-repeat;
+  padding:0 3px 0 0;
+  border:none;
+}
+.navi li, .navi li a {
+  font:bold 14px/41px simsun;
+  color:#000;
+}
+.navi li:hover, .navi li:hover a {
+  color:#333;
+  background:url(techhui/navh.jpg);
+}
+.sub-navi {
+  background:url(techhui/nav.jpg);
+}
 
-.nav{padding:0 4px 2px;width:950px;background:url(../images/techhui/nav.jpg) center top;}
-  .nav,.nav a{font:bold 14px/40px simsun;color:#000;}
-  .nav a{width:110px;text-align:center;display:inline-block;background:url(../images/techhui/nav1.jpg) top right no-repeat;padding:0 3px 0 0}
-  .nav a:hover{color:#333;background:url(../images/techhui/navh.jpg);text-decoration:none}
+.rows dl.column-2 {
+  width:475px;
+}
+.rows dl.column-3 {
+  width:312px;
+}
 
-.z1 dl.z_con,.z2 dl.z_con,.z4 dl.z_con,.z3a1,.z3a2,.z3a3{background:#FCFDF6 url(../images/qlv/a1.jpg)}
-  .z1 dl.z_con{width:100%}
-.z1 dt.z_con,.z2 dt.z_con,.z4 dt.z_con,.z3a1 dt,.z3a2 dt,.z3a3 dt{background:url(../images/qlv/a2.jpg) right no-repeat;line-height:30px;color:#360}
-.z0 dd.z_con,.z1 dd.z_con,.z2 dd.z_con,.z3a1 dd,.z3a2 dd,.z3a3 dd{color:#8A957A;background:#FCFDF6;border:#E8F2C3 1px solid;}
-  .z3a1,.z3a2,.z3a3,.z3a1 dt,.z3a2 dt,.z3a3 dt{border:none}
-    .z3a1{width:360px}
-    .z3a2{width:220px}
-    .z3a3{width:730px}
+.row-item {
+  background:#FCFDF6 url(qlv/a1.jpg);
+  border:none;
+}
+.row-item dt {
+  background:url(qlv/a2.jpg) right no-repeat;
+  line-height:30px;
+  color:#360;
+  padding: 0 10px;
+}
+.row-item dd {
+  color:#8A957A;
+  background:#FCFDF6;
+  border:#E8F2C3 1px solid;
+}
+.row-item a img {
+  border:#A9D10B 1px solid;
+}
+.row-item a:hover img {
+  border-color:#91B601;
+}
+
 
 .z1n3 .l{border:#CDDC94 1px solid;background:#F1F5DF;}
 .z1n6 .b{background:#F1F5DF;border:#CDDC94 1px solid;}
