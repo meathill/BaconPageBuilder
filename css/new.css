@@ -64,9 +64,6 @@ a:hover {
 .clr:after {
   clear:both;
   visibility: hidden;
-  display: block;
-  height: 0;
-  line-height: 0;
   content: "";
 }
 .bai14 {
@@ -194,4 +191,46 @@ a:hover {
   border-width: 1px;
   border-style: solid;
   border-color: #000 #666 #666 #000;
+}
+
+.span1, .span2, .span3, .span4, .span5, .apan6,
+.span7, .span8, .span9, .span10, .span11, .span12 {
+  margin-left:10px;
+  float:left;
+}
+.span1 {
+  width: 70px;
+}
+.span2 {
+  width: 150px;
+}
+.span3 {
+  width: 230px;
+}
+.span4 {
+  width:310px;
+}
+.span5 {
+  width:390px;
+}
+.span6 {
+  width:470px;
+}
+.span7 {
+  width:550px;
+}
+.span8 {
+  width:630px;
+}
+.span9 {
+  width:710px;
+}
+.span10 {
+  width:790px;
+}
+.span11 {
+  width:870px;
+}
+.span12 {
+  width:950px;
 }

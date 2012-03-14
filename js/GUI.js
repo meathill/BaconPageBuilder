@@ -22,7 +22,7 @@ com.meathill.bacon.GUI = Backbone.View.extend({
     this.page = this.options.page;
     this.setElement($("body"));
     var styleList = new com.meathill.bacon.StyleThumbList();
-    var elements = new com.meathill.bacon.Elements({
+    var elementsSource = new com.meathill.bacon.ElementsSource({
       buttons: 'insert-buttons',
       list: 'elements',
       page: this.options.page

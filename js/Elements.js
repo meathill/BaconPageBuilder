@@ -1,10 +1,10 @@
 jQuery.namespace('com.meathill.bacon');
-com.meathill.bacon.Elements = Backbone.View.extend({
+com.meathill.bacon.ElementsSource = Backbone.View.extend({
   buttons: null,
   page: null,
   events: {
     "click .add-navi-button": "addNaviButton_clickHandler",
-    "click .add-row-button": "addRowButton_clickHandler",
+    "click .add-row-button": "addRowButton_clickHandler"
   },
   initialize: function () {
     this.setPage(this.options.page);
@@ -42,5 +42,5 @@ com.meathill.bacon.Elements = Backbone.View.extend({
     var colsNum = $(event.currentTarget).attr('class').match(/column-(\d)/)[1];
     var isTitled = $(event.currentTarget).hasClass('no-title') ? 'no-title' : '';
     this.page.createNewRow(colsNum, isTitled);
-  },
+  }
 });
