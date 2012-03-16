@@ -1,13 +1,18 @@
-<div class="clr">
-  <div class="span5">
-    <div data-config='{"element_type":"11","pic_width":"400","pic_height":"220"}'></div>
-  </div>
+﻿<div class="clr">
+  <ul class="span5" data-config='{"type": "slide", "rows": "1", "cols": "3"}'>
+    <li>
+      <a href="{{link}}" title="{{title}}"><img width="390" height="220" alt="{{title}}" src="{{img}}" /></a>
+    </li>
+  </ul>
   <div class="span7">
-    <div class="mb20">
-      <div data-config='{"element_type":"9","pic_width":"530","pic_height":"40"}'></div>
+    <div class="mb20" data-config='{"type": "img","rows": "1","cols": "1"}'>
+      <a href="{{link}}" title="{{title}}"><img width="540" height="40" alt="{{title}}" src="{{img}}" /></a>
     </div>
-    <div>
-      <div data-config='{"element_type":"14","title_num":"40","title_class":"hei14by","digest_num":"200","table_rows":"2"}'></div>
-    </div>
+    <ul data-config='{"type": "list", "rows": "2", "cols": "1"}'>
+      <li>
+        <h2><a href="{{link}}" title="{{title}}">{{title}}</a></h2>
+        <p>{{description}} <a href="{{link}}" title="全文">全文</a></p>
+      </li>
+    </ul>
   </div>
 </div>

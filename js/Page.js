@@ -1,5 +1,5 @@
-/**
- * “≥√Ê¿‡
+Ôªø/**
+ * È°µÈù¢Á±ª
  * @author Meathill
  * @version 0.1(2011-12-17)
  */
@@ -57,7 +57,7 @@ com.meathill.bacon.Page = Backbone.View.extend({
   createNavi: function () {
     if (this.navi == null) {
       this.navi = new com.meathill.bacon.Navi({editor: com.meathill.bacon.linkEditor});
-      this.navi.addChild(' ◊“≥', '#');
+      this.navi.addChild('È¶ñÈ°µ', '#');
       this.navi.$el.insertAfter(this.header.el);
     }
   },

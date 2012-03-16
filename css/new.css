@@ -1,4 +1,4 @@
-/* = ÕÕ°áWordPressµÄreset
+ï»¿/* = ç…§æ¬WordPressçš„reset
  * ----------------------------------- */
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -47,7 +47,7 @@ a img {
 }
 article, aside, details, figcaption, figure,footer, header, hgroup, menu, nav, section {  display: block;}
 
-/* = Ò»°ãÍ¨ÓÃ
+/* = ä¸€èˆ¬é€šç”¨
  * ----------------------------------- */
 body, input, textarea {
   font:12px/18px simsun
@@ -64,6 +64,9 @@ a:hover {
 .clr:after {
   clear:both;
   visibility: hidden;
+  display: block;
+  height: 0;
+  line-height: 0;
   content: "";
 }
 .bai14 {
@@ -71,7 +74,7 @@ a:hover {
   color:#FFF;
 }
 
-/* = Ò³Ãæ½á¹¹
+/* = é¡µé¢ç»“æ„
  * ----------------------------------- */
 .rows {
   position:relative;

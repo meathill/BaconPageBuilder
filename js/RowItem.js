@@ -1,19 +1,19 @@
-/***************************************
- *  ºáÍ¨Àà
+ï»¿/***************************************
+ *  æ¨ªé€šç±»
  * @author Meathill
  * @version 0.1(2011-12-22)
  * ************************************/
 jQuery.namespace('com.meathill.bacon');
 jQuery.namespace('com.meathill.bacon.LangBundle');
 com.meathill.bacon.LangBundle.RowItem = {
-  editText: '±à¼­±êÌâ',
-  defaultTitle: '±êÌâ',
-  upButtonTitle: '½«Õû¸öÍ¨À¸ÉÏÒÆ',
-  upBattonValue: 'ÉÏÒÆ',
-  downButtonTitle: '½«Õû¸öÍ¨À¸ÏÂÒÆ',
-  downBattonValue: 'ÏÂÒÆ',
-  removeButtonTitle: 'É¾³ıÍ¨À¸',
-  removeBattonValue: 'É¾³ı',
+  editText: 'ç¼–è¾‘æ ‡é¢˜',
+  defaultTitle: 'æ ‡é¢˜',
+  upButtonTitle: 'å°†æ•´ä¸ªé€šæ ä¸Šç§»',
+  upBattonValue: 'ä¸Šç§»',
+  downButtonTitle: 'å°†æ•´ä¸ªé€šæ ä¸‹ç§»',
+  downBattonValue: 'ä¸‹ç§»',
+  removeButtonTitle: 'åˆ é™¤é€šæ ',
+  removeBattonValue: 'åˆ é™¤',
 }
 com.meathill.bacon.RowItem = Backbone.View.extend({
   tagName: 'div',
@@ -29,7 +29,7 @@ com.meathill.bacon.RowItem = Backbone.View.extend({
     "click .remove": "removeButton_clickHandler"
   },
   /**
-   * ¹¹Ôìº¯Êı
+   * æ„é€ å‡½æ•°
    */
   initialize: function () {
     this.render();
@@ -46,7 +46,7 @@ com.meathill.bacon.RowItem = Backbone.View.extend({
     this.createButtons();
   },
   /**
-   * ´´½¨dl£¬dlÊÇ»ù´¡½á¹¹
+   * åˆ›å»ºdlï¼Œdlæ˜¯åŸºç¡€ç»“æ„
    * @private
    */
   createDL: function (colsNum) {
@@ -64,7 +64,7 @@ com.meathill.bacon.RowItem = Backbone.View.extend({
     return result;
   },
   /**
-   * ´´½¨¹¦ÄÜ°´Å¥
+   * åˆ›å»ºåŠŸèƒ½æŒ‰é’®
    * @param {jQuery Object} container
    * @private
    */
@@ -130,7 +130,7 @@ com.meathill.bacon.RowItem = Backbone.View.extend({
     $(event.currentTarget).removeClass('editing row-title');
   },
   /**
-   * ÉÏÒÆÍ¨À¸
+   * ä¸Šç§»é€šæ 
    * @param {Object} event
    * @private
    */
@@ -138,7 +138,7 @@ com.meathill.bacon.RowItem = Backbone.View.extend({
     this.$el.insertBefore(this.$el.prev());
   },
   /**
-   * ÏÂÒÆÍ¨À¸
+   * ä¸‹ç§»é€šæ 
    * @param {Object} event
    * @private
    */

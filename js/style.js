@@ -1,18 +1,18 @@
-/**
- * @fileOverview ËùÓĞ¹ØÓÚÑùÊ½µÄ¿ØÖÆÔÚ´ËÎÄ¼ş½øĞĞ£¬ËùÓĞ¶ÔÑùÊ½µÄ¸Ä±ä¶¼ÂäÊµµ½¶ÔStyleModelµÄĞŞ¸ÄÉÏ£¬È»ºóÍ¨¹ıStyleModelµÄchange·½·¨¹ã²¥µ½¾ßÌåÊÓÍ¼ÀàÈ¥Õ¹ÏÖ
+ï»¿/**
+ * @fileOverview æ‰€æœ‰å…³äºæ ·å¼çš„æ§åˆ¶åœ¨æ­¤æ–‡ä»¶è¿›è¡Œï¼Œæ‰€æœ‰å¯¹æ ·å¼çš„æ”¹å˜éƒ½è½å®åˆ°å¯¹StyleModelçš„ä¿®æ”¹ä¸Šï¼Œç„¶åé€šè¿‡StyleModelçš„changeæ–¹æ³•å¹¿æ’­åˆ°å…·ä½“è§†å›¾ç±»å»å±•ç°
  * @author Meathill
  * @version 0.2 (2012-02-2)
- * @@requires swfobject(v2.0)¼°ÒÔÉÏ
+ * @@requires swfobject(v2.0)åŠä»¥ä¸Š
  */
 jQuery.namespace('com.meathill.bacon');
 /**
- * @description ÑùÊ½¿ØÖÆÆ÷Model¡£Ä£ÄâMediatorÄ£Ê½£¬ÔÚ¼¸¸ö¿ØÖÆÆ÷Ö®¼äÍ¬²½ÑùÊ½£¬Ö±½ÓÉùÃ÷ÊµÀı£¬ËãÄ³ÖÖÒâÒåÉÏµÄinternal°É
+ * @description æ ·å¼æ§åˆ¶å™¨Modelã€‚æ¨¡æ‹ŸMediatoræ¨¡å¼ï¼Œåœ¨å‡ ä¸ªæ§åˆ¶å™¨ä¹‹é—´åŒæ­¥æ ·å¼ï¼Œç›´æ¥å£°æ˜å®ä¾‹ï¼Œç®—æŸç§æ„ä¹‰ä¸Šçš„internalå§
  * @author Meathill
  * @event change
  */
 com.meathill.bacon.StyleModel = Backbone.Model.extend({
   defaults: {
-    "headPicUrl": '', // ´óÍ·Í¼Æ¬url
+    "headPicUrl": '', // å¤§å¤´å›¾ç‰‡url
     "saveURL": '',
     "styleIndex": -1,
     "domID": "banner-maker",
@@ -22,7 +22,7 @@ com.meathill.bacon.StyleModel = Backbone.Model.extend({
 var style = new com.meathill.bacon.StyleModel();
 
 /**
- * @description ´óÍ·Éú³ÉÆ÷£¬ÓÃÓÚÇ¶Èëswf£¬²¢ÓëÆä½»»¥
+ * @description å¤§å¤´ç”Ÿæˆå™¨ï¼Œç”¨äºåµŒå…¥swfï¼Œå¹¶ä¸å…¶äº¤äº’
  * @author Meathill
  */
 com.meathill.bacon.BannerMaker = Backbone.View.extend({
@@ -73,7 +73,7 @@ com.meathill.bacon.BannerMaker = Backbone.View.extend({
   }
 });
 /**
- * @description ÑùÊ½ËõÂÔÍ¼ÁĞ±í
+ * @description æ ·å¼ç¼©ç•¥å›¾åˆ—è¡¨
  * @author Meathil
  */
 com.meathill.bacon.StyleThumbList = Backbone.View.extend({

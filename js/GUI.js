@@ -1,6 +1,6 @@
-/*****************************************
- * ¿ØÖÆËùÓĞÃæ°åÉÏµÄ²Ù×÷
- * ×÷ÎªÈ«¾Ö±äÁ¿GUI£¬ÆäËüĞèÒªÈ«¾ÖÊ¹ÓÃµÄ¶«Î÷Ò²´ÓÕâ¸ö¶ÔÏóÀïÃæÈ¡
+ï»¿/*****************************************
+ * æ§åˆ¶æ‰€æœ‰é¢æ¿ä¸Šçš„æ“ä½œ
+ * ä½œä¸ºå…¨å±€å˜é‡GUIï¼Œå…¶å®ƒéœ€è¦å…¨å±€ä½¿ç”¨çš„ä¸œè¥¿ä¹Ÿä»è¿™ä¸ªå¯¹è±¡é‡Œé¢å–
  * 
  * @author Meathill
  * @version 0.3(2012-02-25)
@@ -39,13 +39,13 @@ com.meathill.bacon.GUI = Backbone.View.extend({
   render: function () {
     this.addButtonFaces();
     
-    // ÉèÖÃ
+    // è®¾ç½®
     $('#settings').dialog({
       autoOpen: false,
       width: 400,
       height: 400,
       modal: true,
-      title: 'ÉèÖÃ'
+      title: 'è®¾ç½®'
     });
     $('#help-panel').dialog({
       autoOpen: false
@@ -122,10 +122,10 @@ com.meathill.bacon.GUI = Backbone.View.extend({
   uploadTemplate: function (event){
     $('#submit-button').prop('disabled', true);
     if (this.banner.isChanged) {
-      if (window.confirm('ÄúÔÚ´óÍ·Éú³ÉÆ÷Àï½øĞĞµÄ²Ù×÷»¹Î´±£´æ£¬ÏÖÔÚÌá½»Ä£°åµÄ»°ÄÇĞ©²Ù×÷²»»áÉúĞ§£¬È·¶¨Ã´£¿')) {
+      if (window.confirm('æ‚¨åœ¨å¤§å¤´ç”Ÿæˆå™¨é‡Œè¿›è¡Œçš„æ“ä½œè¿˜æœªä¿å­˜ï¼Œç°åœ¨æäº¤æ¨¡æ¿çš„è¯é‚£äº›æ“ä½œä¸ä¼šç”Ÿæ•ˆï¼Œç¡®å®šä¹ˆï¼Ÿ')) {
         Model.submit();
       } else{
-        alert('Çëµã»÷´óÍ·Éú³ÉÆ÷ÖĞµÄ¡°±£´æ¡±°´Å¥£¬±£´æ´óÍ·£¬È»ºóÔÙµã¡°ÉÏ´«Ä£°å¡±');
+        alert('è¯·ç‚¹å‡»å¤§å¤´ç”Ÿæˆå™¨ä¸­çš„â€œä¿å­˜â€æŒ‰é’®ï¼Œä¿å­˜å¤§å¤´ï¼Œç„¶åå†ç‚¹â€œä¸Šä¼ æ¨¡æ¿â€');
       }
     } else {
       Model.submit();

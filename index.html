@@ -1,8 +1,8 @@
-<!DOCTYPE html>
+ï»¿<!DOCTYPE html>
 <html>
   <head>
-    <title>Îå»¨ÈâÒ³ÃæÖÆ×÷¹¤¾ß</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+    <title>äº”èŠ±è‚‰é¡µé¢åˆ¶ä½œå·¥å…·</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link href="css/eggplant/jquery-ui-1.8.16.custom.css" rel="stylesheet" />
     <link href="css/new.css" rel="stylesheet" />
     <link href="css/admin.css" rel="stylesheet" />
@@ -25,72 +25,72 @@
     <script src="js/Main.js"></script>
   </head>
   <body>
-    <!--¸¡¶¯ÌáÊ¾²ãbegin-->
+    <!--æµ®åŠ¨æç¤ºå±‚begin-->
     <div id='preloader'>
       <p align="center">
         <img src="images/loading.gif" width="32" height="32" alt="Loading" />
       </p>
       <p align="center">
-        <strong>×¨ÌâÄ£°å×Ô½¨ÏµÍ³</strong>
+        <strong>ä¸“é¢˜æ¨¡æ¿è‡ªå»ºç³»ç»Ÿ</strong>
         <br />
-        ¼ÓÔØÖÐ£¬ÇëÉÔºò¡­¡­
+        åŠ è½½ä¸­ï¼Œè¯·ç¨å€™â€¦â€¦
       </p>
     </div>
-    <!--¸¡¶¯ÌáÊ¾²ãend-->
-    <!--ÓÒ²à¿ØÖÆ°å begin-->
-    <button id="toggle-panel-button" title="¿ª¹Ø²à±ßÀ¸" class="sidebar-icon-button">
-      ¿ª¹Ø²à±ßÀ¸
+    <!--æµ®åŠ¨æç¤ºå±‚end-->
+    <!--å³ä¾§æŽ§åˆ¶æ¿ begin-->
+    <button id="toggle-panel-button" title="å¼€å…³ä¾§è¾¹æ " class="sidebar-icon-button">
+      å¼€å…³ä¾§è¾¹æ 
     </button>
     <div id="sidebar" class="hidden">
-      <!--Åª¸öiframe¸Ç×¡flash-->
+      <!--å¼„ä¸ªiframeç›–ä½flash-->
       <iframe id="cover" scrolling="no" frameborder="0"></iframe>
-      <h3>Éè¼ÆÃæ°å</h3>
+      <h3>è®¾è®¡é¢æ¿</h3>
       <hr />
-      <button id="help-button" title="°ïÖú" class="sidebar-icon-button">°ïÖú</button>
-      <button id="config-button" title="ÅäÖÃ" class="sidebar-icon-button">ÅäÖÃ</button>
+      <button id="help-button" title="å¸®åŠ©" class="sidebar-icon-button">å¸®åŠ©</button>
+      <button id="config-button" title="é…ç½®" class="sidebar-icon-button">é…ç½®</button>
       <div id="steps">
-        <input type="radio" id="step1" name="steps" checked="checked" /><label for="step1" class="step-button">Ñ¡ÔñÑùÊ½</label>
-        <input type="radio" id="step2" name="steps" /><label for="step2" class="step-button">´î½¨Ä£°æ</label>
-        <input type="radio" id="step3" name="steps" /><label for="step3" class="step-button">ÊôÐÔÉèÖÃ</label>
+        <input type="radio" id="step1" name="steps" checked="checked" /><label for="step1" class="step-button">é€‰æ‹©æ ·å¼</label>
+        <input type="radio" id="step2" name="steps" /><label for="step2" class="step-button">æ­å»ºæ¨¡ç‰ˆ</label>
+        <input type="radio" id="step3" name="steps" /><label for="step3" class="step-button">å±žæ€§è®¾ç½®</label>
       </div>
       <div id="step-contents">
         <div id="step-contents-container" class="clr">
           <div id="step-content-1" class="step-content">
-            <label>ÇëÑ¡ÔñÑùÊ½£º</label>
+            <label>è¯·é€‰æ‹©æ ·å¼ï¼š</label>
             <ul id="css-list">
-              <li class="slan"><img src="template/banner.jpg" alt="ÑùÊ½ËõÂÔÍ¼1" /></li>
-              <li class="zdc"><img src="template/banner2.jpg" alt="ÑùÊ½ËõÂÔÍ¼2" /></li>
-              <li class="slan"><img src="template/banner3.jpg" alt="ÑùÊ½ËõÂÔÍ¼3" /></li>
-              <li class="red"><img src="template/banner4.jpg" alt="ÑùÊ½ËõÂÔÍ¼4" /></li>
-              <li class="lusimg"><img src="template/banner5.jpg" alt="ÑùÊ½ËõÂÔÍ¼5" /></li>
-              <li class="qlv"><img src="template/banner6.jpg" alt="ÑùÊ½ËõÂÔÍ¼6" /></li>
-              <li class="lovered"><img src="template/banner7.jpg" alt="ÑùÊ½ËõÂÔÍ¼7" /></li>
-              <li class="cuxiaolan"><img src="template/banner8.jpg" alt="ÑùÊ½ËõÂÔÍ¼8" /></li>
-              <li class="techhui"><img src="template/banner9.jpg" alt="ÑùÊ½ËõÂÔÍ¼9" /></li>
-              <li class="zdc2"><img src="template/banner10.jpg" alt="ÑùÊ½ËõÂÔÍ¼10" /></li>
-              <li class="hzcheng"><img src="template/banner11.jpg" alt="ÑùÊ½ËõÂÔÍ¼11" /></li>
-              <li class="dchei"><img src="template/banner12.jpg" alt="ÑùÊ½ËõÂÔÍ¼12" /></li>
+              <li class="slan"><img src="template/banner.jpg" alt="æ ·å¼ç¼©ç•¥å›¾1" /></li>
+              <li class="zdc"><img src="template/banner2.jpg" alt="æ ·å¼ç¼©ç•¥å›¾2" /></li>
+              <li class="slan"><img src="template/banner3.jpg" alt="æ ·å¼ç¼©ç•¥å›¾3" /></li>
+              <li class="red"><img src="template/banner4.jpg" alt="æ ·å¼ç¼©ç•¥å›¾4" /></li>
+              <li class="lusimg"><img src="template/banner5.jpg" alt="æ ·å¼ç¼©ç•¥å›¾5" /></li>
+              <li class="qlv"><img src="template/banner6.jpg" alt="æ ·å¼ç¼©ç•¥å›¾6" /></li>
+              <li class="lovered"><img src="template/banner7.jpg" alt="æ ·å¼ç¼©ç•¥å›¾7" /></li>
+              <li class="cuxiaolan"><img src="template/banner8.jpg" alt="æ ·å¼ç¼©ç•¥å›¾8" /></li>
+              <li class="techhui"><img src="template/banner9.jpg" alt="æ ·å¼ç¼©ç•¥å›¾9" /></li>
+              <li class="zdc2"><img src="template/banner10.jpg" alt="æ ·å¼ç¼©ç•¥å›¾10" /></li>
+              <li class="hzcheng"><img src="template/banner11.jpg" alt="æ ·å¼ç¼©ç•¥å›¾11" /></li>
+              <li class="dchei"><img src="template/banner12.jpg" alt="æ ·å¼ç¼©ç•¥å›¾12" /></li>
             </ul>
           </div>
           <div id="step-content-2" class="step-content">
-            <!--Ä£¿é&ÑùÊ½ begin-->
+            <!--æ¨¡å—&æ ·å¼ begin-->
             <div id="insert-buttons">
-              <button class="add-navi-button">µ¼º½</button>
-              <button class="add-row-button column-1 no-title" />µ¥ÁÐÎÞ±êÌâ</button>
-              <button class="add-row-button column-1" />µ¥ÁÐÓÐ±êÌâ</button>
-              <button class="add-row-button column-2" />Ë«ÁÐº¬±êÌâ</button>
-              <button class="add-row-button column-3" />ÈýÁÐº¬±êÌâ</button>
+              <button class="add-navi-button">å¯¼èˆª</button>
+              <button class="add-row-button column-1 no-title" />å•åˆ—æ— æ ‡é¢˜</button>
+              <button class="add-row-button column-1" />å•åˆ—æœ‰æ ‡é¢˜</button>
+              <button class="add-row-button column-2" />åŒåˆ—å«æ ‡é¢˜</button>
+              <button class="add-row-button column-3" />ä¸‰åˆ—å«æ ‡é¢˜</button>
             </div>
             <div id="elements">
               <ul>
                 <li>
-                  <a href="#one-column">µ¥ÁÐ</a>
+                  <a href="#one-column">å•åˆ—</a>
                 </li>
                 <li>
-                  <a href="#two-column">Ë«ÁÐ</a>
+                  <a href="#two-column">åŒåˆ—</a>
                 </li>
                 <li>
-                  <a href="#three-column">ÈýÁÐ</a>
+                  <a href="#three-column">ä¸‰åˆ—</a>
                 </li>
               </ul>
               <ul id="one-column" class="elements-thumbs">
@@ -145,60 +145,60 @@
             </div>
           </div>
           <div id="step-content-3" class="step-content">
-            <label for="page-title">±êÌâ</label>
+            <label for="page-title">æ ‡é¢˜</label>
             <input type="text" name="title" id="page-title" />
-            <label for="page-keywords">¹Ø¼ü×Ö</label>
-            <input type="text" name="keywords" id="page-keywords" placeholder="ÓÃÓ¢ÎÄ¶ººÅ·Ö¸î" />
-            <label for="page-description">ÃèÊö</label>
+            <label for="page-keywords">å…³é”®å­—</label>
+            <input type="text" name="keywords" id="page-keywords" placeholder="ç”¨è‹±æ–‡é€—å·åˆ†å‰²" />
+            <label for="page-description">æè¿°</label>
             <textarea name="description" id="page-description" rows="5"></textarea>
           </div>
         </div>
         
       </div>
       <div id="output">
-        2.0ÖØ¹¹ÖÐ
-        ½¨ÒéÊ¹ÓÃ¿íÆÁ£¬ÏíÊÜ¸üºÃµÄ±à¼­ÌåÑé
+        2.0é‡æž„ä¸­
+        å»ºè®®ä½¿ç”¨å®½å±ï¼Œäº«å—æ›´å¥½çš„ç¼–è¾‘ä½“éªŒ
       </div>
       <p align="center">
-        <button id="submit-button" title="ÉÏ´«" class="big-button" disabled="disabled">ÉÏ´«</button>
-        <button id="save-button" title="±£´æ" class="big-button" disabled="disabled">±£´æ</button>
-        <button id="export-button" title="µ¼³ö" class="big-button">µ¼³ö</button>
+        <button id="submit-button" title="ä¸Šä¼ " class="big-button" disabled="disabled">ä¸Šä¼ </button>
+        <button id="save-button" title="ä¿å­˜" class="big-button" disabled="disabled">ä¿å­˜</button>
+        <button id="export-button" title="å¯¼å‡º" class="big-button">å¯¼å‡º</button>
       </p>
-      <!--Ä£¿é&ÑùÊ½ end-->
+      <!--æ¨¡å—&æ ·å¼ end-->
     </div>
-    <!--ÓÒ²à¿ØÖÆ°å end-->
-    <!--Ä£°åÉú³ÉÇø begin-->
+    <!--å³ä¾§æŽ§åˆ¶æ¿ end-->
+    <!--æ¨¡æ¿ç”ŸæˆåŒº begin-->
     <div id="page-container" class="hidden">
       <div id="header" class="hidden">
         <div id="banner-maker">
-          <h2>ÕýÔÚ¼ÓÔØ´óÍ·Éú³ÉÆ÷£¬ÇëÄÍÐÄµÈºò</h2>
-          <p>£¨Èç¹ûÄãÖ»ÄÜ¿´µ½Õâ¸ö£¬¾ÍËµÃ÷ÐèÒª°²×°×îÐÂ°æµÄFlash PlayerÁË£¬µãÏÂÃæµÄÁ´½Ó°É¡££©</p>
+          <h2>æ­£åœ¨åŠ è½½å¤§å¤´ç”Ÿæˆå™¨ï¼Œè¯·è€å¿ƒç­‰å€™</h2>
+          <p>ï¼ˆå¦‚æžœä½ åªèƒ½çœ‹åˆ°è¿™ä¸ªï¼Œå°±è¯´æ˜Žéœ€è¦å®‰è£…æœ€æ–°ç‰ˆçš„Flash Playeräº†ï¼Œç‚¹ä¸‹é¢çš„é“¾æŽ¥å§ã€‚ï¼‰</p>
           <p>
-            <a href="http://get.adobe.com/cn/flashplayer/"><img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="ÏÂÔØ×îÐÂ°æ±¾µÄFlash Player" /></a>
+            <a href="http://get.adobe.com/cn/flashplayer/"><img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="ä¸‹è½½æœ€æ–°ç‰ˆæœ¬çš„Flash Player" /></a>
           </p>
         </div>
       </div>
     </div>
-    <!--Ä£°åÉú³ÉÇø end-->
+    <!--æ¨¡æ¿ç”ŸæˆåŒº end-->
     <form id="htmlCodeForm" action="" method="post" class="always-hidden">
       <input type="hidden" name="submitType" value="3" />
       <input type="hidden" name="templateName" id="template_name" value="" />
       <textarea id="texts" name="templateContent"></textarea>
     </form>
-    <!--loading£¬°ïÖúµÈµÈ begin-->
+    <!--loadingï¼Œå¸®åŠ©ç­‰ç­‰ begin-->
     <div class="always-hidden">
       <div id="timg"></div>
       <div id="settings">
         <input type="checkbox" id="syncBannerCss" checked="checked" />
-        <label for="syncBannerCss">Í¬²½ÇÐ»»´óÍ·ºÍÑùÊ½</label>
+        <label for="syncBannerCss">åŒæ­¥åˆ‡æ¢å¤§å¤´å’Œæ ·å¼</label>
       </div>
       <div id="help-panel">
-        <p>»¶Ó­Ê¹ÓÃÎå»¨Èâ</p>
-        <p>Óöµ½ÈÎºÎÀ§ÄÑ£¬»òÓÐÈÎºÎÎÊÌâ¡¢½¨Òé£¬ÇëÁªÏµÎÒ <br />
+        <p>æ¬¢è¿Žä½¿ç”¨äº”èŠ±è‚‰</p>
+        <p>é‡åˆ°ä»»ä½•å›°éš¾ï¼Œæˆ–æœ‰ä»»ä½•é—®é¢˜ã€å»ºè®®ï¼Œè¯·è”ç³»æˆ‘ <br />
           Email : meathill@foxmail.com
         </p>
       </div>
     </div>
-    <!--loading£¬°ïÖúµÈµÈ end-->
+    <!--loadingï¼Œå¸®åŠ©ç­‰ç­‰ end-->
   </body>
 </html>
