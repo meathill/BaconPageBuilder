@@ -1,13 +1,27 @@
-<div class="z0n2">
-  <div class="l">
-    <zol_zt data='{"element_type":"9","pic_width":"280","pic_height":"330"}' />
+<div class="clr">
+  <ul class="span4" data-config='{"type": "slide", "rows": "1", "cols": "3"}'>
+    <li>
+      <a href="{{link}}" title="{{title}}"><img width="280" height="320" alt="{{title}}" src="{{img}}" /></a>
+    </li>
+  </ul>
+  <div class="span5">
+    <ul data-config='{"type": "list", "rows": "2", "cols": "1"}'>
+      <h2><a href="{{link}}" title="{{title}}">{{title}}</a></h2>
+      <p>{{description}}</p>
+      <hr />
+    </ul>
+    <ul data-config='{"type": "list", "rows": "3", "cols": "1"}'>
+      <li><a href="{{link}}" title="{{title}}">{{title}}</a></li>
+    </div>
   </div>
-  <div class="m">
-    <div class="t"><zol_zt data='{"element_type":"14","title_num":"30","title_class":"hei20by","digest_num":"150","table_rows":"2"}' /></div>
-    <div class="b"><zol_zt data='{"element_type":"8","table_rows":"3","title_num":"36","fix":"&node"}' /></div>
-  </div>
-  <div class="r">
-    <div><zol_zt data='{"element_type":"13","pic_width":"240","pic_height":"210"}' /></div>
-    <div><zol_zt data='{"element_type":"7","table_rows":"4","title_num":"30","fix":"&node"}' /></div>
+  <div class="span3">
+    <div data-config='{"type": "video", "rows": "1", "cols"： "1"}'>
+      <img width="240" height="210" src="{{img}}" />
+    </div>
+    <ul data-config='{"type": "list", "rows": "4", "cols": "1"}'>
+      <li>
+        <a href="{{link}}" title="{{title}}">{{title}}</a>
+      </li>
+    </ul>
   </div>
 </div>

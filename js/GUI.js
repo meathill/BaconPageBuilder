@@ -140,17 +140,10 @@ com.meathill.bacon.GUI = Backbone.View.extend({
   showHelp: function (event) {
     $('#help-panel').dialog('open');
   },
-  log: function (str, isReset){
-    if (isReset) {
-      $('#output').html(str);
-    } else {
-      $('#output').append(str); 
-    }
-  },
   resizeHandler : function (event) {
     var screenHeight = $(window).height();
-    $('.module-thumbs').height(screenHeight - 292);
-    $('.step-content').height(screenHeight - 209)
+    $('.elements-thumbs').height(screenHeight - 288);
+    $('.step-content').height(screenHeight - 169)
     $('#cover').height(screenHeight - 20);
   }
 });
