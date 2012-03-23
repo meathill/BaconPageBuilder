@@ -1,18 +1,19 @@
-<div class="z1n4">
-  <div class="l">
-  	<zol_zt data='{"element_type":"2","pic_width":"200","pic_height":"240","title_num":"20","title_class":"hei12b","digest_num":"50"}' />
+<div class="clr">
+  <div class="span3" data-config='{"type": "single"}'>
+    <a href="{{link}}" title="{{title}}"><img width="200" height="240" src="{{img}}" alt="{{title}}" /></a>
+    <h3><a href="{{link}}" title="{{title}}">{{title}}</a></h3>
+    <p>{{description}}</p>
   </div>
-  <div class="r">
-    <table width="100%" border="0" cellspacing="0" cellpadding="0">
-      <tr>
-        <td><zol_zt data='{"element_type":"14","title_num":"30","title_class":"hei14by","digest_num":"150"}' /></td>
-      </tr>
-      <tr>
-        <td height="8"></td>
-      </tr>
-      <tr>
-        <td><zol_zt data='{"element_type":"6","pic_width":"100","pic_height":"100","title_num":"14","table_cols":"6","table_rows":"2","textalign":"center"}' /></td>
-      </tr>
-    </table>
+  <div class="span9">
+    <div data-config='{"type": "single"}'>
+      <h3>{{title}}</h3>
+      <p>{{description}}.&gt;&gt; <a href="{{link}}">更多</a></p>
+    </div>
+    <ul data-config='{"type": "list", "rows": 2, "cols": 5}'>
+      <li>
+        <a href="{{link}}" title="{{title}}"><img width="100" height="100" src="{{img}}" alt="{{title}}" /></a>
+        <p align="center"><a href="{{link}}" title="{{title}}">{{title}}</a></p>
+      </li>
+    </ul>
   </div>
 </div>
